@@ -1,0 +1,11 @@
+dataset,proposed,comparator,proposed_MAE,comparator_MAE,difference,relative_change_percent,winner
+metr_la,quantum,staeformer,3.896917,2.930198,0.966719,32.991604,STAEformer
+metr_la,quantum,separable,3.896917,3.892254,0.004663,0.119813,Separable VQC
+metr_la,quantum,fourier,3.896917,3.903858,-0.006940,-0.177782,QUARTS
+metr_la,quantum,mlp,3.896917,3.900337,-0.003420,-0.087673,QUARTS
+metr_la,quantum,none,3.896917,3.876265,0.020653,0.532797,QUARTS backbone
+pems_bay,quantum,staeformer,2.029520,1.539357,0.490163,31.842076,STAEformer
+pems_bay,quantum,separable,2.029520,2.024804,0.004715,0.232877,Separable VQC
+pems_bay,quantum,fourier,2.029520,2.037600,-0.008080,-0.396559,QUARTS
+pems_bay,quantum,mlp,2.029520,2.030498,-0.000979,-0.048191,QUARTS
+pems_bay,quantum,none,2.029520,1.990875,0.038645,1.941113,QUARTS backbone

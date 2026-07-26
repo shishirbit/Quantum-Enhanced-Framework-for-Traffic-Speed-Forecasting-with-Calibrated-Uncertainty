@@ -1,0 +1,70 @@
+study: QUARTS-RAC validation-only exploratory pilot
+status: exploratory
+
+backbone:
+  model: official STAEformer
+  seed: 42
+  frozen: true
+  point_forecast_modified: false
+
+data_boundary:
+  development_dataset: METR-LA
+  train_head: canonical training split
+  validation_chronology:
+    early_stopping: 0.40
+    conformal_calibration: 0.30
+    held_out_evaluation: 0.30
+  canonical_test_split_used: false
+
+features:
+  backbone_forecast_horizons: 12
+  local_recent_speed_statistics: 4
+  graph_neighbor_statistics: 4
+  local_neighbor_disagreement: 4
+  network_regime_statistics: 8
+  cyclical_time_features: 4
+  projected_backbone_latent_features: 8
+
+uncertainty_model:
+  central_interval_alpha:
+    - 0.1
+    - 0.2
+    - 0.5
+  experts: 3
+  ordered_radii: positive reverse-cumulative increments
+  objective: differentiable weighted interval score
+  controls:
+    - constant
+    - mlp
+    - fourier
+    - separable
+    - quantum
+  quantum:
+    qubits: 4
+    depth: 2
+    entanglement: CNOT ring
+
+conformal:
+  method: interval-and-horizon-specific scaled split conformal
+  calibration_data: middle chronological validation segment only
+
+pilot:
+  head_seeds:
+    - 42
+    - 73
+    - 202
+  epochs: 15
+  patience: 4
+  batch_size: 4096
+  train_sensor_instances: 200000
+
+promotion_gate:
+  primary_metric: conformal_WIS
+  quantum_relative_WIS_gain_over_fourier_percent_min: 5
+  quantum_relative_WIS_gain_over_separable_percent_min: 5
+  interval90_coverage:
+    minimum: 0.89
+    maximum: 0.91
+  quantum_paired_seed_wins_min: 2
+  point_forecast_must_be_unchanged: true
+  next_stage_if_passed: untouched PeMSD4 or PeMS08 prospective confirmation

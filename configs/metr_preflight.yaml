@@ -1,0 +1,20 @@
+seed: 42
+dataset:
+  name: METR-LA
+  input_steps: 12
+  horizons: 12
+  nodes: 207
+  features: 1
+model:
+  hidden_dim: 16
+  qubits: 4
+  circuit_depth: 2
+  calibrator: none
+training:
+  epochs: 1
+  batch_size: 128
+  learning_rate: 0.001
+evaluation:
+  horizons_minutes: [15, 30, 60]
+  seeds: [17, 42, 73, 101, 202]
+

@@ -1,0 +1,27 @@
+dataset:
+  input_steps: 12
+  horizons: 12
+  features: 1
+model:
+  hidden_dim: 32
+  qubits: 4
+  circuit_depth: 2
+training:
+  epochs: 30
+  patience: 7
+  min_delta: 0.0005
+  batch_size: 256
+  learning_rate: 0.001
+  weight_decay: 0.0001
+evaluation:
+  horizons_minutes: [15, 30, 60]
+  seeds: [17, 42, 73, 101, 202]
+  missing_rates: [0.1, 0.3, 0.5]
+  noise_std_rates: [0.01, 0.05, 0.1]
+  calibrators: [none, mlp, fourier, separable, quantum]
+quantum:
+  qubits: [2, 4, 6]
+  depths: [1, 2, 3]
+  depolarizing: [0.001, 0.005, 0.01]
+  amplitude_damping: [0.001, 0.005, 0.01]
+  shots: [128, 512, 2048]

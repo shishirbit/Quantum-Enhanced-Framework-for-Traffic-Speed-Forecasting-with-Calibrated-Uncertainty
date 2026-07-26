@@ -1,0 +1,14 @@
+numpy==2.0.2
+pandas==2.2.3
+scipy==1.14.1
+scikit-learn==1.5.2
+h5py==3.12.1
+tables==3.10.1
+PyYAML==6.0.2
+matplotlib==3.9.2
+seaborn==0.13.2
+torch==2.5.1
+pennylane==0.39.0
+autoray==0.6.12
+pytest==8.3.3
+gdown==5.2.0

@@ -1,0 +1,10 @@
+stage,dataset,split_policy,proposed,best_comparator,metric,proposed_value,comparator_value,relative_change_percent,coverage90,gate,reason
+QUARTS v1 confirmatory,metr_la,canonical test,Entangled QUARTS,STAEformer,MAE,3.896917,2.930198,32.991604,,FAIL,Substantially worse point forecasting
+QUARTS v1 confirmatory,pems_bay,canonical test,Entangled QUARTS,STAEformer,MAE,2.029520,1.539357,31.842076,,FAIL,Substantially worse point forecasting
+QUARTS-UQ,METR-LA,exploratory test,QUARTS-UQ,Separable VQC,WIS,2.004469,1.999917,0.227596,0.898898,FAIL,No 5% gain; separable circuit wins
+QUARTS-RAC,METR-LA,validation only,QUARTS-RAC,Fourier-RAC,WIS,1.698627,1.686865,0.697278,0.907397,FAIL,Fourier gate wins all seeds
+RAQ-STAEformer,METR-LA,validation only,Asymmetric Fourier-RAC,Symmetric Fourier-RAC,WIS,1.726745,1.686865,2.364132,0.921714,FAIL,Worse WIS and overcoverage
+Fourier-RAC prospective,PeMSD4,prospective test,Fourier-RAC,MLP-RAC,WIS,26.882046,27.066309,-0.680784,0.896611,PROVISIONAL,Small WIS gain; required independent backbones
+Fourier-RAC independent backbones,PeMSD4,3 independent test runs,Fourier-RAC,MLP-RAC,WIS,22.689192,22.748040,-0.258692,0.887788,FAIL,Sign reversal and undercoverage on seed 202
+Recent conformal repair,PeMSD4,post-hoc diagnostic,Recent Fourier conformal,10% recent window,WIS,21.989973,22.410730,-1.877481,0.880915,FAIL,Coverage remained below 89%
+SA-CQR-RAC,PeMSD8,validation only; test untouched,SA-CQR-Fourier,CQR-MLP,WIS,15.255410,15.171569,0.552619,0.918523,FAIL,CQR-MLP wins; overcoverage

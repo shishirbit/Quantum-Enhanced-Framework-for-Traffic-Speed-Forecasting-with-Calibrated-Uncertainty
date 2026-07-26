@@ -1,0 +1,25 @@
+{
+  "complete": true,
+  "study": "RAQ-STAEformer validation-only exploratory ablation",
+  "dataset": "METR-LA validation period only",
+  "canonical_test_split_used": false,
+  "primary_metric": "conformal_WIS",
+  "best_mean_WIS_model": "fourier_sym",
+  "symmetric_fourier_WIS": 1.686865250269572,
+  "asymmetric_fourier_WIS": 1.7267449696858723,
+  "asymmetric_fourier_relative_WIS_change_percent": -2.364131895533877,
+  "asymmetric_fourier_90_coverage": 0.921714416165032,
+  "gate": {
+    "required_WIS_improvement_percent": 3.0,
+    "coverage_range": [
+      0.89,
+      0.91
+    ],
+    "WIS_improvement_gate_passed": false,
+    "coverage_gate_passed": false,
+    "canonical_test_boundary_passed": true
+  },
+  "promotion_gate_passed": false,
+  "decision": "Reject asymmetric RAQ intervals. Symmetric Fourier-RAC remains the strongest candidate: asymmetric Fourier increases WIS by 2.36% and over-covers at 92.17%.",
+  "next_step": "Freeze symmetric Fourier-RAC and run a preregistered prospective evaluation with independent conformal baselines on a fresh dataset."
+}

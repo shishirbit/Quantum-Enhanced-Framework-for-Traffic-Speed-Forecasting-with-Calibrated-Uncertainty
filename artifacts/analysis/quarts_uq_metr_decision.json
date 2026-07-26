@@ -1,0 +1,37 @@
+{
+  "complete": true,
+  "study": "QUARTS-UQ exploratory",
+  "dataset": "METR-LA",
+  "backbone_seed": 42,
+  "head_seeds": [
+    42,
+    73,
+    202
+  ],
+  "primary_metric": "conformal_WIS",
+  "lower_is_better": true,
+  "best_mean_WIS_model": "separable",
+  "best_mean_CRPS_model": "separable",
+  "best_mean_NLL_model": "separable",
+  "best_coverage_calibration_model": "mlp",
+  "quantum_WIS_gain_percent_vs_Fourier": 0.5876282357479914,
+  "quantum_WIS_gain_percent_vs_separable": -0.2275958610567645,
+  "quantum_paired_WIS_wins_vs_Fourier": 3,
+  "quantum_paired_WIS_wins_vs_separable": 1,
+  "paired_runs": 3,
+  "quantum_90_coverage": 0.8988975913428344,
+  "gate": {
+    "minimum_WIS_gain_percent_vs_each_control": 5.0,
+    "coverage_range": [
+      0.88,
+      0.92
+    ],
+    "point_forecast_must_be_unchanged": true,
+    "WIS_gate_passed": false,
+    "coverage_gate_passed": true,
+    "point_forecast_gate_passed": true
+  },
+  "promotion_gate_passed": false,
+  "pems_bay_replication_justified": false,
+  "decision": "Do not promote QUARTS-UQ or launch a PEMS-BAY replication. The separable VQC is the best aggregate uncertainty model and the entangled VQC misses the predeclared 5% WIS advantage by a wide margin."
+}

@@ -1,0 +1,47 @@
+study: RAQ-STAEformer validation-only exploratory ablation
+status: completed
+
+backbone:
+  model: official STAEformer
+  seed: 42
+  frozen: true
+  point_forecast_modified: false
+
+data_boundary:
+  dataset: METR-LA
+  canonical_test_split_used: false
+  validation_segments:
+    early_stopping: 0.40
+    conformal_calibration: 0.30
+    held_out_evaluation: 0.30
+
+intervals:
+  alphas:
+    - 0.1
+    - 0.2
+    - 0.5
+  objective: differentiable weighted interval score
+  asymmetric_radii: lower and upper radii independently ordered by coverage
+
+controls:
+  - constant_asymmetric
+  - symmetric_fourier_rac
+  - asymmetric_mlp
+  - asymmetric_fourier
+
+pilot:
+  head_seeds:
+    - 42
+    - 73
+    - 202
+  epochs: 15
+  patience: 4
+  batch_size: 4096
+  train_sensor_instances: 200000
+
+promotion_gate:
+  asymmetric_WIS_improvement_percent_min: 3
+  interval90_coverage:
+    minimum: 0.89
+    maximum: 0.91
+  point_forecast_must_be_unchanged: true

@@ -1,0 +1,6 @@
+model,label,runs,calibrator_parameters,MAE,canonical_test_split_used,point_forecast_modified,conformal_WIS_mean,conformal_WIS_std,uncalibrated_WIS_mean,uncalibrated_WIS_std,interval90_coverage_mean,interval90_coverage_std,interval90_mean_width_mean,interval90_mean_width_std,interval90_interval_score_mean,interval90_interval_score_std,interval90_calibration_error_mean,interval90_calibration_error_std,effective_experts_mean,effective_experts_std
+constant,Constant intervals,3,36,2.539690,False,False,1.892005,0.000000,1.885881,0.000017,0.910119,0.000001,12.586272,0.000000,26.290266,0.000000,0.010119,0.000001,1.000000,0.000000
+mlp,MLP regime gate,3,351,2.539690,False,False,1.693154,0.003613,1.693541,0.003134,0.909343,0.002757,10.300212,0.223376,20.547918,0.062515,0.009343,0.002757,2.343106,0.142162
+fourier,Fourier regime gate,3,303,2.539690,False,False,1.686865,0.004899,1.687656,0.004126,0.906473,0.001903,10.072843,0.091820,20.415672,0.148660,0.006473,0.001903,2.068774,0.145467
+separable,Separable VQC gate,3,327,2.539690,False,False,1.692984,0.002465,1.693657,0.002322,0.908392,0.002554,10.316862,0.130936,20.568722,0.061531,0.008392,0.002554,2.109267,0.193578
+quantum,QUARTS-RAC,3,327,2.539690,False,False,1.698627,0.006058,1.698444,0.005966,0.907397,0.003379,10.232530,0.336331,20.728768,0.159309,0.007397,0.003379,1.894027,0.067198

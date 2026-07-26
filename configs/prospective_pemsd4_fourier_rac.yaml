@@ -1,0 +1,36 @@
+study: Prospective PeMSD4 Fourier-RAC evaluation
+status: locked external validation
+
+dataset:
+  name: PeMSD4
+  source_record: Zenodo 7816008
+  target_channel: flow channel 0
+  resolution_minutes: 5
+  nodes: 307
+  train_validation_test_split: 70/10/20 chronological
+
+backbone:
+  model: STAEformer
+  point_forecast_modified: false
+  training_seed: 42
+  input_steps: 12
+  forecast_horizon: 12
+
+uncertainty:
+  primary: symmetric Fourier-RAC
+  controls:
+    - constant_interval
+    - MLP_regime_gate
+    - symmetric_Fourier_regime_gate
+  intervals:
+    - 0.1
+    - 0.2
+    - 0.5
+  objective: differentiable weighted interval score
+  conformal_calibration: validation-only, horizon-specific scaled split conformal
+
+evaluation_boundary:
+  head_early_stopping: first 40 percent of validation windows
+  conformal_calibration: next 30 percent of validation windows
+  final_evaluation: canonical test split only after head freeze
+  test_used_for_selection: false

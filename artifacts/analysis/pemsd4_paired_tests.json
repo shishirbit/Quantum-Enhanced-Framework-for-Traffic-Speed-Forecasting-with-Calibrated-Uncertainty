@@ -1,0 +1,38 @@
+[
+  {
+    "seed": 42,
+    "comparison": "fourier_minus_mlp",
+    "n_instances": 1036432,
+    "mean_difference": -0.1843046935086768,
+    "bootstrap_ci95": [
+      -0.18824042938389518,
+      -0.17995557387760364
+    ],
+    "wilcoxon_statistic": 223861377261.0,
+    "wilcoxon_pvalue": 0.0
+  },
+  {
+    "seed": 73,
+    "comparison": "fourier_minus_mlp",
+    "n_instances": 1036432,
+    "mean_difference": -0.04019211670431879,
+    "bootstrap_ci95": [
+      -0.043612365003150036,
+      -0.036945199237057344
+    ],
+    "wilcoxon_statistic": 213457412366.0,
+    "wilcoxon_pvalue": 0.0
+  },
+  {
+    "seed": 202,
+    "comparison": "fourier_minus_mlp",
+    "n_instances": 1036432,
+    "mean_difference": 0.04794859984809658,
+    "bootstrap_ci95": [
+      0.04366128765494672,
+      0.05210662607884889
+    ],
+    "wilcoxon_statistic": 228992087168.0,
+    "wilcoxon_pvalue": 0.0
+  }
+]

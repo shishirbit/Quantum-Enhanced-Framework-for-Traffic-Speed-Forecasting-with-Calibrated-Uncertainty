@@ -1,0 +1,36 @@
+study: SA-CQR-RAC validation-only development
+status: frozen_before_pemsd8_test
+dataset:
+  name: PeMSD8
+  source: Zenodo 7816008
+  target_channel: 0
+  nodes: 170
+  cadence_minutes: 5
+  split: chronological_70_10_20
+  input_steps: 12
+  horizon: 12
+protocol:
+  backbone:
+    architecture: STAEformer
+    seed: 42
+    train_windows_cap: 4000
+    validation_fraction_for_early_stopping: 0.4
+  heads:
+    - constant_interval
+    - mlp_symmetric_wis
+    - asymmetric_cqr_mlp
+    - asymmetric_cqr_fourier
+  rolling_origin_validation:
+    folds: 3
+    selection_fraction: 0.4
+    calibration_fraction: 0.3
+    audit_fraction: 0.3
+  test_policy:
+    read_before_gate: false
+    evaluate_once_after_freeze: true
+acceptance_gate:
+  coverage90_min: 0.89
+  coverage90_max: 0.91
+  minimum_wis_gain_vs_best_baseline: 0.03
+  required_independent_seeds: 2
+  point_forecast_modified: false

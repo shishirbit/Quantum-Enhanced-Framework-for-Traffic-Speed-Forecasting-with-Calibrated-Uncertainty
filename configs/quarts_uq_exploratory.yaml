@@ -1,0 +1,56 @@
+study: QUARTS-UQ exploratory
+status: exploratory
+
+backbone:
+  model: official STAEformer
+  seed: 42
+  frozen: true
+  point_forecast_modified: false
+
+uncertainty_heads:
+  constant_scale: 0
+  mlp:
+    width: 5
+  fourier:
+    width: 3
+    depth: 2
+  separable_vqc:
+    qubits: 4
+    depth: 2
+  entangled_vqc:
+    qubits: 4
+    depth: 2
+    entanglement: CNOT ring
+
+training:
+  objective: conditional Laplace NLL
+  epochs: 12
+  patience: 4
+  learning_rate: 0.001
+  batch_size: 4096
+  train_sensor_instances: 200000
+
+conformal:
+  calibration_split: validation only
+  method: horizon-specific scaled split conformal
+  alpha:
+    - 0.1
+    - 0.2
+    - 0.5
+
+primary_metrics:
+  - Laplace_CRPS
+  - conformal_WIS
+  - interval90_interval_score
+  - interval90_coverage
+
+promotion_gate:
+  point_MAE_degradation_percent_max: 0.1
+  target_interval90_coverage:
+    minimum: 0.88
+    maximum: 0.92
+  quantum_relative_WIS_gain_over_fourier_percent_min: 5
+  quantum_relative_WIS_gain_over_separable_percent_min: 5
+  replication:
+    datasets: 2
+    head_seeds: 5

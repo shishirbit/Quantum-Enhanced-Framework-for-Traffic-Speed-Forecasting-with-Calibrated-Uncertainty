@@ -1,0 +1,43 @@
+{
+  "complete": true,
+  "study": "QUARTS-RAC validation-only exploratory pilot",
+  "dataset": "METR-LA validation period only",
+  "canonical_test_split_used": false,
+  "backbone_seed": 42,
+  "head_seeds": [
+    42,
+    73,
+    202
+  ],
+  "primary_metric": "conformal_WIS",
+  "best_mean_WIS_model": "fourier",
+  "best_mean_interval_score_model": "fourier",
+  "WIS_gain_percent_vs_constant": {
+    "mlp": 10.510083123473247,
+    "fourier": 10.842456883411712,
+    "separable": 10.519042698212262,
+    "quantum": 10.220780849410946
+  },
+  "quantum_WIS_gain_percent_vs_Fourier": -0.697278112731104,
+  "quantum_WIS_gain_percent_vs_separable": -0.3333243829694228,
+  "quantum_paired_WIS_wins_vs_Fourier": 0,
+  "quantum_paired_WIS_wins_vs_separable": 1,
+  "quantum_90_coverage": 0.9073966665465146,
+  "gate": {
+    "minimum_WIS_gain_percent_vs_each_control": 5.0,
+    "minimum_paired_wins_vs_each_control": 2,
+    "coverage_range": [
+      0.89,
+      0.91
+    ],
+    "canonical_test_must_remain_unused": true,
+    "point_forecast_must_be_unchanged": true,
+    "WIS_gate_passed": false,
+    "paired_win_gate_passed": false,
+    "coverage_gate_passed": true,
+    "data_boundary_gate_passed": true
+  },
+  "promotion_gate_passed": false,
+  "fresh_dataset_confirmation_justified": false,
+  "decision": "Do not promote the entangled QUARTS-RAC gate. The regime-aware architecture materially improves uncertainty scoring, but the Fourier gate is the strongest matched implementation and the entangled gate loses to Fourier in every seed."
+}

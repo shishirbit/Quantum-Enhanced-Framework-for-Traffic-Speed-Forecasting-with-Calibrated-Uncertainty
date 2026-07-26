@@ -1,0 +1,20 @@
+{
+  "complete": true,
+  "study": "QUARTS v2 exploratory pilot",
+  "dataset": "METR-LA",
+  "seed": 42,
+  "point_metric_ranking": [
+    "separable",
+    "fourier",
+    "mlp",
+    "quantum",
+    "none"
+  ],
+  "best_point_model": "separable",
+  "best_uncertainty_nll_model": "quantum",
+  "quantum_MAE_gain_vs_STAEformer": 0.0001342296600341797,
+  "quantum_MAE_difference_vs_Fourier": 3.7670135498046875e-05,
+  "quantum_MAE_difference_vs_separable": 5.793571472167969e-05,
+  "promotion_gate_passed": false,
+  "decision": "Do not launch a new confirmatory matrix: the entangled VQC preserved the strong backbone but did not beat the Fourier or separable controls."
+}

@@ -1,0 +1,4 @@
+dataset,model,MAE,conformal_WIS,uncalibrated_WIS,interval90_coverage,interval90_mean_width,calibrator_parameters
+PeMSD4,constant,50.057247,31.467192,31.476524,0.885508,215.719528,36
+PeMSD4,mlp,50.057247,27.066309,26.814919,0.890523,174.123642,351
+PeMSD4,fourier,50.057247,26.882046,26.678434,0.896611,175.040283,303

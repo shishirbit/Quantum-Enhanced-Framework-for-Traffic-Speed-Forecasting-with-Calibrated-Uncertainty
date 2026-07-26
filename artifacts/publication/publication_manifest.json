@@ -1,0 +1,266 @@
+{
+  "complete": true,
+  "scope": "All non-smoke completed experiments through D023",
+  "excluded": [
+    "smoke runs",
+    "pre-protocol seed-17 run",
+    "PeMSD8 canonical test"
+  ],
+  "files": [
+    {
+      "path": "artifacts/publication/figures/figure01_confirmatory_point_forecasting.pdf",
+      "bytes": 38240,
+      "sha256": "40c9336f499af7b0bdd0da38a42703f389b436e0d701ea22e2352ea6ff93bef7"
+    },
+    {
+      "path": "artifacts/publication/figures/figure01_confirmatory_point_forecasting.png",
+      "bytes": 165199,
+      "sha256": "15052c059ec41151fb513944dceecf9aee06230f66f38a15b26342338fe783e6"
+    },
+    {
+      "path": "artifacts/publication/figures/figure02_quantum_matched_control_effects.pdf",
+      "bytes": 38900,
+      "sha256": "530475a5ea1a59235e743376d5a594c434b8d7c93bb5f56c1fe5fe2b0d42e3c4"
+    },
+    {
+      "path": "artifacts/publication/figures/figure02_quantum_matched_control_effects.png",
+      "bytes": 121167,
+      "sha256": "5af82e4d960fb9f91223eb243d9f56405e307e490142fc751bae07622e0f4931"
+    },
+    {
+      "path": "artifacts/publication/figures/figure03_uncertainty_stage_synthesis.pdf",
+      "bytes": 65450,
+      "sha256": "85951ea4ed53ddf3dae4f8872a1cd24812cabdef5c45d4cdfcdf0b5f4027649d"
+    },
+    {
+      "path": "artifacts/publication/figures/figure03_uncertainty_stage_synthesis.png",
+      "bytes": 176200,
+      "sha256": "529816319c54f1f59b4c2148b2c78f221ba53f571ba6fb9857d717cbcb220e05"
+    },
+    {
+      "path": "artifacts/publication/figures/figure04_pemsd4_independent_backbones.pdf",
+      "bytes": 32052,
+      "sha256": "97b3dd688255ff9ac269de1c748d26f79b419dd31554251f7707272fb5d0e45c"
+    },
+    {
+      "path": "artifacts/publication/figures/figure04_pemsd4_independent_backbones.png",
+      "bytes": 215414,
+      "sha256": "be64ad162cc550c0dbaee31331222a68c83e0264264b32af9f0484f422b028bb"
+    },
+    {
+      "path": "artifacts/publication/figures/figure05_calibration_repair_and_transfer.pdf",
+      "bytes": 39239,
+      "sha256": "a4581dfbd251f38b40d69cbb8ee0083d2503f6fe7f593f190616ec2649c0ef53"
+    },
+    {
+      "path": "artifacts/publication/figures/figure05_calibration_repair_and_transfer.png",
+      "bytes": 204236,
+      "sha256": "598ca1937740e6be719f3cf4d79897d081c85fcac4f5be984fcb8ef6c5fdd6e2"
+    },
+    {
+      "path": "artifacts/publication/figures/figure06_accuracy_efficiency_tradeoff.pdf",
+      "bytes": 65791,
+      "sha256": "ee06c165aba157c07a69759c4fd0d1e1cf5a44dea0e4f2c3dad22d75f65285d4"
+    },
+    {
+      "path": "artifacts/publication/figures/figure06_accuracy_efficiency_tradeoff.png",
+      "bytes": 83262,
+      "sha256": "86092af459d8b3983f47a4529a1f26e8cd3e76413472e649441ecfc1188c04f6"
+    },
+    {
+      "path": "artifacts/publication/figures/supplement/figureS01_horizon_performance.pdf",
+      "bytes": 17536,
+      "sha256": "67e2e44df42519be14eb538f8b1dc7afacc81501d4d7335c5e7fa1a4f7fc5662"
+    },
+    {
+      "path": "artifacts/publication/figures/supplement/figureS01_horizon_performance.png",
+      "bytes": 136436,
+      "sha256": "a8795f15f41b7a762eccd3299de0c1efe10cac232b65400157d34a5b8a9e27a8"
+    },
+    {
+      "path": "artifacts/publication/figures/supplement/figureS02_missing_input_metr_la.pdf",
+      "bytes": 18435,
+      "sha256": "af0eed33e3cfa9b7b63abce2b0decf2f351503f7d3e223e5570c01e049d5e2a8"
+    },
+    {
+      "path": "artifacts/publication/figures/supplement/figureS02_missing_input_metr_la.png",
+      "bytes": 146454,
+      "sha256": "a0a482d9aaaa3bd6dd549fe7bf5ffc0e962eca3758687eaf3593cc018550f663"
+    },
+    {
+      "path": "artifacts/publication/figures/supplement/figureS03_missing_input_pems_bay.pdf",
+      "bytes": 18378,
+      "sha256": "49200f58089e28793c5859aea0075c26ec0ac0d9c84bfe8b66c706a86109a336"
+    },
+    {
+      "path": "artifacts/publication/figures/supplement/figureS03_missing_input_pems_bay.png",
+      "bytes": 128647,
+      "sha256": "664a4608d028cae355bd1b23aa7ea19ed6256ef9a31fe15ec4809f91987d7113"
+    },
+    {
+      "path": "artifacts/publication/figures/supplement/figureS04_quantum_ablation.pdf",
+      "bytes": 15969,
+      "sha256": "7f37150d1aa437872379a8d770c7754e2de266ec5ba717e2057bc9b7c7754690"
+    },
+    {
+      "path": "artifacts/publication/figures/supplement/figureS04_quantum_ablation.png",
+      "bytes": 88862,
+      "sha256": "d8d2cafbd6e8453e46aca39416bca23e540913915e17ec92c87701b63ab09a83"
+    },
+    {
+      "path": "artifacts/publication/figures/supplement/figureS05_quantum_noise.pdf",
+      "bytes": 13829,
+      "sha256": "f5791a84b3d59cd3b0d58a04c28a51a1f923cd8651ba57fd4addd5a6855bf304"
+    },
+    {
+      "path": "artifacts/publication/figures/supplement/figureS05_quantum_noise.png",
+      "bytes": 120588,
+      "sha256": "12c1d0738f05c0e419bca77c4989ed7081499d5a46c81c9e7b1361716ca23ebf"
+    },
+    {
+      "path": "artifacts/publication/figures/supplement/figureS06_quarts_v2.png",
+      "bytes": 112614,
+      "sha256": "3eee846ac1aef56db777d122f6d1957fc7930ce62ccc1cd0df6dad29ea960f4e"
+    },
+    {
+      "path": "artifacts/publication/figures/supplement/figureS06_quarts_v2.svg",
+      "bytes": 65187,
+      "sha256": "f8e715f5be94d68f599be5329614caafebc91f92edde38cf075403cf10cfb976"
+    },
+    {
+      "path": "artifacts/publication/figures/supplement/figureS07_quarts_uq.png",
+      "bytes": 125778,
+      "sha256": "ab24d58e67e940bfef1dd561c1e222a5bf332eb571618f9dbb363667aaeda0c7"
+    },
+    {
+      "path": "artifacts/publication/figures/supplement/figureS07_quarts_uq.svg",
+      "bytes": 82250,
+      "sha256": "890c36ccce5e8efb9fcb43e6fd4f7cbd1d46a7d0a61b8eac360448a4f7033d82"
+    },
+    {
+      "path": "artifacts/publication/figures/supplement/figureS08_quarts_rac.png",
+      "bytes": 131829,
+      "sha256": "e1e2ca3d4c52e0dc2acd096a29ac196ff4c32d7f7ea47e6103ce7b1438a2c9d5"
+    },
+    {
+      "path": "artifacts/publication/figures/supplement/figureS08_quarts_rac.svg",
+      "bytes": 82042,
+      "sha256": "42bff83dc9962bd15894cd67642753fa379ca307a2d6fb5b13d91bd777518d4c"
+    },
+    {
+      "path": "artifacts/publication/figures/supplement/figureS09_raq_asymmetry.png",
+      "bytes": 107661,
+      "sha256": "aab4e26a6aeb9d564ac6fe4b3bb9297cc45e45d9327812ba8b0900727edd880c"
+    },
+    {
+      "path": "artifacts/publication/figures/supplement/figureS09_raq_asymmetry.svg",
+      "bytes": 72922,
+      "sha256": "cad094c2a6ab86d300adf46e2cd609ebdae2488e4c9eab2ec12766736a40f95d"
+    },
+    {
+      "path": "artifacts/publication/figures/supplement/figureS10_pemsd4_prospective.png",
+      "bytes": 108393,
+      "sha256": "c206537182f4bd37a0326d76e10e00e847d7d637c7194672e40d65065c11876c"
+    },
+    {
+      "path": "artifacts/publication/figures/supplement/figureS10_pemsd4_prospective.svg",
+      "bytes": 58983,
+      "sha256": "51ec9d98e03b4aa1222e01e3be556df79906d06dbc0bdd09d233d1de14608306"
+    },
+    {
+      "path": "artifacts/publication/figures/supplement/figureS11_pemsd4_head_seeds.png",
+      "bytes": 80748,
+      "sha256": "9b074a88bc59abdee17f5584a4fece971cebf582a2a424ed59f957e835dd24d9"
+    },
+    {
+      "path": "artifacts/publication/figures/supplement/figureS12_sacqr_validation.png",
+      "bytes": 85537,
+      "sha256": "8a137c76694ccabfbe064c6077fd6a931a9270a7c78c656dac24fa6ad164ddd9"
+    },
+    {
+      "path": "artifacts/publication/README.md",
+      "bytes": 1925,
+      "sha256": "d8040b027457e036e5d5d64c8faf928f03f40a2b6c732d789a118cfd5ca0bb1e"
+    },
+    {
+      "path": "artifacts/publication/tables/table01_confirmatory_point_forecasting.csv",
+      "bytes": 2642,
+      "sha256": "f93a90c1b1e281bda4c735efd0795f8e58eed7270e315e35ff6d5e23814525f4"
+    },
+    {
+      "path": "artifacts/publication/tables/table02_quantum_matched_control_effects.csv",
+      "bytes": 830,
+      "sha256": "7a6b9bb0dfece2ce048f27d1f0cd040e8f1c7dbd082b9465a1033ab12e403220"
+    },
+    {
+      "path": "artifacts/publication/tables/table03_resource_efficiency.csv",
+      "bytes": 1349,
+      "sha256": "0648bc9da1a2be543c3507cf6f2a815769ff3ea84bd30aed2283a8477198b47a"
+    },
+    {
+      "path": "artifacts/publication/tables/table04_confirmatory_paired_statistics.csv",
+      "bytes": 1596,
+      "sha256": "7c6a06ab61fac9a423be645a646194b6d294b1a0e8faf640060e8bea73c23b8b"
+    },
+    {
+      "path": "artifacts/publication/tables/table04b_confirmatory_friedman_statistics.csv",
+      "bytes": 208,
+      "sha256": "007ed5a8c6353ba169c1c49f8c58a181627b248c9ea0cf6d3715fbae44f9b916"
+    },
+    {
+      "path": "artifacts/publication/tables/table05_quantum_architecture_ablation.csv",
+      "bytes": 387,
+      "sha256": "69e968e81c857ccf14deae6c616fe74a97edc607d053f87cfc44fc41bc4970fd"
+    },
+    {
+      "path": "artifacts/publication/tables/table06_quarts_v2_pilot.csv",
+      "bytes": 598,
+      "sha256": "6c153f444b8c186f5131fcfd78e4c2291c90c9185eecbf0a8a3370efcada9f6e"
+    },
+    {
+      "path": "artifacts/publication/tables/table07_quarts_uq.csv",
+      "bytes": 1241,
+      "sha256": "0e53f55f373c4f17087ca200ad50152007b7d6f9aaeb48b57ea0e66b368b2d9d"
+    },
+    {
+      "path": "artifacts/publication/tables/table08_quarts_rac_validation.csv",
+      "bytes": 1352,
+      "sha256": "57c097c27b393841915d652fb1da720533453734d828b6296d1e6f4b8a8a8b6a"
+    },
+    {
+      "path": "artifacts/publication/tables/table09_raq_asymmetry_validation.csv",
+      "bytes": 902,
+      "sha256": "6edb329a72ff01ec7372dde699617e79cff4684a7fdfeefde57245c0144a3f09"
+    },
+    {
+      "path": "artifacts/publication/tables/table10_pemsd4_prospective.csv",
+      "bytes": 320,
+      "sha256": "87f89ad1b8cb43066dc94b62195e825c1abffa1b645a0a43e902ff7ff1bf93b9"
+    },
+    {
+      "path": "artifacts/publication/tables/table11_pemsd4_independent_backbones.csv",
+      "bytes": 501,
+      "sha256": "ef22bee4b5bc6cda878efcf035257d320de4f02603b9f1dc7a05e9cdf00ae673"
+    },
+    {
+      "path": "artifacts/publication/tables/table12_pemsd4_paired_statistics.csv",
+      "bytes": 443,
+      "sha256": "c04a214e318b2ac6076b56b1650b6d3d531fc55c487deeb2c79152c6697705ab"
+    },
+    {
+      "path": "artifacts/publication/tables/table13_pemsd4_recent_conformal.csv",
+      "bytes": 440,
+      "sha256": "792738cf9e167a67306a15f4ee80f34136b8bf71f62f32a62967717675111b89"
+    },
+    {
+      "path": "artifacts/publication/tables/table14_sacqr_pemsd8_validation.csv",
+      "bytes": 539,
+      "sha256": "7b54e54962f1743132137cb61d7f2c622c4b3f8f890424277b891049ddce1672"
+    },
+    {
+      "path": "artifacts/publication/tables/table15_experiment_gate_summary.csv",
+      "bytes": 1539,
+      "sha256": "80ac70269eb94b95d273e96e70e85001be25ad266a7658fb8d150e9fe5467f6b"
+    }
+  ]
+}

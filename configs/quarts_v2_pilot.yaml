@@ -1,0 +1,61 @@
+study: QUARTS v2 exploratory pilot
+status: exploratory
+dataset: METRLA
+seed: 42
+
+backbone:
+  model: official STAEformer
+  checkpoint: artifacts/runs/confirmatory/metr_la/staeformer/seed_42/best.pt
+  frozen: true
+
+features:
+  base_forecast_horizons: 12
+  recent_speed:
+    - last
+    - mean
+    - standard_deviation
+    - trend
+  time_encoding:
+    - time_of_day_sine
+    - time_of_day_cosine
+    - day_of_week_sine
+    - day_of_week_cosine
+
+calibrators:
+  - none
+  - mlp_width_4
+  - fourier_width_3_depth_2
+  - separable_vqc_q4_depth_2
+  - entangled_vqc_q4_depth_2
+
+quantum_simulation:
+  backend: differentiable PyTorch state vector
+  reason: Windows Application Control blocks the optional PennyLane rustworkx DLL
+  scope: noiseless exploratory pilot only
+
+residual_safety:
+  residual_limit_normalized_units: 2.0
+  initial_gate_logit: -6.0
+  selection: retain a residual horizon only when it improves validation MAE
+
+optimization:
+  epochs: 6
+  patience: 3
+  batch_size: 4096
+  learning_rate: 0.001
+  loss: Laplace NLL + 0.2 * MAE
+
+pilot_limits:
+  train_windows: 2000
+  validation_windows: 1000
+  test_windows: all
+  train_sensor_instances: 200000
+
+promotion_gate:
+  primary: lower test MAE than frozen STAEformer
+  quantum_specific:
+    - entangled VQC improves over the parameter-matched Fourier head
+    - entangled VQC improves over the separable VQC
+  required_before_confirmatory:
+    - repeat the frozen pilot design on seeds 73 and 202
+    - do not tune against test results

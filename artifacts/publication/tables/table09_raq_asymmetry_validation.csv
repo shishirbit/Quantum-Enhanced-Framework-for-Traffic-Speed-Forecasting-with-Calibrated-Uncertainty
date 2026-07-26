@@ -1,0 +1,5 @@
+model,label,runs,conformal_WIS_mean,conformal_WIS_std,interval90_coverage_mean,interval90_coverage_std,interval90_mean_width_mean,interval90_mean_width_std,interval90_interval_score_mean,interval90_interval_score_std,interval90_calibration_error_mean,interval90_calibration_error_std,effective_experts_mean,effective_experts_std
+constant_asym,Constant asymmetric,3,1.877316,0.000002,0.917065,0.000005,12.735242,0.001280,25.688932,0.000059,0.017065,0.000005,1.000000,0.000000
+fourier_sym,Symmetric Fourier-RAC,3,1.686865,0.004899,0.906473,0.001903,10.072843,0.091820,20.415672,0.148660,0.006473,0.001903,2.068774,0.145467
+mlp_asym,Asymmetric MLP,3,1.735325,0.003251,0.927883,0.002343,11.786875,0.262588,20.482901,0.056505,0.027883,0.002343,2.347006,0.042186
+fourier_asym,RAQ-STAEformer,3,1.726745,0.004005,0.921714,0.001847,11.121750,0.234613,20.066732,0.020671,0.021714,0.001847,1.909735,0.047487
