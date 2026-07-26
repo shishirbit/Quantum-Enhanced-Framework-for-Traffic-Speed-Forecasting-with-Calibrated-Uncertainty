@@ -1,45 +1,52 @@
-"""Generate the journal figure for the QUARTS system architecture."""
+"""Generate the publication system architecture for QUARTS."""
 from __future__ import annotations
 
 from pathlib import Path
 
 import matplotlib.pyplot as plt
 from matplotlib.patches import FancyArrowPatch, FancyBboxPatch
+from matplotlib.path import Path as MplPath
 
 
 ROOT = Path(__file__).resolve().parents[1]
-OUTPUT = ROOT / "manuscript" / "quarts_springer" / "figures"
+MANUSCRIPT_OUTPUT = ROOT / "manuscript" / "quarts_springer" / "figures"
+PUBLICATION_OUTPUT = ROOT / "artifacts" / "publication" / "figures"
 
 COLORS = {
-    "input": "#e8f1f8",
-    "classical": "#d9ead3",
+    "data": "#e8f1f8",
+    "backbone": "#d9ead3",
     "feature": "#fff2cc",
     "quantum": "#eadcf8",
     "output": "#fce5cd",
-    "audit": "#eeeeee",
-    "ink": "#222222",
+    "decision": "#eeeeee",
+    "ink": "#20242a",
+    "muted": "#50565e",
+    "bus": "#48515c",
 }
 
 
-def box(
+def add_box(
     axis,
-    x,
-    y,
-    width,
-    height,
-    text,
-    color,
-    fontsize=8.2,
-    linewidth=1.0,
+    x: float,
+    y: float,
+    width: float,
+    height: float,
+    text: str,
+    color: str,
+    *,
+    fontsize: float = 9.0,
+    linewidth: float = 1.05,
 ):
+    """Add a consistently styled box and return its patch."""
     patch = FancyBboxPatch(
         (x, y),
         width,
         height,
-        boxstyle="round,pad=0.012,rounding_size=0.012",
+        boxstyle="round,pad=0.008,rounding_size=0.008",
         facecolor=color,
         edgecolor=COLORS["ink"],
         linewidth=linewidth,
+        zorder=3,
     )
     axis.add_patch(patch)
     axis.text(
@@ -50,28 +57,337 @@ def box(
         va="center",
         fontsize=fontsize,
         color=COLORS["ink"],
+        linespacing=1.18,
+        zorder=4,
     )
     return patch
 
 
-def arrow(axis, start, end, connectionstyle="arc3", linewidth=1.1):
+def anchor(patch, side: str) -> tuple[float, float]:
+    """Return the midpoint of one box boundary."""
+    x, y = patch.get_x(), patch.get_y()
+    width, height = patch.get_width(), patch.get_height()
+    points = {
+        "left": (x, y + height / 2),
+        "right": (x + width, y + height / 2),
+        "top": (x + width / 2, y + height),
+        "bottom": (x + width / 2, y),
+    }
+    return points[side]
+
+
+def add_arrow(
+    axis,
+    start: tuple[float, float],
+    end: tuple[float, float],
+    *,
+    linewidth: float = 1.25,
+):
+    """Draw a straight arrow between boundary anchors."""
     patch = FancyArrowPatch(
         start,
         end,
         arrowstyle="-|>",
-        mutation_scale=11,
+        mutation_scale=12,
         linewidth=linewidth,
         color=COLORS["ink"],
-        connectionstyle=connectionstyle,
-        shrinkA=2,
-        shrinkB=2,
+        shrinkA=4,
+        shrinkB=4,
+        zorder=2,
     )
     axis.add_patch(patch)
     return patch
 
 
+def add_elbow_arrow(
+    axis,
+    start: tuple[float, float],
+    end: tuple[float, float],
+    *,
+    bend_y: float,
+    linewidth: float = 1.25,
+):
+    """Draw an orthogonal connector with one horizontal segment."""
+    start_x, start_y = start
+    end_x, end_y = end
+    vertices = [
+        (start_x, start_y),
+        (start_x, bend_y),
+        (end_x, bend_y),
+        (end_x, end_y),
+    ]
+    path = MplPath(
+        vertices,
+        [MplPath.MOVETO, MplPath.LINETO, MplPath.LINETO, MplPath.LINETO],
+    )
+    patch = FancyArrowPatch(
+        path=path,
+        arrowstyle="-|>",
+        mutation_scale=12,
+        linewidth=linewidth,
+        color=COLORS["ink"],
+        zorder=2,
+    )
+    axis.add_patch(patch)
+    return patch
+
+
+def build_main_workflow(axis) -> None:
+    axis.set_xlim(0, 1)
+    axis.set_ylim(0, 1)
+    axis.axis("off")
+    axis.text(
+        0.0,
+        1.015,
+        "(a) End to end forecasting and uncertainty calibration",
+        fontsize=10.4,
+        weight="bold",
+        ha="left",
+        color=COLORS["ink"],
+    )
+
+    top_y, top_h, top_w = 0.69, 0.22, 0.19
+    top_x = [0.02, 0.275, 0.53, 0.785]
+    top_labels = [
+        "Historical traffic tensor\nRoad graph\nTemporal covariates",
+        "Chronological\npreprocessing\nTraining only scaling\nTarget masking",
+        "Forecasting backbone\nGraph temporal model\nor frozen STAEformer",
+        "Base forecast and\nnode level latent state",
+    ]
+    top_colors = [
+        COLORS["data"],
+        COLORS["backbone"],
+        COLORS["backbone"],
+        COLORS["feature"],
+    ]
+    top_boxes = [
+        add_box(axis, x, top_y, top_w, top_h, label, color)
+        for x, label, color in zip(top_x, top_labels, top_colors)
+    ]
+    for left, right in zip(top_boxes[:-1], top_boxes[1:]):
+        add_arrow(axis, anchor(left, "right"), anchor(right, "left"))
+
+    lower_y, lower_h, lower_w = 0.28, 0.22, 0.14
+    lower_x = [0.835, 0.67, 0.505, 0.34, 0.175, 0.01]
+    lower_labels = [
+        "Residual and\nregime features",
+        "Matched calibration\nhead",
+        "Point correction,\nscale, or radii",
+        "Chronological\nconformal adjustment",
+        "Final forecast and\npredictive intervals",
+        "Validation gate\nAccuracy, WIS,\ncoverage, seeds",
+    ]
+    lower_colors = [
+        COLORS["feature"],
+        COLORS["quantum"],
+        COLORS["output"],
+        COLORS["output"],
+        COLORS["output"],
+        COLORS["decision"],
+    ]
+    lower_boxes = [
+        add_box(
+            axis,
+            x,
+            lower_y,
+            lower_w,
+            lower_h,
+            label,
+            color,
+            fontsize=8.4,
+        )
+        for x, label, color in zip(lower_x, lower_labels, lower_colors)
+    ]
+
+    add_elbow_arrow(
+        axis,
+        anchor(top_boxes[-1], "bottom"),
+        anchor(lower_boxes[0], "top"),
+        bend_y=0.585,
+    )
+    for right, left in zip(lower_boxes[:-1], lower_boxes[1:]):
+        add_arrow(axis, anchor(right, "left"), anchor(left, "right"))
+
+    axis.text(
+        0.01,
+        0.12,
+        "The canonical test split is evaluated only after the prespecified validation gate passes.",
+        fontsize=8.2,
+        ha="left",
+        color=COLORS["muted"],
+    )
+
+
+def build_matched_controls(axis) -> None:
+    axis.set_xlim(0, 1)
+    axis.set_ylim(0, 1)
+    axis.axis("off")
+    axis.text(
+        0.0,
+        1.02,
+        "(b) Matched calibration heads and the entangled circuit",
+        fontsize=10.4,
+        weight="bold",
+        ha="left",
+        color=COLORS["ink"],
+    )
+
+    axis.text(
+        0.255,
+        0.91,
+        "Matched head comparison",
+        fontsize=8.8,
+        weight="bold",
+        ha="center",
+        color=COLORS["ink"],
+    )
+    input_box = add_box(
+        axis,
+        0.015,
+        0.48,
+        0.13,
+        0.22,
+        "Identical latent\nfeatures",
+        COLORS["feature"],
+        fontsize=8.4,
+    )
+    head_x = [0.175, 0.285, 0.395, 0.505]
+    head_labels = [
+        "MLP\nTanh",
+        "Fourier\nSin and cos",
+        "Separable VQC\nNo CNOT",
+        "Entangled VQC\nRing CNOT",
+    ]
+    head_colors = [
+        COLORS["backbone"],
+        COLORS["backbone"],
+        COLORS["quantum"],
+        COLORS["quantum"],
+    ]
+    head_boxes = [
+        add_box(axis, x, 0.48, 0.095, 0.22, label, color, fontsize=7.8)
+        for x, label, color in zip(head_x, head_labels, head_colors)
+    ]
+    output_box = add_box(
+        axis,
+        0.64,
+        0.48,
+        0.13,
+        0.22,
+        "Identical outputs\nand objective",
+        COLORS["output"],
+        fontsize=8.4,
+    )
+
+    input_bus_x = 0.155
+    output_bus_x = 0.62
+    bus_y_top = 0.76
+    bus_y_bottom = 0.42
+    axis.plot(
+        [input_bus_x, input_bus_x],
+        [bus_y_bottom, bus_y_top],
+        color=COLORS["bus"],
+        linewidth=1.15,
+        zorder=1,
+    )
+    axis.plot(
+        [input_bus_x, 0.595],
+        [bus_y_top, bus_y_top],
+        color=COLORS["bus"],
+        linewidth=1.15,
+        zorder=1,
+    )
+    axis.plot(
+        [0.155, output_bus_x],
+        [bus_y_bottom, bus_y_bottom],
+        color=COLORS["bus"],
+        linewidth=1.15,
+        zorder=1,
+    )
+    axis.plot(
+        [output_bus_x, output_bus_x],
+        [bus_y_bottom, bus_y_top],
+        color=COLORS["bus"],
+        linewidth=1.15,
+        zorder=1,
+    )
+    add_arrow(axis, anchor(input_box, "right"), (input_bus_x, 0.59), linewidth=1.05)
+    for candidate in head_boxes:
+        center_x = anchor(candidate, "top")[0]
+        add_arrow(axis, (center_x, bus_y_top), anchor(candidate, "top"), linewidth=1.0)
+        add_arrow(
+            axis,
+            anchor(candidate, "bottom"),
+            (center_x, bus_y_bottom),
+            linewidth=1.0,
+        )
+    add_arrow(axis, (output_bus_x, 0.59), anchor(output_box, "left"), linewidth=1.05)
+
+    axis.text(
+        0.385,
+        0.31,
+        "Same features, parameter scale, training budget, horizons, and loss",
+        fontsize=7.8,
+        ha="center",
+        color=COLORS["muted"],
+    )
+
+    axis.plot(
+        [0.795, 0.795],
+        [0.13, 0.91],
+        color="#b7bbc0",
+        linewidth=0.9,
+        zorder=1,
+    )
+    axis.text(
+        0.895,
+        0.91,
+        "Entangled VQC",
+        fontsize=8.8,
+        weight="bold",
+        ha="center",
+        color=COLORS["ink"],
+    )
+    stage_x, stage_w, stage_h = 0.82, 0.16, 0.135
+    stage_y = [0.70, 0.51, 0.32, 0.13]
+    stage_labels = [
+        "Linear\nmap",
+        "RY and Rot reuploading",
+        "Ring CNOT entanglement",
+        "Pauli Z measurement\nand classical readout",
+    ]
+    stage_colors = [
+        COLORS["feature"],
+        COLORS["quantum"],
+        COLORS["quantum"],
+        COLORS["output"],
+    ]
+    stage_boxes = [
+        add_box(
+            axis,
+            stage_x,
+            y,
+            stage_w,
+            stage_h,
+            label,
+            color,
+            fontsize=7.6,
+            linewidth=0.9,
+        )
+        for y, label, color in zip(stage_y, stage_labels, stage_colors)
+    ]
+    for upper, lower in zip(stage_boxes[:-1], stage_boxes[1:]):
+        add_arrow(
+            axis,
+            anchor(upper, "bottom"),
+            anchor(lower, "top"),
+            linewidth=0.95,
+        )
+
+
 def main() -> None:
-    OUTPUT.mkdir(parents=True, exist_ok=True)
+    MANUSCRIPT_OUTPUT.mkdir(parents=True, exist_ok=True)
+    PUBLICATION_OUTPUT.mkdir(parents=True, exist_ok=True)
     plt.rcParams.update(
         {
             "font.family": "DejaVu Sans",
@@ -80,228 +396,26 @@ def main() -> None:
             "ps.fonttype": 42,
         }
     )
-    figure = plt.figure(figsize=(13.4, 7.2))
-    grid = figure.add_gridspec(2, 1, height_ratios=(1.18, 0.82), hspace=0.28)
+    figure = plt.figure(figsize=(8.2, 7.3))
+    grid = figure.add_gridspec(2, 1, height_ratios=(1.15, 0.85), hspace=0.22)
+    build_main_workflow(figure.add_subplot(grid[0, 0]))
+    build_matched_controls(figure.add_subplot(grid[1, 0]))
+    figure.subplots_adjust(left=0.025, right=0.985, top=0.96, bottom=0.045)
 
-    top = figure.add_subplot(grid[0, 0])
-    top.set_xlim(0, 1)
-    top.set_ylim(0, 1)
-    top.axis("off")
-    top.text(
-        0.0,
-        1.02,
-        "(a) End to end forecasting and calibration workflow",
-        fontsize=10,
-        weight="bold",
-        ha="left",
-    )
-
-    widths = [0.135, 0.13, 0.15, 0.14, 0.15, 0.13]
-    xs = [0.015, 0.18, 0.34, 0.52, 0.69, 0.855]
-    y_top = 0.63
-    height = 0.23
-    labels = [
-        "Historical traffic tensor\nRoad graph\nTemporal covariates",
-        "Chronological split\nTrain only scaling\nMask preservation",
-        "Forecasting backbone\nGraph temporal model in v1\nFrozen STAEformer later",
-        "Base forecast\nand local latent state",
-        "Residual and regime\nfeature construction",
-        "Matched calibration head\nEntangled VQC or control",
-    ]
-    fills = [
-        COLORS["input"],
-        COLORS["classical"],
-        COLORS["classical"],
-        COLORS["feature"],
-        COLORS["feature"],
-        COLORS["quantum"],
-    ]
-    top_boxes = [
-        box(top, x, y_top, w, height, label, fill)
-        for x, w, label, fill in zip(xs, widths, labels, fills)
-    ]
-    for left, right in zip(top_boxes[:-1], top_boxes[1:]):
-        arrow(
-            top,
-            (left.get_x() + left.get_width(), left.get_y() + left.get_height() / 2),
-            (right.get_x(), right.get_y() + right.get_height() / 2),
+    for output in (MANUSCRIPT_OUTPUT, PUBLICATION_OUTPUT):
+        figure.savefig(
+            output / "figure00_system_architecture.pdf",
+            bbox_inches="tight",
         )
-
-    output_box = box(
-        top,
-        0.805,
-        0.25,
-        0.18,
-        0.20,
-        "Point correction and\nscale or interval radii",
-        COLORS["output"],
-    )
-    conformal_box = box(
-        top,
-        0.58,
-        0.25,
-        0.17,
-        0.20,
-        "Split conformal or\nconformal quantile calibration",
-        COLORS["output"],
-    )
-    final_box = box(
-        top,
-        0.355,
-        0.25,
-        0.17,
-        0.20,
-        "Final multiple horizon\nforecast and intervals",
-        COLORS["output"],
-    )
-    gate_box = box(
-        top,
-        0.095,
-        0.25,
-        0.20,
-        0.20,
-        "Validation decision gate\nAccuracy, WIS, coverage\nand seed consistency",
-        COLORS["audit"],
-    )
-    arrow(
-        top,
-        (
-            top_boxes[-1].get_x() + top_boxes[-1].get_width() / 2,
-            top_boxes[-1].get_y(),
-        ),
-        (output_box.get_x() + output_box.get_width() / 2, output_box.get_y() + output_box.get_height()),
-    )
-    arrow(
-        top,
-        (output_box.get_x(), output_box.get_y() + output_box.get_height() / 2),
-        (
-            conformal_box.get_x() + conformal_box.get_width(),
-            conformal_box.get_y() + conformal_box.get_height() / 2,
-        ),
-    )
-    arrow(
-        top,
-        (conformal_box.get_x(), conformal_box.get_y() + conformal_box.get_height() / 2),
-        (
-            final_box.get_x() + final_box.get_width(),
-            final_box.get_y() + final_box.get_height() / 2,
-        ),
-    )
-    arrow(
-        top,
-        (final_box.get_x(), final_box.get_y() + final_box.get_height() / 2),
-        (
-            gate_box.get_x() + gate_box.get_width(),
-            gate_box.get_y() + gate_box.get_height() / 2,
-        ),
-    )
-    top.text(
-        0.095,
-        0.12,
-        "Canonical test evaluation occurs only after the prespecified gate is passed.",
-        fontsize=8,
-        ha="left",
-        color="#555555",
-    )
-
-    bottom = figure.add_subplot(grid[1, 0])
-    bottom.set_xlim(0, 1)
-    bottom.set_ylim(0, 1)
-    bottom.axis("off")
-    bottom.text(
-        0.0,
-        1.04,
-        "(b) Parameter matched head comparison and entangled circuit",
-        fontsize=10,
-        weight="bold",
-        ha="left",
-    )
-
-    controls = [
-        ("MLP\nTanh layers", COLORS["classical"]),
-        ("Fourier\nSine and cosine", COLORS["classical"]),
-        ("Separable VQC\nNo CNOT gates", COLORS["quantum"]),
-        ("Entangled VQC\nRing CNOT gates", COLORS["quantum"]),
-    ]
-    control_x = [0.01, 0.165, 0.32, 0.475]
-    control_boxes = [
-        box(bottom, x, 0.49, 0.135, 0.27, text, color, fontsize=8.1)
-        for x, (text, color) in zip(control_x, controls)
-    ]
-    bottom.text(
-        0.31,
-        0.23,
-        "Identical local features, optimization budget, forecast outputs, and objective",
-        fontsize=8.1,
-        ha="center",
-        va="center",
-        color="#444444",
-    )
-    bottom.plot([0.025, 0.595], [0.36, 0.36], color=COLORS["ink"], linewidth=1.0)
-    for candidate in control_boxes:
-        arrow(
-            bottom,
-            (candidate.get_x() + candidate.get_width() / 2, 0.36),
-            (candidate.get_x() + candidate.get_width() / 2, candidate.get_y()),
-            linewidth=0.85,
+        figure.savefig(
+            output / "figure00_system_architecture.png",
+            dpi=320,
+            bbox_inches="tight",
         )
-
-    stages = [
-        ("Linear\ncompression", COLORS["feature"]),
-        ("Repeated quantum block\nRY encoding, Rot gates,\nand ring CNOT gates", COLORS["quantum"]),
-        ("Pauli Z\nmeasurement", COLORS["quantum"]),
-        ("Classical\nreadout", COLORS["output"]),
-    ]
-    stage_x = [0.66, 0.745, 0.865, 0.94]
-    stage_widths = [0.07, 0.105, 0.06, 0.055]
-    stage_boxes = []
-    for x, width, (label, fill) in zip(stage_x, stage_widths, stages):
-        stage_boxes.append(
-            box(
-                bottom,
-                x,
-                0.36,
-                width,
-                0.33,
-                label,
-                fill,
-                fontsize=7.0,
-                linewidth=0.85,
-            )
+        figure.savefig(
+            output / "figure00_system_architecture.svg",
+            bbox_inches="tight",
         )
-    for left, right in zip(stage_boxes[:-1], stage_boxes[1:]):
-        arrow(
-            bottom,
-            (left.get_x() + left.get_width(), left.get_y() + left.get_height() / 2),
-            (right.get_x(), right.get_y() + right.get_height() / 2),
-            linewidth=0.8,
-        )
-    bottom.text(
-        0.83,
-        0.78,
-        "Entangled variational quantum circuit",
-        fontsize=7.6,
-        ha="center",
-        color="#555555",
-    )
-    bottom.text(
-        0.83,
-        0.17,
-        "Reference circuit: four qubits, depth two, analytic state vector simulation",
-        fontsize=7.7,
-        ha="center",
-        color="#555555",
-    )
-
-    figure.savefig(
-        OUTPUT / "figure00_system_architecture.pdf",
-        bbox_inches="tight",
-    )
-    figure.savefig(
-        OUTPUT / "figure00_system_architecture.png",
-        dpi=300,
-        bbox_inches="tight",
-    )
     plt.close(figure)
 
 
