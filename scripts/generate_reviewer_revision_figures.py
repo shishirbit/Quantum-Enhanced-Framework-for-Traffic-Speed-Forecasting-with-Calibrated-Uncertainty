@@ -78,99 +78,145 @@ def arrow(ax, start, end, text=None, color=INK, style="-"):
 
 
 def experiment_flow() -> None:
-    fig, ax = plt.subplots(figsize=(12.2, 5.9))
+    fig, ax = plt.subplots(figsize=(11.8, 7.4))
     ax.set_xlim(0, 1)
     ax.set_ylim(0, 1)
     ax.axis("off")
-    ax.text(0.5, 0.965, "Prespecified confirmatory path", ha="center", va="top", fontsize=12, fontweight="bold")
-    widths, height = 0.165, 0.16
-    x = [0.015, 0.213, 0.411, 0.609, 0.807]
-    texts = [
-        "Stage 1\nPoint forecasting\nRQ1 and RQ2",
-        "Stage 2\nUncertainty heads\nRQ3",
-        "Stage 3\nRegime calibration\nValidation only",
-        "Stage 4\nProspective PeMSD4\nProtected test",
-        "Stage 5\nIndependent backbone\nreplication, RQ4",
+    ax.text(0.5, 0.975, "Experimental sequence and decision logic", ha="center", va="top", fontsize=14, fontweight="bold")
+    ax.text(0.225, 0.925, "Experimental stage", ha="center", fontsize=10, fontweight="bold")
+    ax.text(0.755, 0.925, "Decision and consequence", ha="center", fontsize=10, fontweight="bold")
+    stage_x, stage_w, decision_x, decision_w, height = 0.05, 0.35, 0.55, 0.40, 0.105
+    ys = [0.78, 0.63, 0.48, 0.33, 0.18]
+    stage_texts = [
+        "Stage 1: Point forecasting\nRQ1 and RQ2",
+        "Stage 2: Uncertainty heads\nRQ3",
+        "Stage 3: Regime calibration\nValidation only",
+        "Stage 4: Prospective PeMSD4\nProtected test",
+        "Stage 5: Independent backbones\nReplication for RQ4",
     ]
-    colors = [BLUE, BLUE, GREEN, GREEN, GREEN]
-    for xpos, text, color in zip(x, texts, colors):
-        box(ax, (xpos, 0.65), widths, height, text, color, fontsize=9, weight="bold")
-    for index in range(4):
-        arrow(ax, (x[index] + widths, 0.73), (x[index + 1], 0.73), "gate")
-
-    gate_texts = [
-        "Advance if primary metric improves\nand coverage is 0.89 to 0.91",
-        "Entangled branches failed\nRetained as negative evidence",
-        "Fourier RAC selected\non validation before test access",
-        "Initial PeMSD4 result\npassed provisionally",
-        "Five backbones and block bootstrap\nFailed robustness gate",
+    decision_texts = [
+        "Advance only if the primary metric improves\nand all declared criteria are satisfied",
+        "FAIL: entangled branches retained\nas negative evidence",
+        "PASS: Fourier RAC selected on validation\nbefore test access",
+        "PROVISIONAL PASS: initial PeMSD4 result\nrequires independent replication",
+        "FAIL: five-backbone effect is unstable\nand the block-bootstrap interval crosses zero",
     ]
-    gate_colors = [YELLOW, RED, YELLOW, YELLOW, RED]
-    y = [0.32, 0.32, 0.32, 0.32, 0.32]
-    for xpos, ypos, text, color in zip(x, y, gate_texts, gate_colors):
-        box(ax, (xpos, ypos), widths, 0.15, text, color, fontsize=7.2)
-    arrow(ax, (x[0] + widths / 2, 0.65), (x[0] + widths / 2, y[0] + 0.15))
-    arrow(ax, (x[1] + widths / 2, 0.65), (x[1] + widths / 2, y[1] + 0.15), color="#9B2C2C")
-    arrow(ax, (x[2] + widths / 2, 0.65), (x[2] + widths / 2, y[2] + 0.15))
-    arrow(ax, (x[3] + widths / 2, 0.65), (x[3] + widths / 2, y[3] + 0.15))
-    arrow(ax, (x[4] + widths / 2, 0.65), (x[4] + widths / 2, y[4] + 0.15), color="#9B2C2C")
-
-    box(
-        ax,
-        (0.58, 0.03),
-        0.39,
-        0.13,
-        "Reviewer requested post hoc diagnostics\nK ablation, conditional coverage,\ncircuit expressivity, and simulator cost",
-        PURPLE,
-        fontsize=8.3,
-    )
-    arrow(ax, (0.89, 0.32), (0.89, 0.16), text="diagnostic only", color="#674188", style="--")
+    stage_colors = [BLUE, BLUE, GREEN, GREEN, GREEN]
+    decision_colors = [YELLOW, RED, YELLOW, YELLOW, RED]
+    for index, y in enumerate(ys):
+        box(ax, (stage_x, y), stage_w, height, stage_texts[index], stage_colors[index], fontsize=9.4, weight="bold")
+        box(ax, (decision_x, y), decision_w, height, decision_texts[index], decision_colors[index], fontsize=8.2)
+        arrow(ax, (stage_x + stage_w, y + height / 2), (decision_x, y + height / 2))
+        if index < len(ys) - 1:
+            arrow(ax, (stage_x + stage_w / 2, y), (stage_x + stage_w / 2, ys[index + 1] + height))
+    box(ax, (0.38, 0.025), 0.57, 0.085, "Post hoc reviewer diagnostics only\nExpert count, conditional coverage, circuit expressivity, and simulator cost", PURPLE, fontsize=7.8)
+    arrow(ax, (0.75, ys[-1]), (0.75, 0.11), color="#674188", style="--")
     save(fig, FIGURES / "figure07_experimental_flow")
 
 
+def system_architecture() -> None:
+    fig, axes = plt.subplots(1, 2, figsize=(14.2, 7.6))
+    for ax in axes:
+        ax.set_xlim(0, 1)
+        ax.set_ylim(0, 1)
+        ax.axis("off")
+
+    ax = axes[0]
+    ax.set_title("(a) End-to-end QUARTS workflow", fontsize=13, fontweight="bold", pad=12)
+    input_specs = [
+        (0.02, "Historical traffic"),
+        (0.35, "Road graph"),
+        (0.68, "Time covariates"),
+    ]
+    for xpos, label in input_specs:
+        box(ax, (xpos, 0.88), 0.30, 0.075, label, BLUE, fontsize=8.4, weight="bold")
+        arrow(ax, (xpos + 0.15, 0.88), (0.5, 0.82))
+    box(ax, (0.15, 0.70), 0.70, 0.12, "Chronological preprocessing\nTraining-only scaling and target masking", BLUE, fontsize=9.0)
+    arrow(ax, (0.5, 0.70), (0.5, 0.64))
+    box(ax, (0.15, 0.53), 0.70, 0.11, "Forecasting backbone\nGraph temporal model or frozen STAEformer", GREEN, fontsize=9.0, weight="bold")
+    arrow(ax, (0.5, 0.53), (0.5, 0.47))
+    box(ax, (0.24, 0.38), 0.52, 0.09, "Base forecast and node-level latent state", GREEN, fontsize=8.7)
+    arrow(ax, (0.5, 0.38), (0.5, 0.32))
+    box(ax, (0.18, 0.22), 0.64, 0.10, "Matched calibration head\nPoint correction, scale, or interval radii", YELLOW, fontsize=8.8, weight="bold")
+    arrow(ax, (0.5, 0.22), (0.5, 0.16))
+    box(ax, (0.14, 0.07), 0.72, 0.09, "Chronological conformal adjustment", YELLOW, fontsize=8.7)
+    arrow(ax, (0.5, 0.07), (0.5, 0.015))
+    ax.text(0.5, 0.002, "Final forecast, predictive intervals, and validation decision", ha="center", va="bottom", fontsize=8.2, fontweight="bold")
+
+    ax = axes[1]
+    ax.set_title("(b) Matched heads and entangled VQC", fontsize=13, fontweight="bold", pad=12)
+    box(ax, (0.01, 0.72), 0.29, 0.12, "Common base forecast\nand latent features", GREEN, fontsize=8.2, weight="bold")
+    heads = [
+        (0.86, "MLP (tanh)"),
+        (0.72, "Fourier (sin and cos)"),
+        (0.58, "Separable VQC"),
+        (0.44, "Entangled VQC"),
+    ]
+    for y, label in heads:
+        box(ax, (0.38, y), 0.27, 0.085, label, YELLOW, fontsize=8.6)
+        arrow(ax, (0.30, 0.78), (0.38, y + 0.042))
+        arrow(ax, (0.65, y + 0.042), (0.76, 0.71))
+    box(ax, (0.76, 0.64), 0.22, 0.14, "Identical outputs\nand objective", YELLOW, fontsize=9.0, weight="bold")
+
+    frame = FancyBboxPatch((0.03, 0.04), 0.94, 0.34, boxstyle="round,pad=0.02,rounding_size=0.025", facecolor="#FAFAFA", edgecolor=INK, linewidth=1.1)
+    ax.add_patch(frame)
+    ax.text(0.5, 0.35, "Entangled VQC internal path", ha="center", va="center", fontsize=10.2, fontweight="bold")
+    blocks = [
+        (0.07, 0.15, 0.18, "Linear\ncompression", BLUE),
+        (0.30, 0.15, 0.20, "$R_Y$ encoding\nand Rot gates", BLUE),
+        (0.55, 0.15, 0.18, "Ring CNOT\nentanglement", BLUE),
+        (0.78, 0.13, 0.16, "Pauli $Z$\nand readout", PURPLE),
+    ]
+    for xpos, ypos, width, label, color in blocks:
+        box(ax, (xpos, ypos), width, 0.10, label, color, fontsize=8.3)
+    for left, right in ((0.25, 0.30), (0.50, 0.55), (0.73, 0.78)):
+        arrow(ax, (left, 0.20), (right, 0.20))
+    save(fig, FIGURES / "figure00_system_architecture")
+
+
 def circuit_comparison() -> None:
-    fig, axes = plt.subplots(1, 2, figsize=(11.6, 4.5), sharey=True)
+    fig, axes = plt.subplots(1, 2, figsize=(12.8, 5.2), sharey=True)
     for ax, entangled, title in zip(
         axes,
         (False, True),
         ("Separable VQC", "Entangled VQC with ring CNOT"),
     ):
         ax.set_xlim(0, 10)
-        ax.set_ylim(-0.7, 3.7)
+        ax.set_ylim(-0.65, 4.05)
         ax.axis("off")
         ax.set_title(title, fontsize=12, fontweight="bold")
         for qubit in range(4):
-            y = 3 - qubit
-            ax.plot([0.25, 9.75], [y, y], color=INK, linewidth=1.0)
-            ax.text(0.05, y, rf"$q_{{{qubit}}}$", ha="right", va="center", fontsize=9)
+            y = 3.25 - qubit
+            ax.plot([0.35, 9.65], [y, y], color=INK, linewidth=1.0)
+            ax.text(0.15, y, rf"$q_{{{qubit}}}$", ha="right", va="center", fontsize=9)
         for layer in range(2):
-            offset = 0.65 + layer * 4.35
+            offset = 0.75 + layer * 4.55
             for qubit in range(4):
-                y = 3 - qubit
-                box(ax, (offset, y - 0.23), 0.75, 0.46, r"$R_Y(z)$", BLUE, fontsize=8)
-                box(ax, (offset + 1.0, y - 0.23), 0.88, 0.46, "Rot", GREEN, fontsize=8)
+                y = 3.25 - qubit
+                box(ax, (offset, y - 0.20), 0.78, 0.40, r"$R_Y(z)$", BLUE, fontsize=8)
+                box(ax, (offset + 1.05, y - 0.20), 0.78, 0.40, "Rot", GREEN, fontsize=8)
             if entangled:
-                cnot_x = offset + 2.35
+                cnot_x = offset + 2.20
                 for qubit in range(4):
-                    control_y = 3 - qubit
-                    target_y = 3 - ((qubit + 1) % 4)
-                    x = cnot_x + 0.27 * qubit
+                    control_y = 3.25 - qubit
+                    target_y = 3.25 - ((qubit + 1) % 4)
+                    x = cnot_x + 0.30 * qubit
                     ax.plot([x, x], [control_y, target_y], color="#9B2C2C", linewidth=1.0)
                     ax.plot(x, control_y, "o", color="#9B2C2C", markersize=4)
                     ax.plot(x, target_y, marker="o", markerfacecolor="white", markeredgecolor="#9B2C2C", markersize=8)
                     ax.plot([x - 0.06, x + 0.06], [target_y, target_y], color="#9B2C2C", linewidth=1.0)
                     ax.plot([x, x], [target_y - 0.06, target_y + 0.06], color="#9B2C2C", linewidth=1.0)
-            ax.text(offset + 1.65, -0.5, f"reupload layer {layer + 1}", ha="center", va="center", fontsize=8)
-        annotation = (
-            "24 trainable rotation parameters\n8 data rotations, 0 CNOT, logical depth 4"
-            if not entangled
-            else "24 trainable rotation parameters\n8 data rotations, 8 CNOT, logical depth 12"
-        )
-        ax.text(5.0, 3.55, annotation, ha="center", va="top", fontsize=8.5)
+                ax.text(offset + 2.65, 3.88, "CNOT ring", ha="center", va="center", fontsize=8.0, color="#9B2C2C")
+            ax.text(offset + 1.45, -0.40, f"Reupload layer {layer + 1}", ha="center", va="center", fontsize=8)
+        for qubit in range(4):
+            y = 3.25 - qubit
+            box(ax, (9.00, y - 0.20), 0.55, 0.40, "$Z$", PURPLE, fontsize=8)
+        ax.text(9.28, 3.88, "Measure", ha="center", va="center", fontsize=8.0)
+        ax.text(5.0, 3.67, "Same compression, rotations, initialization, measurement, and readout", ha="center", va="center", fontsize=7.7)
     fig.text(
         0.5,
         0.01,
-        "Both circuits use identical compression, parameter initialization, local rotations, measurement, readout, and optimizer. Only the ring CNOT operations differ.",
+        "Only the two ring CNOT layers differ: the separable circuit has 0 CNOT gates and logical depth 4; the entangled circuit has 8 CNOT gates and logical depth 12.",
         ha="center",
         va="bottom",
         fontsize=9,
@@ -252,6 +298,7 @@ def quantitative_revision_figure() -> None:
 
 
 def main() -> None:
+    system_architecture()
     experiment_flow()
     circuit_comparison()
     quantitative_revision_figure()
