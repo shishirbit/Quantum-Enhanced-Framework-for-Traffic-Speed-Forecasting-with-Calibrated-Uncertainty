@@ -1,0 +1,160 @@
+\documentclass[11pt]{article}
+\usepackage[a4paper,margin=25mm]{geometry}
+\usepackage{microtype}
+\usepackage{booktabs}
+\usepackage{array}
+\usepackage{xcolor}
+\usepackage[colorlinks=true,allcolors=blue]{hyperref}
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{0.65em}
+\newcommand{\comment}[1]{\textbf{Comment.} \emph{#1}}
+\newcommand{\response}[1]{\textbf{Response.} #1}
+\newcommand{\change}[1]{\textbf{Revision made.} #1}
+
+\begin{document}
+
+\begin{center}
+{\Large\bfseries Response to the Reviewers}\par
+\vspace{0.5em}
+{\large QUARTS for Probabilistic Traffic Forecasting: A Controlled Evaluation of Quantum and Classical Residual Calibration}\par
+\vspace{0.5em}
+Shishir Singh Chauhan
+\end{center}
+
+Dear Editor and Reviewers,
+
+Thank you for the careful and constructive assessment. The manuscript has been substantially revised, and the additional analyses have been completed without changing the protected experimental outcomes. The revision clarifies the study chronology, replaces instance level inference with dependence aware resampling, expands the PeMSD4 replication from three to five independently trained backbones, adds an expert count ablation and conditional calibration analysis, quantifies circuit structure and expressivity, reports controlled computational resources, and distinguishes prespecified decisions from post hoc diagnostics. A new experimental flowchart and a side by side circuit diagram have also been added. All new reviewer requested analyses are explicitly labelled post hoc so that they cannot be mistaken for prespecified confirmatory evidence.
+
+The responses below follow the order of the reports. Section, figure, and table titles are used instead of page numbers because pagination may change during production.
+
+\section*{Reviewer 1}
+
+\subsection*{Main comments}
+
+\textbf{1. Experimental process, phase transitions, and PASS or FAIL criteria}
+
+\comment{Clarify the objectives and comparison groups at each stage, explain how PASS or FAIL decisions affect later analyses, and add an overall flowchart.}
+
+\response{We agree that the original presentation required readers to reconstruct the sequence from several locations. The revised manuscript now states four research questions, defines advancement rules before presenting results, and distinguishes confirmatory, exploratory, prospective, validation only, and post hoc analyses. A failed stage remains in the evidence record but cannot promote a model to a protected downstream test.}
+
+\change{The new subsection ``Research questions and decision logic'' defines the criteria. Figure~7 presents the complete sequence, including the point, uncertainty, regime, prospective replication, repair, and transfer branches. The revised ``Experiment gates'' subsection and the gate summary table connect every decision to its metric, comparator, dataset split, and status.}
+
+\textbf{2. Statistical support for negative findings}
+
+\comment{Report variability in WIS, coverage, and other principal outcomes so that the reproducibility of the negative findings can be judged.}
+
+\response{We replaced inferential claims based on individual forecast values with a hierarchical procedure. Paired losses are first averaged over nodes and horizons at each five minute forecast origin. Circular blocks of 288 consecutive origins preserve one day of temporal dependence, and the outer resampling level treats independently trained seeds as the replication unit. The revision reports seed means, seed standard deviations, directional wins, and 5,000 replicate confidence intervals. Coverage and interval width are summarized by seed and by conditional subgroup.}
+
+\change{The revised ``Statistical analysis'' subsection defines the resampling unit and algorithm. The point results include a new dependence aware comparison table. The PeMSD4 results now use five independent backbones and report WIS, coverage, width, seed variation, and a hierarchical block bootstrap interval.}
+
+\textbf{3. Scope of circuit design and simulator based conclusions}
+
+\comment{Clarify the tested encoding, ansatz, entangling topology, and their limitations, and avoid extrapolation from simulation to quantum hardware.}
+
+\response{The claim has been narrowed to the actual design space: two to six qubits, one to three data reuploading layers, $R_Y$ encoding, local $R_ZR_YR_Z$ rotations, a directed ring of CNOT gates, and Pauli $Z$ readout. We explicitly state that a negative result for this family does not exclude benefits from other encodings, ansatz families, observables, topologies, or hardware conditions. All reported quantum computations used analytic state vector simulation on a classical GPU.}
+
+\change{The circuit specification appears in ``Entangled and separable quantum heads.'' The architecture and efficiency results give the tested grid and scaling. The Discussion and Limitations sections restrict the interpretation, and the simulator qualification now appears in the Methods, Results, and Conclusion.}
+
+\textbf{4. Target domain data use}
+
+\comment{Identify which target domain observations are used for fitting, selection, conformal calibration, and final evaluation, and confirm that test data are not used for model selection.}
+
+\response{All datasets use chronological 70, 10, and 20 percent train, validation, and test partitions. Training statistics are obtained only from training data, and windows do not cross boundaries. When selection and calibration are both required, the validation partition is divided chronologically into nonoverlapping segments. PeMSD8 remains validation only because its advancement gate failed. Test outcomes were not used for parameter fitting, conformal calibration, hyperparameter selection, or branch promotion.}
+
+\change{A new target domain data use table lists fitting, selection, calibration, and final evaluation segments for every transfer or recalibration stage. The conformal subsection now explains the horizon specific construction and the limits of empirical coverage under dependence and drift.}
+
+\subsection*{Methodological clarifications}
+
+\textbf{5. Hyperparameter tuning transparency}
+
+\comment{Report search spaces, numbers of configurations, selection criteria, and principal training settings for classical and quantum models.}
+
+\response{The revision reports the optimizer, learning rate, weight decay, epoch limit, patience, seeds, and selection metric. The reference four qubit, depth two circuit was not chosen retrospectively from the sensitivity grid. The nine qubit and depth combinations are reported as a complete sensitivity analysis. The official STAEformer configuration was adopted without an architecture search, and matched residual heads received the same data, optimizer settings, minibatch order, and early stopping rule.}
+
+\change{The new ``Optimization and tuning disclosure'' table describes every model family and its configuration budget. The resource table separately reports parameter counts, training time, inference time, and accuracy for Fourier, separable VQC, entangled VQC, and STAEformer on both confirmatory datasets.}
+
+\textbf{6. Choice and use of three interval experts}
+
+\comment{Explain why $K=3$ was used and provide evidence about mixture weights or expert collapse.}
+
+\response{Three experts were fixed before the regime study as a compact low, intermediate, and high residual scale design; the value was not selected from test performance. To test sensitivity, we added a validation only ablation over $K=1,2,3,4,5$ with identical features, optimization settings, head seeds, and chronological selection, calibration, and evaluation segments. We also report the average mixture weights, effective number of experts, maximum gate probability, and regime characteristics. The analysis shows whether performance depends on additional capacity and makes any concentration of mass visible rather than assuming semantic regimes.}
+
+\change{The rationale is stated in ``Regime aware interval calibration.'' The new expert count results and figure report WIS, coverage, effective expert use, and mixture behaviour. Detailed seed level weights are included in the reproducibility package.}
+
+\textbf{7. Structural difference between entangled and separable circuits}
+
+\comment{Report depth, gate count, and trainable parameters, display both circuits side by side, and limit the conclusion to the tested entangling operation.}
+
+\response{Both circuits contain 132 compression parameters, 24 trainable circuit rotation parameters, and 120 readout parameters. Each has eight encoding gates and eight trainable $\mathrm{Rot}$ gates at depth two. The entangled version alone adds eight fixed CNOT gates. PennyLane resource tracing gives logical depths 12 and 4 for the entangled and separable circuits. The revised conclusion is limited to the tested directed ring entangler. A reviewer requested diagnostic using 256 random input and parameter draws confirms that the ring changes both expressibility and entangling capability, but this diagnostic is not treated as evidence of predictive advantage.}
+
+\change{Figure~8 places the two circuits side by side. The circuit subsection and Discussion report the exact counts, identical initialization and optimization, expressibility divergence, Meyer Wallach measure, and the appropriately restricted conclusion.}
+
+\subsection*{Minor comments}
+
+\textbf{8. Abbreviations and terminology}
+
+\response{All nonstandard abbreviations are now expanded at first use, including VQC, MLP, WIS, QUARTS-UQ, QUARTS-RAC, RAQ, and SA-CQR. Figure captions use the same names as the main text, and figure references have been standardized.}
+
+\textbf{9. Self contained captions}
+
+\response{Captions have been rewritten to identify the experimental stage, metric direction, interval level, uncertainty representation, and meaning of PASS or FAIL where applicable. The new flowchart and circuit captions describe their colour and structural encodings.}
+
+\textbf{10. Appendix layout}
+
+\response{The former dense appendix composition has been separated into twelve individually numbered supplementary figures. Each figure has its own caption and label, and the sequence follows the experimental chronology.}
+
+\textbf{11. Reference and character anomalies}
+
+\response{The source and generated bibliography were audited for encoding problems, citation key mismatches, and malformed mathematical delimiters. References are generated from BibTeX, and the final PDF is rendered and visually checked after compilation.}
+
+\section*{Reviewer 2}
+
+\textbf{1. Dependence aware statistical analysis}
+
+\comment{Define the resampling unit and replace a bootstrap that treats overlapping windows, sensors, and horizons as independent.}
+
+\response{We agree. The revised analysis no longer uses individual forecasts as independent inferential units. For each seed and five minute origin, paired loss differences are averaged over all nodes and horizons. A circular moving block bootstrap samples 288 origin daily blocks, and a hierarchical outer level resamples independently trained backbones. This preserves spatial and cross horizon dependence within each origin and short range temporal dependence within daily blocks. The original instance level results remain archived only for provenance.}
+
+\change{The method is specified in ``Statistical analysis.'' A new point comparison table reports the dependence aware intervals, and the PeMSD4 comparison uses the same hierarchy with five independent backbones.}
+
+\textbf{2. VQC parameters, initialization, expressivity, and entanglement ablation}
+
+\response{The revision gives exact compression, circuit, readout, and total parameter counts; initialization from $\mathcal{U}(0,2\pi)$; identical optimizer and early stopping settings; gate counts; and traced logical depths. The systematic size analysis covers three qubit counts and three depths. A side by side circuit figure isolates the CNOT ring. The additional expressivity diagnostic reports fidelity distribution divergence and Meyer Wallach entanglement for both circuits. The conclusion now concerns only this tested circuit family.}
+
+\textbf{3. Fairness of the STAEformer comparison}
+
+\response{STAEformer and the compact QUARTS backbone answer different comparison questions, so they are not described as parameter matched. STAEformer is a strong end to end forecasting reference, whereas the separable VQC, entangled VQC, Fourier, and MLP residual heads provide the controlled attribution comparisons. The official STAEformer architecture was used without architecture search. The revision reports parameters, five seed training and inference times, optimization settings, tuning budgets, and accuracy for both model families. This makes the capacity and cost difference explicit rather than implying equivalence.}
+
+\textbf{4. Prespecified and post hoc thresholds}
+
+\response{The revised flowchart separates stages governed by archived configurations from reviewer requested or outcome motivated diagnostics. The MAE, WIS, coverage, minimum improvement, and seed consistency rules are stated before the Results. The recent window repair, expansion to five PeMSD4 seeds, expert count sensitivity study, conditional calibration analysis, and circuit expressivity analysis are labelled post hoc and cannot redefine an earlier decision.}
+
+\textbf{5. Generality across learning paradigms}
+
+\response{The empirical comparison already spans persistence and historical references, a graph recurrent backbone, MLP and Fourier heads, separable and entangled circuits, and a modern spatiotemporal Transformer. Adding tree ensembles after test access would require a new feature engineering and selection protocol and could create an unequal post hoc comparison. We therefore added a systematic scope discussion, including the three suggested references, and explicitly restrict the conclusion to the tested residual interface and forecasting backbones rather than all classical machine learning.}
+
+\textbf{6. Expert count ablation and learned regimes}
+
+\response{A new validation only experiment varies $K$ from one to five under the same data, Fourier gate, optimizer, epoch budget, and three head seeds. Results include WIS, coverage, width, parameter count, mixture weights, effective expert count, and maximum gate probability. A separate PeMSD4 diagnostic relates dominant experts to traffic intensity, recent local volatility, and absolute backbone residual. These analyses test both capacity sensitivity and whether the learned routing reflects observable traffic conditions.}
+
+\textbf{7. Conditional coverage and width}
+
+\response{The revision now reports WIS, 90 percent coverage, and width by forecast horizon, traffic intensity quartile, detector, backbone residual quartile, recent local volatility quartile, and dominant expert. Node level distributions and the complete conditional tables are supplied with the code. These results reveal where aggregate calibration conceals local undercoverage or overcoverage and are described as post hoc diagnostics rather than new selection criteria.}
+
+\textbf{8. Conformal calibration under temporal dependence}
+
+\response{The manuscript now specifies nonoverlapping chronological fitting, selection, calibration, and evaluation segments. Multiplicative conformity factors are estimated separately for each horizon and interval level, while nodes are pooled within the calibration segment. We explicitly state that overlapping traffic windows violate ordinary exchangeability and that the reported values are empirical marginal coverage, not distribution free conditional guarantees. Daily block resampling addresses uncertainty estimation but does not remove distribution drift; rolling recalibration remains necessary in deployment.}
+
+\textbf{9. Number of independent PeMSD4 replications}
+
+\response{We trained two additional complete STAEformer backbones, increasing the independent seeds from three to five: 17, 42, 73, 101, and 202. Every frozen backbone received independently trained constant, MLP, and Fourier interval heads under the same chronological protocol. Fourier minus MLP WIS was $-0.0308\pm0.1285$ across seeds, with a hierarchical daily block bootstrap 95 percent interval of $[-0.1336,0.0767]$. Fourier won three seed comparisons and MLP won two. The primary revised comparison therefore treats the backbone as the experimental unit and does not claim a stable advantage.}
+
+\textbf{10. Simulator cost and quantum hardware interpretation}
+
+\response{The revision separates batched quantum forward calls from the number of node level circuit instances and reports training time, inference time, peak GPU memory, state vector dimension, and scaling with qubit count and depth. One METR-LA seed required 3,267 batched calls representing 171,388,134 circuit instances; PeMSD4 required 4,961 calls representing 409,428,825 instances. The experiments used analytic differentiation and state vector simulation on a classical GPU. The text now states repeatedly that these measurements do not demonstrate speed, memory, energy, or accuracy on physical quantum hardware.}
+
+\section*{Closing statement}
+
+We appreciate the reviewers' suggestions. They led to a clearer chronology, more conservative statistical inference, a better delimited quantum claim, and substantially stronger reproducibility documentation. The revised manuscript reports positive, negative, and inconclusive results under the same decision framework and does not use the new post hoc analyses to manufacture a confirmatory claim.
+
+\end{document}

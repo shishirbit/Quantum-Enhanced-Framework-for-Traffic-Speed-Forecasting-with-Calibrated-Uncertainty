@@ -24,9 +24,14 @@
 
 \title[Controlled evaluation of QUARTS]{QUARTS for Probabilistic Traffic Forecasting: A Controlled Evaluation of Quantum and Classical Residual Calibration}
 
-% Author names, email addresses, and affiliations require confirmation.
+\author*[1]{\fnm{Shishir Singh} \sur{Chauhan}}\email{shishir.chauhan@jaipur.manipal.edu}
 
-\abstract{Quantum machine learning has been proposed for traffic forecasting, yet evidence from network traffic settings remains limited. We present QUARTS, a Quantum Uncertainty Aware Residual Traffic System, to test whether an entangled variational quantum circuit improves point forecasts or predictive intervals under identical experimental conditions. Experiments used METR-LA, PEMS-BAY, PeMSD4, and PeMSD8 with matched separable quantum, Fourier, multilayer perceptron, and unchanged backbone controls. Across five confirmatory seeds, entangled QUARTS obtained mean absolute errors of 3.897 on METR-LA and 2.030 on PEMS-BAY, which were 32.99\% and 31.84\% above STAEformer. Differences from the separable quantum and Fourier heads remained below 0.40\%, providing no evidence that entanglement produced a predictive gain. A classical Fourier regime aware calibrator reduced weighted interval score by 14.58\% relative to constant intervals and by 0.68\% relative to a multilayer perceptron on prospective PeMSD4 test data, with 89.66\% coverage. This advantage reversed for one of three independently trained backbones, and mean coverage declined to 88.78\%. A conformal quantile variant failed its PeMSD8 validation gate, so the test split remained untouched. The results show that strong forecasting backbones, matched nonlinear controls, and explicit validation gates are necessary for credible assessment of quantum traffic models.}
+\affil*[1]{\orgdiv{Department of Computer Science and Engineering},
+\orgname{Manipal University Jaipur},
+\orgaddress{\street{Jaipur-Ajmer Expressway}, \city{Jaipur},
+\postcode{303007}, \state{Rajasthan}, \country{India}}}
+
+\abstract{Quantum machine learning has been proposed for traffic forecasting, yet evidence from network traffic settings remains limited. We present QUARTS, a Quantum Uncertainty Aware Residual Traffic System, to test whether an entangled variational quantum circuit improves point forecasts or predictive intervals under identical experimental conditions. Experiments used METR-LA, PEMS-BAY, PeMSD4, and PeMSD8 with matched separable quantum, Fourier, multilayer perceptron, and unchanged backbone controls. Across five confirmatory seeds, entangled QUARTS obtained mean absolute errors of 3.897 on METR-LA and 2.030 on PEMS-BAY, which were 32.99\% and 31.84\% above STAEformer. Differences from the separable quantum and Fourier heads remained below 0.40\%, providing no evidence that entanglement produced a predictive gain. A classical Fourier regime aware calibrator reduced weighted interval score by 14.58\% relative to constant intervals and by 0.68\% relative to a multilayer perceptron in the initial prospective PeMSD4 run. Across five independently trained backbones, however, the mean Fourier minus multilayer perceptron difference was $-0.0308$ with a dependence aware $95\%$ interval of $[-0.1336,0.0767]$ and only three directional wins. A conformal quantile variant failed its PeMSD8 validation gate, so the test split remained untouched. The results show that strong forecasting backbones, matched nonlinear controls, and explicit validation gates are necessary for credible assessment of quantum traffic models.}
 
 \keywords{traffic forecasting, quantum machine learning, variational quantum circuits, probabilistic forecasting, uncertainty calibration, conformal prediction}
 
@@ -48,7 +53,7 @@ This study addresses that question through QUARTS, the Quantum Uncertainty Aware
 
 The investigation is organized around four questions. First, does the entangled head improve point forecasting over the unchanged backbone and STAEformer? Second, does it outperform separable quantum, Fourier, and multilayer perceptron controls? Third, can regime aware residual calibration improve interval quality while maintaining nominal coverage? Fourth, do observed gains survive independent backbone initialization and a new dataset? These questions are evaluated with five confirmatory seeds on METR-LA and PEMS-BAY, prospective testing on PeMSD4, and a validation only transfer study on PeMSD8.
 
-The study makes four contributions. First, it provides a controlled architecture that isolates the function of a small shared quantum calibrator from the network scale forecasting backbone. Second, it evaluates entanglement against a separable circuit and a Fourier control that directly reflects the known spectral structure of data reuploading models. Third, it links point accuracy, interval quality, calibration, computation time, circuit sensitivity, missing input robustness, and paired statistical analysis in one traceable protocol. Fourth, it reports the complete sequence of favourable, negative, and inconclusive findings. The confirmatory study does not support a quantum advantage. A classical Fourier regime calibrator shows a small prospective interval score improvement, but that improvement changes sign for one independently trained backbone and does not satisfy the coverage requirement in aggregate. The resulting contribution is therefore an evidence bounded account of what residual calibration achieved, where it failed, and why entanglement cannot be credited for the observed behaviour.
+The study makes four contributions. First, it provides a controlled architecture that isolates the function of a small shared quantum calibrator from the network scale forecasting backbone. Second, it evaluates entanglement against a separable circuit and a Fourier control that directly reflects the known spectral structure of data reuploading models. Third, it links point accuracy, interval quality, calibration, computation time, circuit sensitivity, missing input robustness, and paired statistical analysis in one traceable protocol. Fourth, it reports the complete sequence of favourable, negative, and inconclusive findings. The confirmatory study does not support a quantum advantage. A classical Fourier regime calibrator shows a small prospective interval score improvement, but the expanded five backbone analysis contains two sign reversals and a confidence interval that crosses zero. The resulting contribution is therefore an evidence bounded account of what residual calibration achieved, where it failed, and why entanglement cannot be credited for the observed behaviour.
 
 \section{Related work}\label{sec:related}
 
@@ -96,6 +101,15 @@ The experiments answer four prespecified questions. RQ1 asks whether the entangl
 
 Each extension was evaluated behind a validation gate. A branch advanced only when it improved the declared primary metric, remained within the declared coverage range when intervals were involved, and satisfied any seed consistency requirement. A failed branch was retained as evidence but was not promoted. In particular, the PeMSD8 test split was not opened after the conformal quantile branch failed validation. This separation between model development and final testing limits the opportunity to select a favourable test outcome.
 
+Figure~\ref{fig:experimentflow} consolidates the experimental sequence that was distributed across the original submission. Stages 1 to 4 follow the archived protocol and immutable configuration files. For point forecasting, the primary criterion was lower mean absolute error (MAE) than both the unchanged backbone and STAEformer. For uncertainty experiments, advancement required lower weighted interval score (WIS), empirical $90\%$ coverage between $0.89$ and $0.91$, and the seed consistency criterion stored for that stage. The quantum uncertainty and regime branches additionally required at least a $5\%$ WIS reduction relative to the separable and Fourier controls. The initial PeMSD4 experiment used the selected Fourier regime aware calibrator without test set tuning. The recent window repair, the expansion from three to five PeMSD4 backbones, the expert count sensitivity study, the conditional calibration analysis, and the circuit expressivity diagnostic were requested or motivated after the original analysis. They are therefore labelled post hoc and are not used to redefine an earlier gate.
+
+\begin{figure*}[t]
+\centering
+\includegraphics[width=\textwidth]{figures/figure07_experimental_flow.pdf}
+\caption{Experimental sequence and decision logic. Blue boxes denote confirmatory point and uncertainty comparisons, green boxes denote calibration and transfer stages, red boxes denote failed gates, and purple denotes reviewer requested post hoc diagnostics. A gate advances only when the archived primary metric, coverage requirement, and seed consistency rule are all satisfied. A failed branch remains in the evidence record but cannot select a downstream test result.}
+\label{fig:experimentflow}
+\end{figure*}
+
 \section{QUARTS system architecture and method}\label{sec:method}
 
 \subsection{System overview}\label{subsec:overview}
@@ -113,7 +127,7 @@ Figure~\ref{fig:architecture} presents the complete system. A chronological prep
 
 The reference QUARTS backbone combines graph propagation with a gated recurrent encoder. For an input \(X\), graph propagated features \(AX\) are concatenated with the original features and encoded for every node. A linear horizon head maps the final hidden state \(H\in\mathbb{R}^{N\times d}\) to the base forecast \(B\in\mathbb{R}^{12\times N}\). The unchanged version of this backbone is retained as a control.
 
-The later uncertainty studies use a frozen STAEformer backbone. Freezing is methodologically important because all interval heads then receive identical point forecasts and representations. Any difference in WIS can be attributed to residual calibration rather than to a change in point forecasting capacity. STAEformer is also trained independently with seeds 42, 73, and 202 for the PeMSD4 replication.
+The later uncertainty studies use a frozen STAEformer backbone. Freezing is methodologically important because all interval heads then receive identical point forecasts and representations. Any difference in WIS can be attributed to residual calibration rather than to a change in point forecasting capacity. The revised PeMSD4 replication independently trains STAEformer with seeds 17, 42, 73, 101, and 202.
 
 \subsection{Entangled and separable quantum heads}\label{subsec:vqc}
 
@@ -129,6 +143,17 @@ At each circuit layer, \(R_Y(z_j)\) reuploads the corresponding feature on qubit
 \end{equation}
 For point forecasting, \(\widehat{Y}=B+\Delta\). For scale only experiments, the frozen location remains \(B\). The main experiments use analytic state vector simulation without sampling shots. No claim about execution speed or accuracy on physical quantum hardware is made.
 
+Figure~\ref{fig:circuits} makes the entanglement ablation explicit. Both point heads contain 132 compression parameters, 24 circuit rotation parameters, and 120 readout parameters, giving 276 head parameters and 4,140 parameters when the common backbone is included. The trainable circuit angles are initialized independently from \(\mathcal{U}(0,2\pi)\). Adam, the learning rate $10^{-3}$, weight decay $10^{-4}$, minibatch order, early stopping rule, and five seeds are identical. Each two layer circuit has eight data encoding $R_Y$ operations and eight trainable \(\mathrm{Rot}\) operations, equivalent to 24 elementary trainable rotations. The entangled circuit adds eight fixed CNOT operations. PennyLane resource tracing gives logical depths 12 and 4 for the entangled and separable circuits, respectively. Thus, parameter count is matched, but gate count, depth, computational graph, and expressivity necessarily differ.
+
+As a reviewer requested architecture diagnostic, 256 random input and parameter draws were evaluated without fitting to traffic targets. The entangled circuit had an expressibility divergence from the Haar fidelity distribution of $0.039$, compared with $0.183$ for the separable circuit, and a mean Meyer Wallach entanglement measure of $0.841\pm0.083$, compared with numerical zero for the separable circuit. These values verify that the added ring changes the represented state family. They do not establish useful task specific capacity, and they do not alter the predictive comparison.
+
+\begin{figure*}[t]
+\centering
+\includegraphics[width=\textwidth]{figures/figure08_circuit_comparison.pdf}
+\caption{Side by side circuit structures for the entanglement ablation. Both variational quantum circuits (VQCs) use four qubits, two data reuploading layers, identical $R_Y$ encoding, identical trainable \(\mathrm{Rot}=R_ZR_YR_Z\) gates, Pauli $Z$ measurement, classical readout, initialization, and optimization. The entangled VQC alone contains the eight ring CNOT operations shown in red.}
+\label{fig:circuits}
+\end{figure*}
+
 \subsection{Classical matched heads}\label{subsec:controls}
 
 The Fourier control receives the same compressed node representation. At layer \(k\), it forms
@@ -141,7 +166,7 @@ It therefore exposes periodic functions related to the spectral structure of dat
 
 \subsection{Regime aware interval calibration}\label{subsec:rac}
 
-The regime aware calibrator contains \(K=3\) shared interval experts. A head maps the node representation to logits, which become mixture weights
+The regime aware calibrator contains \(K=3\) shared interval experts. Three experts were fixed before the regime study as a compact low, intermediate, and high residual scale design; the value was not selected by reading test performance. A head maps the node representation to logits, which become mixture weights
 \begin{equation}
  \pi_{n,k}=\frac{\exp(g_k(H_n))}
  {\sum_{j=1}^{K}\exp(g_j(H_n))}.
@@ -149,7 +174,9 @@ The regime aware calibrator contains \(K=3\) shared interval experts. A head map
 \end{equation}
 Positive increments are summed in reverse order to obtain nested radii for the three interval levels. The mixture of expert radii produces \(r^{(\alpha)}\), and the symmetric interval is \(B\pm r^{(\alpha)}\). The asymmetric extension learns separate lower and upper increments. The ordered construction prevents a nominally wider interval from being contained inside a narrower one.
 
-After training, horizon and level specific conformal factors are estimated from a dedicated chronological calibration segment. SA-CQR instead trains lower and upper residual quantiles with pinball loss and applies a finite sample conformal adjustment. These procedures calibrate the frozen forecast rather than altering its location.
+After training, horizon and level specific conformal factors are estimated from a dedicated chronological calibration segment. For horizon $h$, level \(\alpha\), residual $e_i=|Y_i-B_i|$, and uncalibrated radius $r_i^{(\alpha)}$, the nonconformity score is $e_i/r_i^{(\alpha)}$. Its finite sample upper quantile multiplies future radii. Calibration is separate by horizon and interval level, but pooled over nodes within the assigned chronological segment. Symmetric adaptive conformal quantile residual calibration (SA-CQR) instead trains lower and upper residual quantiles with pinball loss and applies an additive conformity correction. These procedures calibrate the frozen forecast rather than altering its location.
+
+The chronological construction prevents future observations from entering model fitting or calibration, but it does not make overlapping traffic windows exchangeable. Reported coverage is therefore empirical marginal coverage on the indicated future segment, not a distribution free conditional guarantee. Temporal dependence is addressed in uncertainty estimates by resampling complete daily blocks, while distribution drift remains a threat that requires rolling or adaptive recalibration in deployment.
 
 \subsection{Objectives and evaluation measures}\label{subsec:metrics}
 
@@ -192,29 +219,71 @@ PeMSD8 & 170 & 17,856 & 12 & 12 & Validation transfer \\
 
 Every dataset was divided chronologically into \(70\%\) training, \(10\%\) validation, and \(20\%\) test partitions. Scaling statistics were calculated from the training partition only. Sliding windows did not cross partition boundaries. The validation partition was subdivided when early stopping, conformal calibration, and held out validation were all required. Test observations were never used to fit head parameters or conformal factors.
 
+\begin{table*}[t]
+\caption{Target domain data use. Percentages within validation refer to consecutive, nonoverlapping chronological windows. The PeMSD4 subgroup results added during revision are descriptive analyses of frozen predictions and do not select or recalibrate a model.}\label{tab:datause}
+\centering
+\scriptsize
+\resizebox{\textwidth}{!}{%
+\begin{tabular}{lllll}
+\toprule
+Stage & Model fitting & Selection & Calibration & Final evaluation \\
+\midrule
+METR-LA and PEMS-BAY point study & Training split & Validation split & Not applicable & Protected test split \\
+METR-LA RAC & Training split & First 40\% validation & Next 30\% validation & Final 30\% validation \\
+PeMSD4 prospective RAC & Training split & First 40\% validation & Next 30\% validation & Protected test split \\
+PeMSD4 recent repair & No refitting & None & Last 10\%, 20\%, or 30\% validation & Frozen test predictions \\
+PeMSD8 SA-CQR & Training split & First 40\% validation & Rolling validation folds & Later validation folds only \\
+\bottomrule
+\end{tabular}%
+}
+\end{table*}
+
 \subsection{Comparators and implementation}\label{subsec:implementation}
 
 The point study includes historical average and persistence references, the unchanged graph temporal backbone, MLP, Fourier, separable quantum, and entangled quantum residual heads, and the official STAEformer implementation. All QUARTS heads use the same hidden representation and twelve horizon outputs. The reference circuit has four qubits and two reuploading layers. The architecture study evaluates \(q\in\{2,4,6\}\) and depths \(d\in\{1,2,3\}\).
 
-Models were trained for at most 30 epochs with Adam, learning rate \(10^{-3}\), weight decay \(10^{-4}\), batch size 256, early stopping patience seven, and minimum improvement \(5\times10^{-4}\). Confirmatory point results use seeds \(17,42,73,101,\) and \(202\). The uncertainty branches use their declared head seeds, while the independent PeMSD4 study trains complete backbones with seeds 42, 73, and 202.
+Models were trained for at most 30 epochs with Adam, learning rate \(10^{-3}\), weight decay \(10^{-4}\), batch size 256, early stopping patience seven, and minimum improvement \(5\times10^{-4}\). Confirmatory point results use seeds \(17,42,73,101,\) and \(202\). The uncertainty branches use their declared head seeds. The revised independent PeMSD4 study trains complete backbones with the same five seeds.
+
+The comparison spans simple temporal references, a graph recurrent model, a compact multilayer perceptron (MLP), a Fourier network, and a Transformer with adaptive spatial and temporal embeddings. It therefore tests the proposed head against several distinct inductive biases, but it does not constitute a benchmark of every machine learning family. Random forests, XGBoost, and LightGBM do not directly represent the network and horizon structure without an additional feature engineering protocol, so introducing them after test access would create a new and potentially unequal selection exercise. The broader literature shows that tree ensembles and hybrid models can be strong when their representation is appropriate, including recent applications to fatigue and structural response prediction \cite{naeim2025fatigue,akbarzadeh2025fragility,akbarzadeh2026multihazard}. The conclusion here is consequently restricted to the tested residual interface and backbones rather than generalized to all classical learning approaches.
+
+\begin{table*}[t]
+\caption{Optimization and tuning disclosure. The official STAEformer architecture was adopted without an architecture search. The nine quantum size configurations form a sensitivity analysis and did not retrospectively replace the four qubit, depth two reference treatment.}\label{tab:tuning}
+\centering
+\scriptsize
+\resizebox{\textwidth}{!}{%
+\begin{tabular}{lllllll}
+\toprule
+Component & Configurations & Optimizer & Learning rate & Weight decay & Maximum epochs & Selection criterion \\
+\midrule
+QUARTS point heads & None, MLP, Fourier, separable VQC, entangled VQC & Adam & $10^{-3}$ & $10^{-4}$ & 30 & Validation Laplace loss \\
+Quantum sensitivity & $q\in\{2,4,6\}$, $d\in\{1,2,3\}$ & Adam & $10^{-3}$ & $10^{-4}$ & 30 & Reported as full grid \\
+STAEformer & Official published architecture, one configuration per dataset & Adam & $10^{-3}$ & $3\times10^{-4}$ or $10^{-4}$ & 30 & Validation MAE \\
+RAC heads & Constant, MLP, Fourier, separable VQC, entangled VQC & Adam & $3\times10^{-3}$ & 0 & 15 & Chronological validation WIS \\
+PeMSD4 backbone and heads & Five backbone seeds, three interval heads & Adam & $10^{-3}$, $3\times10^{-3}$ & $3\times10^{-4}$, 0 & 12, 15 & Validation MAE and WIS \\
+\bottomrule
+\end{tabular}%
+}
+\end{table*}
 
 The experiments ran on Windows 11 with Python 3.12.13, PyTorch 2.13.0 built for CUDA 13.0, PennyLane 0.39, NumPy 2.0.2, pandas 2.2.3, SciPy 1.18.0, and scikit learn 1.9.0. The GPU was an NVIDIA GeForce RTX 5060 Laptop GPU with 8,151 MiB of memory. Quantum models were simulated on the same computer, which provides a controlled software comparison but not a hardware quantum benchmark.
 
 \subsection{Statistical analysis}\label{subsec:statistics}
 
-Overall differences among point models were assessed separately for each dataset with the Friedman rank test \cite{friedman1937ranks}. Paired mean error differences were accompanied by percentile bootstrap \(95\%\) confidence intervals \cite{efron1979bootstrap}. Holm adjustment controlled multiplicity for the paired comparisons. Cliff's delta was also recorded as a distribution free effect size \cite{cliff1993dominance}. These paired analyses use the stored forecast errors and should not be interpreted as independent sensor samples.
+Overall differences among point models were assessed separately for each dataset with the Friedman rank test \cite{friedman1937ranks}. Cliff's delta was recorded as a distribution free descriptive effect size \cite{cliff1993dominance}. The original instance level bootstrap and Wilcoxon calculations are retained in the repository for provenance, but they are no longer used for inferential claims because overlapping windows, nodes, and horizons are strongly correlated.
 
-For PeMSD4, Fourier and MLP WIS contributions were paired within each independently trained backbone. The decision did not rest on statistical significance alone. Directional consistency and the prespecified coverage range were required because a very large number of forecast instances can make a practically small difference statistically detectable.
+The revised analysis first averages the paired loss difference over every node and horizon within a five minute forecast origin. It then uses 5,000 circular moving block bootstrap replicates with blocks of 288 consecutive origins, corresponding to one day \cite{efron1979bootstrap}. The primary interval resamples the five independently trained seeds and then resamples daily blocks within each selected seed. This hierarchical construction treats the training seed as the independent replication unit while preserving short range temporal, spatial, and cross horizon dependence inside each origin. Seed means, seed standard deviations, directional wins, and the hierarchical $95\%$ interval are reported together.
+
+For PeMSD4, the same procedure is applied to the origin averaged Fourier minus MLP WIS. Coverage and width are summarized at seed level rather than inferred from more than one million correlated forecast values. Conditional results by horizon, traffic intensity, detector, base residual, local volatility, and dominant expert are descriptive post hoc diagnostics. The decision does not rest on a small instance level $p$ value; it requires practical magnitude, directional consistency across independent backbones, and the archived coverage range.
 
 \subsection{Experiment gates}\label{subsec:gates}
 
-The study followed a staged sequence. Point forecasting first tested whether the entangled head warranted promotion. QUARTS-UQ then isolated uncertainty scale prediction. QUARTS-RAC tested regime selection on validation data. RAQ tested asymmetric intervals. A favourable Fourier result was next evaluated prospectively on PeMSD4 and repeated with two additional independently trained backbones. Recent conformal repair and SA-CQR transfer were conducted only after the corresponding failure was observed. Table~\ref{tab:gates} in Section~\ref{sec:results} reports every decision, including failed branches.
+The study followed a staged sequence. Point forecasting first tested whether the entangled head warranted promotion. The QUARTS uncertainty module (QUARTS-UQ) then isolated uncertainty scale prediction. The QUARTS regime aware calibrator (QUARTS-RAC) tested regime selection on validation data. Residual adaptive quantile calibration (RAQ) tested asymmetric intervals. A favourable Fourier result was next evaluated prospectively on PeMSD4 and was originally repeated with two additional independently trained backbones. Recent conformal repair and SA-CQR transfer were conducted only after the corresponding failure was observed. During revision, PeMSD4 replication was expanded to five backbones, but this post hoc robustness analysis did not change the frozen heads, calibration rules, or protected test predictions. The expert count and conditional calibration analyses are also post hoc diagnostics. Table~\ref{tab:gates} in Section~\ref{sec:results} reports every decision, including failed branches.
 
 \section{Results}\label{sec:results}
 
 \subsection{Confirmatory point forecasting}\label{subsec:pointresults}
 
-Table~\ref{tab:point} and Fig.~\ref{fig:point} show the five seed results. Entangled QUARTS obtained MAE \(3.8969\) on METR-LA and \(2.0295\) on PEMS-BAY. The unchanged graph temporal backbone was better on both datasets. STAEformer obtained \(2.9302\) and \(1.5394\), making the entangled head \(32.99\%\) and \(31.84\%\) worse. The result rejects RQ1 for the tested architecture.
+Table~\ref{tab:point} and Figure~\ref{fig:point} show the five seed results. Entangled QUARTS obtained MAE \(3.8969\) on METR-LA and \(2.0295\) on PEMS-BAY. The unchanged graph temporal backbone was better on both datasets. STAEformer obtained \(2.9302\) and \(1.5394\), making the entangled head \(32.99\%\) and \(31.84\%\) worse. The result rejects RQ1 for the tested architecture.
 
 \begin{table*}[t]
 \caption{Confirmatory point forecasting over five seeds. Values are mean with standard deviation in parentheses. Lower values are better.}\label{tab:point}
@@ -252,7 +321,7 @@ Dataset & Model & MAE & RMSE & MAPE (\%) \\
 \label{fig:point}
 \end{figure}
 
-The matched comparisons answer RQ2. Entangled QUARTS was \(0.120\%\) worse than the separable circuit on METR-LA and \(0.233\%\) worse on PEMS-BAY. It was \(0.178\%\) and \(0.397\%\) better than Fourier. These differences are small relative to the gap from STAEformer and do not establish an entanglement benefit. The paired entangled minus separable MAE differences were \(0.0055\), with \(95\%\) confidence interval \([0.0036,0.0076]\), and \(0.0047\), with interval \([0.0038,0.0055]\), respectively. Cliff's delta remained at or below \(0.0022\). The entangled minus Fourier differences were \(-0.0073\), with interval \([-0.0096,-0.0053]\), and \(-0.0078\), with interval \([-0.0100,-0.0055]\), with absolute Cliff's delta below \(0.0033\). The Friedman tests rejected equality among all treatments on METR-LA (\(\chi^2_F=21.23\), \(p=0.00073\)) and PEMS-BAY (\(\chi^2_F=20.43\), \(p=0.00104\)), a result driven primarily by the much larger difference from STAEformer.
+The matched comparisons answer RQ2. Entangled QUARTS was \(0.120\%\) worse than the separable circuit on METR-LA and \(0.233\%\) worse on PEMS-BAY. It was \(0.178\%\) and \(0.397\%\) better than Fourier. These differences are small relative to the gap from STAEformer and do not establish an entanglement benefit. Under the revised hierarchical daily block bootstrap, the entangled minus separable MAE difference was $0.0048\pm0.0073$ across seeds on METR-LA, with $95\%$ interval \([-0.0017,0.0104]\), and $0.0047\pm0.0066$ on PEMS-BAY, with interval \([0.0002,0.0106]\). The quantum head won one of five and two of five seed comparisons, respectively. The entangled minus Fourier differences were \(-0.0068\pm0.0074\), with interval \([-0.0129,-0.0011]\), and \(-0.0081\pm0.0079\), with interval \([-0.0140,-0.0017]\). Although both Fourier intervals exclude zero, the changes are below $0.01$ MAE, reverse for one seed on each dataset, and occur while the unchanged backbone remains better. The Friedman tests rejected equality among all treatments on METR-LA (\(\chi^2_F=21.23\), \(p=0.00073\)) and PEMS-BAY (\(\chi^2_F=20.43\), \(p=0.00104\)), a result driven primarily by the much larger difference from STAEformer.
 
 \begin{figure}[t]
 \centering
@@ -261,16 +330,58 @@ The matched comparisons answer RQ2. Entangled QUARTS was \(0.120\%\) worse than 
 \label{fig:effects}
 \end{figure}
 
+\begin{table*}[t]
+\caption{Dependence aware paired point comparison. Differences are entangled VQC minus comparator MAE, so negative values favour the entangled head. The interval uses 5,000 hierarchical bootstrap replicates over five training seeds and 288 origin daily blocks.}\label{tab:blockpoint}
+\centering
+\small
+\begin{tabular}{llrrr}
+\toprule
+Dataset & Comparator & Mean difference & Seed SD & Hierarchical 95\% interval \\
+\midrule
+METR-LA & Separable VQC & 0.0048 & 0.0073 & \([-0.0017,0.0104]\) \\
+METR-LA & Fourier & \(-0.0068\) & 0.0074 & \([-0.0129,-0.0011]\) \\
+METR-LA & STAEformer & 0.9857 & 0.0124 & \([0.9292,1.0426]\) \\
+PEMS-BAY & Separable VQC & 0.0047 & 0.0066 & \([0.0002,0.0106]\) \\
+PEMS-BAY & Fourier & \(-0.0081\) & 0.0079 & \([-0.0140,-0.0017]\) \\
+PEMS-BAY & STAEformer & 0.4906 & 0.0050 & \([0.4510,0.5294]\) \\
+\bottomrule
+\end{tabular}
+\end{table*}
+
 \subsection{Architecture and efficiency}\label{subsec:efficiency}
 
-Increasing circuit size did not produce a monotonic accuracy gain. Across nine METR-LA configurations, MAE ranged from \(3.8839\) to \(3.9046\). The best value occurred with six qubits and one layer, while six qubits and deeper circuits were slightly worse. Inference time increased from \(1.069\) s for two qubits and one layer to \(16.760\) s for six qubits and three layers. The reference four qubit, depth two quantum head contained 4,140 trainable parameters, close to the Fourier head's 4,196 parameters. Nevertheless, its METR-LA total training time was \(1,544.3\) s compared with \(162.2\) s for Fourier. Figure~\ref{fig:efficiency} places these costs beside accuracy. The simulator therefore offered no computational advantage.
+Increasing circuit size did not produce a monotonic accuracy gain. Across nine METR-LA configurations, MAE ranged from \(3.8839\) to \(3.9046\). The best value occurred with six qubits and one layer, while six qubits and deeper circuits were slightly worse. Inference time increased from \(1.069\) s for two qubits and one layer to \(16.760\) s for six qubits and three layers. The corresponding state vector dimension rises from $2^2=4$ to $2^6=64$, and the ring contributes $qd$ CNOT operations per circuit. The reference four qubit, depth two quantum head contained 4,140 trainable parameters, close to the Fourier head's 4,196 parameters. Nevertheless, its METR-LA total training time was \(1,544.3\) s compared with \(162.2\) s for Fourier.
+
+The simulator executed 3,267 batched quantum forward calls, representing 171,388,134 node level state vector circuit instances, for one 30 epoch METR-LA seed. The corresponding PEMS-BAY counts were 4,961 batched calls and 409,428,825 circuit instances. Peak allocated GPU memory was 2.22 GiB and 3.44 GiB, and test inference took 4.54 s and 12.50 s, respectively. These counts describe analytic differentiation and batched state vector evaluation on a classical GPU. They are neither physical quantum processor execution counts nor evidence of hardware speed, memory, or energy efficiency. Figure~\ref{fig:efficiency} places measured simulator costs beside accuracy.
 
 \begin{figure}[t]
 \centering
 \includegraphics[width=\linewidth]{figures/figure06_accuracy_efficiency_tradeoff.pdf}
-\caption{Accuracy and measured computational cost for the confirmatory models. Times refer to the reported local GPU and simulated circuit environment.}
+\caption{Accuracy and measured computational cost for the confirmatory models. Times refer to the local NVIDIA GPU and analytic state vector simulator. They do not estimate runtime on quantum hardware. Error bars summarize the five training seeds where available.}
 \label{fig:efficiency}
 \end{figure}
+
+\begin{table*}[t]
+\caption{Controlled model size and measured cost. Training and test inference times are mean and standard deviation over five seeds on the same GPU. STAEformer was trained end to end; the residual heads include their common graph temporal backbone. These computational budgets are not equivalent in capacity, so accuracy is interpreted together with the matched head comparisons.}\label{tab:resources}
+\centering
+\scriptsize
+\resizebox{\textwidth}{!}{%
+\begin{tabular}{llrrrr}
+\toprule
+Dataset & Model & Parameters & Training time (s) & Inference time (s) & MAE \\
+\midrule
+METR-LA & Fourier & 4,196 & $162.2\pm44.9$ & $0.73\pm0.25$ & 3.9039 \\
+METR-LA & Separable VQC & 4,140 & $1,539.9\pm6.0$ & $4.53\pm0.02$ & 3.8923 \\
+METR-LA & Entangled VQC & 4,140 & $1,544.3\pm1.0$ & $4.54\pm0.02$ & 3.8969 \\
+METR-LA & STAEformer & 1,258,980 & $6,850.9\pm201.5$ & $25.19\pm0.30$ & 2.9302 \\
+PEMS-BAY & Fourier & 4,196 & $291.9\pm0.2$ & $1.16\pm0.02$ & 2.0376 \\
+PEMS-BAY & Separable VQC & 4,140 & $3,792.6\pm145.7$ & $11.96\pm1.06$ & 2.0248 \\
+PEMS-BAY & Entangled VQC & 4,140 & $3,947.7\pm6.9$ & $12.57\pm0.07$ & 2.0295 \\
+PEMS-BAY & STAEformer & 1,372,260 & $15,694.6\pm2,239.5$ & $58.14\pm3.57$ & 1.5394 \\
+\bottomrule
+\end{tabular}
+}
+\end{table*}
 
 \subsection{Uncertainty and regime calibration}\label{subsec:uqresults}
 
@@ -285,18 +396,49 @@ Figure~\ref{fig:uq} consolidates the uncertainty stages. On METR-LA, QUARTS-UQ p
 
 These findings answer RQ3 for METR-LA. Conditional calibration improved over a constant interval model, but the improvement was classical rather than quantum. Symmetric radii were more reliable than the tested asymmetric extension. A gated point correction initialized near the unchanged STAEformer prediction also produced MAE values between \(2.9276\) and \(2.9277\) for all learned heads, so it did not create a meaningful point forecasting gain.
 
+The reviewer requested expert count ablation used only the chronologically partitioned METR-LA validation data. Mean WIS for $K=1,2,3,4,$ and $5$ was $1.8920$, $1.6899$, $1.6869$, $1.6856$, and $1.6869$, respectively. The corresponding $90\%$ coverage values ranged from $0.9048$ to $0.9101$. Thus one expert was inadequate, while the difference among two to five experts was at most $0.0042$ WIS. The prespecified $K=3$ model used an effective $2.07\pm0.18$ experts and had mean weights $[0.745,0.096,0.158]$ across three head seeds. The routing was concentrated but not collapsed to one expert. Increasing $K$ raised parameter count from 223 at $K=1$ to 383 at $K=5$ without a material score improvement.
+
 \subsection{Prospective PeMSD4 evaluation}\label{subsec:pems4}
 
 The Fourier regime calibrator was selected before opening the PeMSD4 test split. With backbone seed 42, its WIS was \(26.8820\), compared with \(31.4672\) for constant intervals and \(27.0663\) for MLP-RAC. These values correspond to improvements of \(14.58\%\) and \(0.68\%\), and Fourier coverage was \(89.66\%\). This was the strongest prospective result, but its small margin over MLP required independent replication.
 
-Across seeds 42, 73, and 202, mean Fourier WIS was \(22.6892\), compared with \(22.7480\) for MLP. Mean Fourier coverage was \(88.78\%\), below the declared lower bound of \(89\%\). More importantly, Fourier minus MLP WIS changed from \(-0.1843\) and \(-0.0402\) for seeds 42 and 73 to \(+0.0479\) for seed 202. All paired confidence intervals excluded zero because each run contained more than one million forecast instances, but the sign reversal and aggregate undercoverage failed the replication gate. Figure~\ref{fig:pems4} shows both the average and the seed level behaviour.
+The original replication used seeds 42, 73, and 202. Mean Fourier WIS was \(22.6892\), compared with \(22.7480\) for MLP, but seed 202 reversed the ordering and mean Fourier coverage was \(88.78\%\). Figure~\ref{fig:pems4} preserves this original evidence. The reviewer requested expansion added complete backbones for seeds 17 and 101. Across all five backbones, Fourier WIS was $21.2373\pm3.4720$, compared with $21.2681\pm3.5345$ for MLP. Fourier minus MLP was $-0.0308\pm0.1285$ across seeds, with a hierarchical daily block bootstrap $95\%$ interval of $[-0.1336,0.0767]$. Fourier won for seeds 17, 42, and 73, while MLP won for seeds 101 and 202. Mean Fourier coverage was $89.44\%\pm1.70\%$ and mean width was $141.47\pm19.55$. The average coverage therefore entered the declared range after expansion, but the uncertain effect and two directional reversals still failed the robustness gate.
 
 \begin{figure*}[t]
 \centering
 \includegraphics[width=\textwidth]{figures/figure04_pemsd4_independent_backbones.pdf}
-\caption{PeMSD4 WIS and \(90\%\) coverage for three independently trained STAEformer backbones. The Fourier advantage reverses for seed 202, and its mean coverage falls below the gate.}
+\caption{Original PeMSD4 WIS and \(90\%\) coverage for three independently trained STAEformer backbones. The Fourier advantage reverses for seed 202, motivating the reviewer requested expansion to five backbones shown in Figure~\ref{fig:revisiondiagnostics}.}
 \label{fig:pems4}
 \end{figure*}
+
+Conditional analysis showed why aggregate coverage was insufficient. For Fourier, mean coverage increased from $85.4\%$ at the five minute horizon to $91.8\%$ at 60 minutes. It decreased from $96.2\%$ in the lowest traffic intensity quartile to $83.8\%$ in the highest, while mean width increased from $104.65$ to $197.10$. Coverage in the largest backbone residual quartile was only $61.0\%$. Across detector and seed combinations, median coverage was $89.63\%$, with an interquartile range from $86.63\%$ to $92.64\%$ and a minimum of $72.58\%$. Dominant expert routing was also concentrated: the first Fourier expert was dominant for approximately $98\%$ of PeMSD4 node origins, while the rare second and third experts were associated with higher traffic, local volatility, and backbone residuals. This indicates partial soft mixture use but not three balanced semantic regimes.
+
+\begin{figure*}[t]
+\centering
+\includegraphics[width=\textwidth]{figures/figure09_revision_diagnostics.pdf}
+\caption{Reviewer requested post hoc diagnostics. Panel (a) reports Fourier minus MLP WIS for five independently trained PeMSD4 backbones, where negative values favour Fourier. Panel (b) gives mean Fourier $90\%$ coverage by forecast horizon with standard deviation across backbones. Panel (c) compares coverage and mean interval width across traffic intensity quartiles. Panel (d) reports METR-LA validation WIS and effective expert count for $K=1$ to $5$ over three head seeds. These diagnostics do not redefine the prespecified promotion gates.}
+\label{fig:revisiondiagnostics}
+\end{figure*}
+
+\begin{table}[t]
+\caption{Conditional PeMSD4 Fourier interval diagnostics averaged over five backbones. Q1 and Q4 denote the lowest and highest quartiles within each seed. These post hoc summaries expose heterogeneity that is hidden by aggregate coverage.}\label{tab:conditional}
+\centering
+\scriptsize
+\begin{tabular}{llrrr}
+\toprule
+Condition & Level & WIS & Coverage & Width \\
+\midrule
+Horizon & 5 min & 18.86 & 0.854 & 113.42 \\
+Horizon & 60 min & 25.10 & 0.918 & 178.96 \\
+Traffic intensity & Q1 & 12.17 & 0.962 & 104.65 \\
+Traffic intensity & Q4 & 32.87 & 0.837 & 197.10 \\
+Base residual & Q1 & 8.85 & 1.000 & 117.83 \\
+Base residual & Q4 & 47.38 & 0.615 & 195.90 \\
+Local volatility & Q1 & 12.69 & 0.956 & 106.19 \\
+Local volatility & Q4 & 33.63 & 0.840 & 201.78 \\
+\bottomrule
+\end{tabular}
+\end{table}
 
 \subsection{Calibration repair and PeMSD8 transfer}\label{subsec:transfer}
 
@@ -330,7 +472,7 @@ QUARTS-UQ & METR-LA exploratory test & Entangled VQC & Separable VQC & 2.0045 & 
 QUARTS-RAC & METR-LA validation & Entangled gate & Fourier gate & 1.6986 & 0.70 & Fail \\
 RAQ & METR-LA validation & Asymmetric Fourier & Symmetric Fourier & 1.7267 & 2.36 & Fail \\
 Prospective RAC & PeMSD4 test & Fourier gate & MLP gate & 26.8820 & \(-0.68\) & Provisional \\
-Independent RAC & PeMSD4, three tests & Fourier gate & MLP gate & 22.6892 & \(-0.26\) & Fail \\
+Independent RAC & PeMSD4, five tests & Fourier gate & MLP gate & 21.2373 & \(-0.14\) & Fail \\
 Recent calibration & PeMSD4 diagnostic & Recent Fourier & Ten percent window & 21.9900 & \(-1.88\) & Fail \\
 SA-CQR & PeMSD8 validation & CQR-Fourier & CQR-MLP & 15.2554 & 0.55 & Fail \\
 \bottomrule
@@ -344,27 +486,27 @@ SA-CQR & PeMSD8 validation & CQR-Fourier & CQR-MLP & 15.2554 & 0.55 & Fail \\
 
 The principal result is not that a quantum head failed to beat every classical model. It is that changing entanglement changed MAE by less than one quarter of one percent relative to the otherwise identical separable circuit, while both were far behind STAEformer. This pattern does not support an entanglement based explanation. The small improvement over Fourier is likewise insufficient because the unchanged backbone remained better and the effect size was negligible.
 
-The result is consistent with the functional interpretation of data reuploading circuits. Periodic nonlinear features can be useful without being uniquely quantum \cite{schuld2021encoding}. A matched Fourier head exposes this alternative explanation directly. The architecture ablation further weakens a capacity argument: additional qubits and layers increased execution time but did not yield a consistent accuracy trend. The experiment cannot prove that entanglement is never useful for traffic data, but it bounds the claim for the tested local calibration setting.
+The result is consistent with the functional interpretation of data reuploading circuits. Periodic nonlinear features can be useful without being uniquely quantum \cite{schuld2021encoding}. A matched Fourier head exposes this alternative explanation directly. The expressivity diagnostic confirms that the ring CNOT circuit is both more Haar like and able to generate entanglement, while the traffic results show that these state space properties did not translate into a stable predictive gain. The architecture ablation further weakens a capacity argument: additional qubits and layers increased execution time but did not yield a consistent accuracy trend. The experiment cannot prove that entanglement is never useful for traffic data. It establishes only that this \(R_Y\) data reuploading, local \(R_ZR_YR_Z\) ansatz, directed ring topology, and Pauli \(Z\) readout did not provide a stable advantage at two to six qubits and one to three layers.
 
 \subsection{Why the classical interval result did not qualify as final evidence}\label{subsec:replicationdiscussion}
 
-The first PeMSD4 run met its prospective WIS and coverage requirements and improved substantially over constant intervals. That finding demonstrates that the frozen latent state contains information about conditional residual scale. The margin over MLP was only \(0.68\%\), however. Independent backbones exposed the fragility hidden by a single initialization. One seed reversed the ordering, and mean coverage fell below the accepted range.
+The first PeMSD4 run met its prospective WIS and coverage requirements and improved substantially over constant intervals. That finding demonstrates that the frozen latent state contains information about conditional residual scale. The margin over MLP was only \(0.68\%\), however. Five independent backbones exposed the fragility hidden by a single initialization. Two seeds reversed the ordering, the mean difference shrank to $-0.0308$ WIS, and its hierarchical interval crossed zero. Average coverage entered the accepted range, but conditional analysis revealed substantial undercoverage for high intensity, high volatility, large residual, and selected detector groups.
 
-This distinction matters for large traffic datasets. With more than one million paired forecasts per backbone, a very small mean difference can produce a narrow confidence interval. Statistical detectability does not guarantee stability across training conditions or practical relevance. The decision rule therefore combined paired uncertainty, effect direction, coverage, and independent initialization. Under that rule the Fourier model did not qualify as a robust improvement.
+This distinction matters for large traffic datasets. With more than one million paired forecasts per backbone, a very small mean difference can produce a narrow interval if individual forecasts are treated as independent. Statistical detectability does not guarantee stability across training conditions or practical relevance. The revised decision therefore combines a seed level effect, daily block uncertainty, effect direction, aggregate and conditional coverage, and independent initialization. Under that rule the Fourier model did not qualify as a robust improvement.
 
 \subsection{Implications for quantum transportation research}\label{subsec:implications}
 
 Three design principles follow. First, a quantum component should be assigned a clearly isolated role. A hybrid model that changes its backbone, input features, and optimization at the same time cannot identify the source of an improvement. Second, matched controls should reflect the known function class of the circuit. Parameter matching alone is not enough when a classical periodic layer captures the same spectral bias. Third, protected validation gates should remain active after a favourable result. The untouched PeMSD8 test set is more informative than a selectively reported transfer score because it shows that the stopping rule was respected.
 
-Quantum traffic forecasting may still be valuable when a circuit processes a compact decision state, when data or kernels have a structure suited to a quantum feature map, or when physical hardware changes the computational tradeoff. Those possibilities require hardware aware experiments, noise and shot budgets, strong network backbones, and repeated out of distribution evaluation. The present simulator results do not establish any of them.
+Quantum traffic forecasting may still be valuable when a circuit processes a compact decision state, when data or kernels have a structure suited to a quantum feature map, or when physical hardware changes the computational tradeoff. Alternative amplitude, phase, or problem informed graph encodings, deeper or data dependent ansatzes, nonlocal entangling topologies, and other observables remain outside the tested design space. Those possibilities require hardware aware experiments, noise and shot budgets, strong network backbones, and repeated out of distribution evaluation. The present simulator results do not establish any of them.
 
 \section{Limitations and threats to validity}\label{sec:limitations}
 
-The quantum circuits were executed with analytic state vector simulation on a classical GPU environment. Consequently, runtime measurements describe the implementation used here and cannot predict latency on future quantum hardware. The primary circuits were also small. Larger circuits could represent different functions, but the observed runtime growth and nonmonotonic ablation make unrestricted scaling an unsupported remedy.
+The quantum circuits were executed with analytic state vector simulation on a classical GPU environment. Consequently, runtime, memory, and circuit instance counts describe the implementation used here and cannot predict latency, queueing, compilation overhead, noise, sampling cost, or energy use on quantum hardware. The primary circuits were also small and covered only one encoding, one local ansatz, one ring entangler, and one measurement family. Larger or structurally different circuits could represent different functions, but the observed simulator growth and nonmonotonic ablation make unrestricted scaling an unsupported remedy.
 
 The point experiments use two speed networks, while the later interval studies use PeMSD4 and PeMSD8. This improves dataset diversity but does not cover incidents, weather disruptions, or long term distribution shift. Conformal calibration was applied chronologically and assessed empirically. Dependence between traffic observations means that standard exchangeability based coverage theory does not apply without qualification.
 
-The paired error analysis contains many correlated node and horizon observations. Bootstrap intervals quantify the stored paired mean differences, but residual dependence can make them appear more precise than a replication level analysis. We therefore based the final PeMSD4 decision on three complete backbone initializations and directional consistency rather than on instance level significance alone.
+Traffic errors remain dependent across overlapping windows, connected nodes, and horizons. The revised bootstrap aggregates within each forecast origin, resamples daily temporal blocks, and nests those blocks within independently trained seeds. This is more conservative than treating individual forecasts as independent, but five training seeds still provide limited information about the distribution over optimization outcomes. The final PeMSD4 decision therefore emphasizes the seed standard deviation, directional wins, conditional coverage, and practical effect size rather than an instance level significance result.
 
 STAEformer is a strong comparator on the selected datasets, but it is not the only modern forecasting architecture. Results could change with another frozen backbone or a different latent interface. Hyperparameter budgets were intentionally bounded and shared across treatments. A broader search might improve any head, yet it would also increase selection bias unless nested inside a new protected protocol.
 
@@ -376,13 +518,13 @@ The reproducibility package contains the complete source code, environment recor
 
 Raw benchmark data are not redistributed when their original terms or standard download routes apply. Instead, the package provides acquisition instructions, expected file layout, dimensions, and cryptographic hashes for the files used in the experiments. Each run stores its dataset, split, seed, model treatment, metrics, timing, and completion state. Smoke tests and the preprotocol batch size 128 run are marked and excluded from publication aggregation.
 
-The main analysis package expects 50 reference runs, 10 official STAEformer runs, and nine circuit ablations. Its completion audit reports no missing run. Validation only results are labelled separately from canonical test results. PeMSD8 test targets are absent by design because the validation gate failed. This absence can be verified from both the experiment ledger and the publication manifest.
+The main analysis package expects 50 reference runs, 10 official STAEformer runs, and nine circuit ablations. Its completion audit reports no missing run. The reviewer revision package adds five PeMSD4 backbone evaluations, 15 expert count runs, dependence aware bootstrap outputs, conditional calibration tables, circuit diagnostics, and the scripts that regenerate Figures~\ref{fig:experimentflow}, \ref{fig:circuits}, and \ref{fig:revisiondiagnostics}. Validation only results are labelled separately from canonical test results. PeMSD8 test targets are absent by design because the validation gate failed. This absence can be verified from both the experiment ledger and the publication manifest.
 
 \section{Conclusion}\label{sec:conclusion}
 
 QUARTS was designed to test a specific claim under controlled conditions: whether an entangled variational quantum circuit adds useful residual information to network traffic forecasts or predictive intervals. Across METR-LA and PEMS-BAY, it did not improve the unchanged backbone and remained about one third worse than STAEformer. Its differences from separable quantum and Fourier controls were below \(0.40\%\), with negligible effect sizes. Circuit scaling increased cost without a consistent accuracy gain.
 
-For uncertainty prediction, a Fourier regime calibrator achieved the strongest prospective result on one PeMSD4 backbone, reducing WIS by \(14.58\%\) relative to constant intervals and \(0.68\%\) relative to an MLP. The MLP comparison reversed for one of three independent backbones, and average \(90\%\) coverage fell to \(88.78\%\). A recent conformal repair remained undercovered, and a conformal quantile Fourier model failed PeMSD8 validation. The protected test split was therefore not evaluated.
+For uncertainty prediction, a Fourier regime calibrator achieved the strongest prospective result on one PeMSD4 backbone, reducing WIS by \(14.58\%\) relative to constant intervals and \(0.68\%\) relative to an MLP. Across five independent backbones, the Fourier minus MLP difference was only $-0.0308\pm0.1285$ WIS, its dependence aware interval crossed zero, and MLP was better for two seeds. Aggregate Fourier coverage was $89.44\%$, but it varied materially by horizon, detector, traffic intensity, volatility, and residual size. A recent conformal repair remained undercovered, and a conformal quantile Fourier model failed PeMSD8 validation. The protected test split was therefore not evaluated.
 
 The study finds no empirical basis for attributing a forecasting or calibration advantage to entanglement in the tested system. Its positive result is methodological: strong backbones, functionally matched controls, seed level replication, interval aware metrics, and binding validation gates make a hybrid quantum claim more credible, whether the final evidence is favourable or negative.
 
@@ -390,13 +532,13 @@ The study finds no empirical basis for attributing a forecasting or calibration 
 
 \bmhead{Acknowledgements}
 
-Acknowledgement information will be added after author confirmation.
+The author acknowledges the maintainers of the public benchmark datasets and the open source software used in this study.
 
 \section*{Declarations}
 
 \bmhead{Funding}
 
-Funding information will be added after author confirmation.
+The author received no specific funding for this work.
 
 \bmhead{Competing interests}
 
@@ -430,32 +572,91 @@ The author conceived the study, designed the methodology, developed the software
 
 \section{Supplementary experiment record}\label{app:supplement}
 
-The supplementary figures report horizon specific point errors, missing input robustness on METR-LA and PEMS-BAY, the quantum architecture ablation, simulated circuit noise sensitivity, the gated point pilot, the QUARTS-UQ and QUARTS-RAC studies, asymmetric interval validation, the initial PeMSD4 prospective run, additional PeMSD4 head seeds, and PeMSD8 SA-CQR validation. They are generated from the same publication manifest as the main figures.
+The supplementary figures report horizon specific point errors, missing input robustness, circuit size and simulated noise sensitivity, each uncertainty development stage, prospective replication, and the protected PeMSD8 validation study. Each figure is presented separately so that its caption maps unambiguously to its panels.
 
 \begin{figure*}[t]
 \centering
-\includegraphics[width=.48\textwidth]{figures/supplement/figureS01_horizon_performance.pdf}
-\hfill
-\includegraphics[width=.48\textwidth]{figures/supplement/figureS04_quantum_ablation.pdf}
-\caption{Supplementary point results. Left: horizon specific error. Right: qubit and depth ablation.}
-\label{fig:supppoint}
+\includegraphics[width=.82\textwidth]{figures/supplement/figureS01_horizon_performance.pdf}
+\caption{Horizon specific MAE for confirmatory METR-LA and PEMS-BAY point forecasts. Error bars summarize five training seeds; lower values are better.}
+\label{fig:s01}
 \end{figure*}
 
 \begin{figure*}[t]
 \centering
-\includegraphics[width=.48\textwidth]{figures/supplement/figureS02_missing_input_metr_la.pdf}
-\hfill
-\includegraphics[width=.48\textwidth]{figures/supplement/figureS03_missing_input_pems_bay.pdf}
-\caption{Missing input sensitivity for METR-LA and PEMS-BAY.}
-\label{fig:suppmissing}
+\includegraphics[width=.82\textwidth]{figures/supplement/figureS02_missing_input_metr_la.pdf}
+\caption{METR-LA sensitivity to randomly masked input values. The perturbation is applied only to model inputs; target masking and evaluation definitions remain unchanged.}
+\label{fig:s02}
 \end{figure*}
 
-\begin{figure}[t]
+\begin{figure*}[t]
 \centering
-\includegraphics[width=.75\linewidth]{figures/supplement/figureS05_quantum_noise.pdf}
-\caption{Sensitivity of the simulated quantum head to the evaluated noise settings.}
-\label{fig:suppnoise}
-\end{figure}
+\includegraphics[width=.82\textwidth]{figures/supplement/figureS03_missing_input_pems_bay.pdf}
+\caption{PEMS-BAY sensitivity to randomly masked input values under the same perturbation and evaluation protocol as Figure~\ref{fig:s02}.}
+\label{fig:s03}
+\end{figure*}
+
+\begin{figure*}[t]
+\centering
+\includegraphics[width=.82\textwidth]{figures/supplement/figureS04_quantum_ablation.pdf}
+\caption{Quantum architecture sensitivity on METR-LA across two, four, and six qubits and circuit depths one, two, and three. Accuracy is nonmonotonic while analytic simulator time increases with circuit size.}
+\label{fig:s04}
+\end{figure*}
+
+\begin{figure*}[t]
+\centering
+\includegraphics[width=.82\textwidth]{figures/supplement/figureS05_quantum_noise.pdf}
+\caption{Sensitivity of the simulated quantum head to the evaluated finite shot, depolarizing, and amplitude damping settings. These are simulator perturbations rather than measurements on physical hardware.}
+\label{fig:s05}
+\end{figure*}
+
+\begin{figure*}[t]
+\centering
+\includegraphics[width=.9\textwidth]{figures/supplement/figureS06_quarts_v2.png}
+\caption{QUARTS V2 gated point correction pilot on the validation path. The learned correction remains close to the frozen STAEformer location and does not provide a meaningful point accuracy gain.}
+\label{fig:s06}
+\end{figure*}
+
+\begin{figure*}[t]
+\centering
+\includegraphics[width=.9\textwidth]{figures/supplement/figureS07_quarts_uq.png}
+\caption{QUARTS-UQ uncertainty scale comparison over three head seeds. PASS requires lower WIS than both matched controls and \(90\%\) coverage between \(0.89\) and \(0.91\); the entangled head fails the score requirement.}
+\label{fig:s07}
+\end{figure*}
+
+\begin{figure*}[t]
+\centering
+\includegraphics[width=.9\textwidth]{figures/supplement/figureS08_quarts_rac.png}
+\caption{Validation only QUARTS-RAC comparison over three head seeds. Fourier-RAC has the lowest mean WIS, while the entangled gate does not pass the required improvement threshold.}
+\label{fig:s08}
+\end{figure*}
+
+\begin{figure*}[t]
+\centering
+\includegraphics[width=.9\textwidth]{figures/supplement/figureS09_raq_asymmetry.png}
+\caption{Asymmetric residual adaptive quantile (RAQ) validation. The asymmetric Fourier head increases WIS and overcovers relative to the symmetric Fourier calibrator, so the branch is not promoted.}
+\label{fig:s09}
+\end{figure*}
+
+\begin{figure*}[t]
+\centering
+\includegraphics[width=.9\textwidth]{figures/supplement/figureS10_pemsd4_prospective.png}
+\caption{Initial prospective PeMSD4 evaluation for backbone seed 42. Fourier-RAC improves WIS relative to constant and MLP intervals while meeting the coverage gate, producing a provisional rather than final pass.}
+\label{fig:s10}
+\end{figure*}
+
+\begin{figure*}[t]
+\centering
+\includegraphics[width=.9\textwidth]{figures/supplement/figureS11_pemsd4_head_seeds.png}
+\caption{Original additional PeMSD4 head seed comparison on the seed 42 frozen backbone. Head initialization variation is distinct from the revised five backbone replication, which retrains the complete point model.}
+\label{fig:s11}
+\end{figure*}
+
+\begin{figure*}[t]
+\centering
+\includegraphics[width=.9\textwidth]{figures/supplement/figureS12_sacqr_validation.png}
+\caption{PeMSD8 validation only symmetric adaptive conformal quantile residual (SA-CQR) study over three rolling folds. CQR-Fourier fails its WIS and coverage gate; the canonical PeMSD8 test split remains unused.}
+\label{fig:s12}
+\end{figure*}
 
 \end{appendices}
 

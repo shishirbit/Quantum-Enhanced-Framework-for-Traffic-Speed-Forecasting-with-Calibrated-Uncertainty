@@ -1,0 +1,17 @@
+{
+  "complete": true,
+  "reviewer_1_comments_addressed": 11,
+  "reviewer_2_comments_addressed": 10,
+  "independent_pemsd4_backbones": 5,
+  "pemsd4_seeds": [17, 42, 73, 101, 202],
+  "expert_count_runs": 15,
+  "expert_counts": [1, 2, 3, 4, 5],
+  "hierarchical_bootstrap_replicates": 5000,
+  "block_length_origins": 288,
+  "manuscript_compiled": true,
+  "response_compiled": true,
+  "manuscript_pages": 31,
+  "response_pages": 6,
+  "visual_pdf_check": "passed",
+  "unresolved_required_work": []
+}
