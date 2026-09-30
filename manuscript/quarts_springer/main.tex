@@ -106,7 +106,7 @@ Figure~\ref{fig:experimentflow} consolidates the experimental sequence that was 
 \begin{figure*}[t]
 \centering
 \includegraphics[width=\textwidth]{figures/figure07_experimental_flow.pdf}
-\caption{Experimental sequence and decision logic. Blue boxes denote confirmatory point and uncertainty comparisons, green boxes denote calibration and transfer stages, red boxes denote failed gates, and purple denotes reviewer requested post hoc diagnostics. A gate advances only when the archived primary metric, coverage requirement, and seed consistency rule are all satisfied. A failed branch remains in the evidence record but cannot select a downstream test result.}
+\caption{Experimental sequence and decision logic. Blue boxes denote confirmatory point and uncertainty comparisons, green boxes denote calibration and transfer stages, red boxes denote failed gates, and purple denotes supplementary post hoc diagnostics. A gate advances only when the archived primary metric, coverage requirement, and seed consistency rule are all satisfied. A failed branch remains in the evidence record but cannot select a downstream test result.}
 \label{fig:experimentflow}
 \end{figure*}
 
@@ -127,7 +127,7 @@ Figure~\ref{fig:architecture} presents the complete system. A chronological prep
 
 The reference QUARTS backbone combines graph propagation with a gated recurrent encoder. For an input \(X\), graph propagated features \(AX\) are concatenated with the original features and encoded for every node. A linear horizon head maps the final hidden state \(H\in\mathbb{R}^{N\times d}\) to the base forecast \(B\in\mathbb{R}^{12\times N}\). The unchanged version of this backbone is retained as a control.
 
-The later uncertainty studies use a frozen STAEformer backbone. Freezing is methodologically important because all interval heads then receive identical point forecasts and representations. Any difference in WIS can be attributed to residual calibration rather than to a change in point forecasting capacity. The revised PeMSD4 replication independently trains STAEformer with seeds 17, 42, 73, 101, and 202.
+The later uncertainty studies use a frozen STAEformer backbone. Freezing is methodologically important because all interval heads then receive identical point forecasts and representations. Any difference in WIS can be attributed to residual calibration rather than to a change in point forecasting capacity. The expanded PeMSD4 replication independently trains STAEformer with seeds 17, 42, 73, 101, and 202.
 
 \subsection{Entangled and separable quantum heads}\label{subsec:vqc}
 
@@ -145,7 +145,7 @@ For point forecasting, \(\widehat{Y}=B+\Delta\). For scale only experiments, the
 
 Figure~\ref{fig:circuits} makes the entanglement ablation explicit. Both point heads contain 132 compression parameters, 24 circuit rotation parameters, and 120 readout parameters, giving 276 head parameters and 4,140 parameters when the common backbone is included. The trainable circuit angles are initialized independently from \(\mathcal{U}(0,2\pi)\). Adam, the learning rate $10^{-3}$, weight decay $10^{-4}$, minibatch order, early stopping rule, and five seeds are identical. Each two layer circuit has eight data encoding $R_Y$ operations and eight trainable \(\mathrm{Rot}\) operations, equivalent to 24 elementary trainable rotations. The entangled circuit adds eight fixed CNOT operations. PennyLane resource tracing gives logical depths 12 and 4 for the entangled and separable circuits, respectively. Thus, parameter count is matched, but gate count, depth, computational graph, and expressivity necessarily differ.
 
-As a reviewer requested architecture diagnostic, 256 random input and parameter draws were evaluated without fitting to traffic targets. The entangled circuit had an expressibility divergence from the Haar fidelity distribution of $0.039$, compared with $0.183$ for the separable circuit, and a mean Meyer Wallach entanglement measure of $0.841\pm0.083$, compared with numerical zero for the separable circuit. These values verify that the added ring changes the represented state family. They do not establish useful task specific capacity, and they do not alter the predictive comparison.
+As an architecture diagnostic, 256 random input and parameter draws were evaluated without fitting to traffic targets. The entangled circuit had an expressibility divergence from the Haar fidelity distribution of $0.039$, compared with $0.183$ for the separable circuit, and a mean Meyer Wallach entanglement measure of $0.841\pm0.083$, compared with numerical zero for the separable circuit. These values verify that the added ring changes the represented state family. They do not establish useful task specific capacity, and they do not alter the predictive comparison.
 
 \begin{figure*}[t]
 \centering
@@ -220,7 +220,7 @@ PeMSD8 & 170 & 17,856 & 12 & 12 & Validation transfer \\
 Every dataset was divided chronologically into \(70\%\) training, \(10\%\) validation, and \(20\%\) test partitions. Scaling statistics were calculated from the training partition only. Sliding windows did not cross partition boundaries. The validation partition was subdivided when early stopping, conformal calibration, and held out validation were all required. Test observations were never used to fit head parameters or conformal factors.
 
 \begin{table*}[t]
-\caption{Target domain data use. Percentages within validation refer to consecutive, nonoverlapping chronological windows. The PeMSD4 subgroup results added during revision are descriptive analyses of frozen predictions and do not select or recalibrate a model.}\label{tab:datause}
+\caption{Target domain data use. Percentages within validation refer to consecutive, nonoverlapping chronological windows. The PeMSD4 subgroup results are descriptive analyses of frozen predictions and do not select or recalibrate a model.}\label{tab:datause}
 \centering
 \scriptsize
 \resizebox{\textwidth}{!}{%
@@ -242,7 +242,7 @@ PeMSD8 SA-CQR & Training split & First 40\% validation & Rolling validation fold
 
 The point study includes historical average and persistence references, the unchanged graph temporal backbone, MLP, Fourier, separable quantum, and entangled quantum residual heads, and the official STAEformer implementation. All QUARTS heads use the same hidden representation and twelve horizon outputs. The reference circuit has four qubits and two reuploading layers. The architecture study evaluates \(q\in\{2,4,6\}\) and depths \(d\in\{1,2,3\}\).
 
-Models were trained for at most 30 epochs with Adam, learning rate \(10^{-3}\), weight decay \(10^{-4}\), batch size 256, early stopping patience seven, and minimum improvement \(5\times10^{-4}\). Confirmatory point results use seeds \(17,42,73,101,\) and \(202\). The uncertainty branches use their declared head seeds. The revised independent PeMSD4 study trains complete backbones with the same five seeds.
+Models were trained for at most 30 epochs with Adam, learning rate \(10^{-3}\), weight decay \(10^{-4}\), batch size 256, early stopping patience seven, and minimum improvement \(5\times10^{-4}\). Confirmatory point results use seeds \(17,42,73,101,\) and \(202\). The uncertainty branches use their declared head seeds. The independent PeMSD4 study trains complete backbones with the same five seeds.
 
 The comparison spans simple temporal references, a graph recurrent model, a compact multilayer perceptron (MLP), a Fourier network, and a Transformer with adaptive spatial and temporal embeddings. It therefore tests the proposed head against several distinct inductive biases, but it does not constitute a benchmark of every machine learning family. Random forests, XGBoost, and LightGBM do not directly represent the network and horizon structure without an additional feature engineering protocol, so introducing them after test access would create a new and potentially unequal selection exercise. The broader literature shows that tree ensembles and hybrid models can be strong when their representation is appropriate, including recent applications to fatigue and structural response prediction \cite{naeim2025fatigue,akbarzadeh2025fragility,akbarzadeh2026multihazard}. The conclusion here is consequently restricted to the tested residual interface and backbones rather than generalized to all classical learning approaches.
 
@@ -271,13 +271,13 @@ The experiments ran on Windows 11 with Python 3.12.13, PyTorch 2.13.0 built for 
 
 Overall differences among point models were assessed separately for each dataset with the Friedman rank test \cite{friedman1937ranks}. Cliff's delta was recorded as a distribution free descriptive effect size \cite{cliff1993dominance}. The original instance level bootstrap and Wilcoxon calculations are retained in the repository for provenance, but they are no longer used for inferential claims because overlapping windows, nodes, and horizons are strongly correlated.
 
-The revised analysis first averages the paired loss difference over every node and horizon within a five minute forecast origin. It then uses 5,000 circular moving block bootstrap replicates with blocks of 288 consecutive origins, corresponding to one day \cite{efron1979bootstrap}. The primary interval resamples the five independently trained seeds and then resamples daily blocks within each selected seed. This hierarchical construction treats the training seed as the independent replication unit while preserving short range temporal, spatial, and cross horizon dependence inside each origin. Seed means, seed standard deviations, directional wins, and the hierarchical $95\%$ interval are reported together.
+The dependence-aware analysis first averages the paired loss difference over every node and horizon within a five minute forecast origin. It then uses 5,000 circular moving block bootstrap replicates with blocks of 288 consecutive origins, corresponding to one day \cite{efron1979bootstrap}. The primary interval resamples the five independently trained seeds and then resamples daily blocks within each selected seed. This hierarchical construction treats the training seed as the independent replication unit while preserving short range temporal, spatial, and cross horizon dependence inside each origin. Seed means, seed standard deviations, directional wins, and the hierarchical $95\%$ interval are reported together.
 
 For PeMSD4, the same procedure is applied to the origin averaged Fourier minus MLP WIS. Coverage and width are summarized at seed level rather than inferred from more than one million correlated forecast values. Conditional results by horizon, traffic intensity, detector, base residual, local volatility, and dominant expert are descriptive post hoc diagnostics. The decision does not rest on a small instance level $p$ value; it requires practical magnitude, directional consistency across independent backbones, and the archived coverage range.
 
 \subsection{Experiment gates}\label{subsec:gates}
 
-The study followed a staged sequence. Point forecasting first tested whether the entangled head warranted promotion. The QUARTS uncertainty module (QUARTS-UQ) then isolated uncertainty scale prediction. The QUARTS regime aware calibrator (QUARTS-RAC) tested regime selection on validation data. Residual adaptive quantile calibration (RAQ) tested asymmetric intervals. A favourable Fourier result was next evaluated prospectively on PeMSD4 and was originally repeated with two additional independently trained backbones. Recent conformal repair and SA-CQR transfer were conducted only after the corresponding failure was observed. During revision, PeMSD4 replication was expanded to five backbones, but this post hoc robustness analysis did not change the frozen heads, calibration rules, or protected test predictions. The expert count and conditional calibration analyses are also post hoc diagnostics. Table~\ref{tab:gates} in Section~\ref{sec:results} reports every decision, including failed branches.
+The study followed a staged sequence. Point forecasting first tested whether the entangled head warranted promotion. The QUARTS uncertainty module (QUARTS-UQ) then isolated uncertainty scale prediction. The QUARTS regime aware calibrator (QUARTS-RAC) tested regime selection on validation data. Residual adaptive quantile calibration (RAQ) tested asymmetric intervals. A favourable Fourier result was next evaluated prospectively on PeMSD4 with independently trained backbones. Recent conformal repair and SA-CQR transfer were conducted only after the corresponding failure was observed. The PeMSD4 replication uses five backbones; this post hoc robustness analysis does not change the frozen heads, calibration rules, or protected test predictions. The expert count and conditional calibration analyses are also post hoc diagnostics. Table~\ref{tab:gates} in Section~\ref{sec:results} reports every decision, including failed branches.
 
 \section{Results}\label{sec:results}
 
@@ -321,7 +321,7 @@ Dataset & Model & MAE & RMSE & MAPE (\%) \\
 \label{fig:point}
 \end{figure}
 
-The matched comparisons answer RQ2. Entangled QUARTS was \(0.120\%\) worse than the separable circuit on METR-LA and \(0.233\%\) worse on PEMS-BAY. It was \(0.178\%\) and \(0.397\%\) better than Fourier. These differences are small relative to the gap from STAEformer and do not establish an entanglement benefit. Under the revised hierarchical daily block bootstrap, the entangled minus separable MAE difference was $0.0048\pm0.0073$ across seeds on METR-LA, with $95\%$ interval \([-0.0017,0.0104]\), and $0.0047\pm0.0066$ on PEMS-BAY, with interval \([0.0002,0.0106]\). The quantum head won one of five and two of five seed comparisons, respectively. The entangled minus Fourier differences were \(-0.0068\pm0.0074\), with interval \([-0.0129,-0.0011]\), and \(-0.0081\pm0.0079\), with interval \([-0.0140,-0.0017]\). Although both Fourier intervals exclude zero, the changes are below $0.01$ MAE, reverse for one seed on each dataset, and occur while the unchanged backbone remains better. The Friedman tests rejected equality among all treatments on METR-LA (\(\chi^2_F=21.23\), \(p=0.00073\)) and PEMS-BAY (\(\chi^2_F=20.43\), \(p=0.00104\)), a result driven primarily by the much larger difference from STAEformer.
+The matched comparisons answer RQ2. Entangled QUARTS was \(0.120\%\) worse than the separable circuit on METR-LA and \(0.233\%\) worse on PEMS-BAY. It was \(0.178\%\) and \(0.397\%\) better than Fourier. These differences are small relative to the gap from STAEformer and do not establish an entanglement benefit. Under the hierarchical daily block bootstrap, the entangled minus separable MAE difference was $0.0048\pm0.0073$ across seeds on METR-LA, with $95\%$ interval \([-0.0017,0.0104]\), and $0.0047\pm0.0066$ on PEMS-BAY, with interval \([0.0002,0.0106]\). The quantum head won one of five and two of five seed comparisons, respectively. The entangled minus Fourier differences were \(-0.0068\pm0.0074\), with interval \([-0.0129,-0.0011]\), and \(-0.0081\pm0.0079\), with interval \([-0.0140,-0.0017]\). Although both Fourier intervals exclude zero, the changes are below $0.01$ MAE, reverse for one seed on each dataset, and occur while the unchanged backbone remains better. The Friedman tests rejected equality among all treatments on METR-LA (\(\chi^2_F=21.23\), \(p=0.00073\)) and PEMS-BAY (\(\chi^2_F=20.43\), \(p=0.00104\)), a result driven primarily by the much larger difference from STAEformer.
 
 \begin{figure}[t]
 \centering
@@ -396,18 +396,18 @@ Figure~\ref{fig:uq} consolidates the uncertainty stages. On METR-LA, QUARTS-UQ p
 
 These findings answer RQ3 for METR-LA. Conditional calibration improved over a constant interval model, but the improvement was classical rather than quantum. Symmetric radii were more reliable than the tested asymmetric extension. A gated point correction initialized near the unchanged STAEformer prediction also produced MAE values between \(2.9276\) and \(2.9277\) for all learned heads, so it did not create a meaningful point forecasting gain.
 
-The reviewer requested expert count ablation used only the chronologically partitioned METR-LA validation data. Mean WIS for $K=1,2,3,4,$ and $5$ was $1.8920$, $1.6899$, $1.6869$, $1.6856$, and $1.6869$, respectively. The corresponding $90\%$ coverage values ranged from $0.9048$ to $0.9101$. Thus one expert was inadequate, while the difference among two to five experts was at most $0.0042$ WIS. The prespecified $K=3$ model used an effective $2.07\pm0.18$ experts and had mean weights $[0.745,0.096,0.158]$ across three head seeds. The routing was concentrated but not collapsed to one expert. Increasing $K$ raised parameter count from 223 at $K=1$ to 383 at $K=5$ without a material score improvement.
+The expert count ablation used only the chronologically partitioned METR-LA validation data. Mean WIS for $K=1,2,3,4,$ and $5$ was $1.8920$, $1.6899$, $1.6869$, $1.6856$, and $1.6869$, respectively. The corresponding $90\%$ coverage values ranged from $0.9048$ to $0.9101$. Thus one expert was inadequate, while the difference among two to five experts was at most $0.0042$ WIS. The prespecified $K=3$ model used an effective $2.07\pm0.18$ experts and had mean weights $[0.745,0.096,0.158]$ across three head seeds. The routing was concentrated but not collapsed to one expert. Increasing $K$ raised parameter count from 223 at $K=1$ to 383 at $K=5$ without a material score improvement.
 
 \subsection{Prospective PeMSD4 evaluation}\label{subsec:pems4}
 
 The Fourier regime calibrator was selected before opening the PeMSD4 test split. With backbone seed 42, its WIS was \(26.8820\), compared with \(31.4672\) for constant intervals and \(27.0663\) for MLP-RAC. These values correspond to improvements of \(14.58\%\) and \(0.68\%\), and Fourier coverage was \(89.66\%\). This was the strongest prospective result, but its small margin over MLP required independent replication.
 
-The original replication used seeds 42, 73, and 202. Mean Fourier WIS was \(22.6892\), compared with \(22.7480\) for MLP, but seed 202 reversed the ordering and mean Fourier coverage was \(88.78\%\). Figure~\ref{fig:pems4} preserves this original evidence. The reviewer requested expansion added complete backbones for seeds 17 and 101. Across all five backbones, Fourier WIS was $21.2373\pm3.4720$, compared with $21.2681\pm3.5345$ for MLP. Fourier minus MLP was $-0.0308\pm0.1285$ across seeds, with a hierarchical daily block bootstrap $95\%$ interval of $[-0.1336,0.0767]$. Fourier won for seeds 17, 42, and 73, while MLP won for seeds 101 and 202. Mean Fourier coverage was $89.44\%\pm1.70\%$ and mean width was $141.47\pm19.55$. The average coverage therefore entered the declared range after expansion, but the uncertain effect and two directional reversals still failed the robustness gate.
+The first three independently trained backbones used seeds 42, 73, and 202. Mean Fourier WIS was \(22.6892\), compared with \(22.7480\) for MLP, but seed 202 reversed the ordering and mean Fourier coverage was \(88.78\%\). Figure~\ref{fig:pems4} reports this three-seed evidence. Complete backbones for seeds 17 and 101 provide a five-seed robustness assessment. Across all five backbones, Fourier WIS was $21.2373\pm3.4720$, compared with $21.2681\pm3.5345$ for MLP. Fourier minus MLP was $-0.0308\pm0.1285$ across seeds, with a hierarchical daily block bootstrap $95\%$ interval of $[-0.1336,0.0767]$. Fourier won for seeds 17, 42, and 73, while MLP won for seeds 101 and 202. Mean Fourier coverage was $89.44\%\pm1.70\%$ and mean width was $141.47\pm19.55$. The average coverage therefore entered the declared range across five seeds, but the uncertain effect and two directional reversals still failed the robustness gate.
 
 \begin{figure*}[t]
 \centering
 \includegraphics[width=\textwidth]{figures/figure04_pemsd4_independent_backbones.pdf}
-\caption{Original PeMSD4 WIS and \(90\%\) coverage for three independently trained STAEformer backbones. The Fourier advantage reverses for seed 202, motivating the reviewer requested expansion to five backbones shown in Figure~\ref{fig:revisiondiagnostics}.}
+\caption{PeMSD4 WIS and \(90\%\) coverage for three independently trained STAEformer backbones. The Fourier advantage reverses for seed 202, motivating the five-backbone robustness assessment shown in Figure~\ref{fig:robustnessdiagnostics}.}
 \label{fig:pems4}
 \end{figure*}
 
@@ -415,9 +415,9 @@ Conditional analysis showed why aggregate coverage was insufficient. For Fourier
 
 \begin{figure*}[t]
 \centering
-\includegraphics[width=\textwidth]{figures/figure09_revision_diagnostics.pdf}
-\caption{Reviewer requested post hoc diagnostics. Panel (a) reports Fourier minus MLP WIS for five independently trained PeMSD4 backbones, where negative values favour Fourier. Panel (b) gives mean Fourier $90\%$ coverage by forecast horizon with standard deviation across backbones. Panel (c) compares coverage and mean interval width across traffic intensity quartiles. Panel (d) reports METR-LA validation WIS and effective expert count for $K=1$ to $5$ over three head seeds. These diagnostics do not redefine the prespecified promotion gates.}
-\label{fig:revisiondiagnostics}
+\includegraphics[width=\textwidth]{figures/figure09_robustness_diagnostics.pdf}
+\caption{Post hoc robustness diagnostics. Panel (a) reports Fourier minus MLP WIS for five independently trained PeMSD4 backbones, where negative values favour Fourier. Panel (b) gives mean Fourier $90\%$ coverage by forecast horizon with standard deviation across backbones. Panel (c) compares coverage and mean interval width across traffic intensity quartiles. Panel (d) reports METR-LA validation WIS and effective expert count for $K=1$ to $5$ over three head seeds. These diagnostics do not redefine the prespecified promotion gates.}
+\label{fig:robustnessdiagnostics}
 \end{figure*}
 
 \begin{table}[t]
@@ -492,7 +492,7 @@ The result is consistent with the functional interpretation of data reuploading 
 
 The first PeMSD4 run met its prospective WIS and coverage requirements and improved substantially over constant intervals. That finding demonstrates that the frozen latent state contains information about conditional residual scale. The margin over MLP was only \(0.68\%\), however. Five independent backbones exposed the fragility hidden by a single initialization. Two seeds reversed the ordering, the mean difference shrank to $-0.0308$ WIS, and its hierarchical interval crossed zero. Average coverage entered the accepted range, but conditional analysis revealed substantial undercoverage for high intensity, high volatility, large residual, and selected detector groups.
 
-This distinction matters for large traffic datasets. With more than one million paired forecasts per backbone, a very small mean difference can produce a narrow interval if individual forecasts are treated as independent. Statistical detectability does not guarantee stability across training conditions or practical relevance. The revised decision therefore combines a seed level effect, daily block uncertainty, effect direction, aggregate and conditional coverage, and independent initialization. Under that rule the Fourier model did not qualify as a robust improvement.
+This distinction matters for large traffic datasets. With more than one million paired forecasts per backbone, a very small mean difference can produce a narrow interval if individual forecasts are treated as independent. Statistical detectability does not guarantee stability across training conditions or practical relevance. The decision rule therefore combines a seed level effect, daily block uncertainty, effect direction, aggregate and conditional coverage, and independent initialization. Under that rule the Fourier model did not qualify as a robust improvement.
 
 \subsection{Implications for quantum transportation research}\label{subsec:implications}
 
@@ -506,7 +506,7 @@ The quantum circuits were executed with analytic state vector simulation on a cl
 
 The point experiments use two speed networks, while the later interval studies use PeMSD4 and PeMSD8. This improves dataset diversity but does not cover incidents, weather disruptions, or long term distribution shift. Conformal calibration was applied chronologically and assessed empirically. Dependence between traffic observations means that standard exchangeability based coverage theory does not apply without qualification.
 
-Traffic errors remain dependent across overlapping windows, connected nodes, and horizons. The revised bootstrap aggregates within each forecast origin, resamples daily temporal blocks, and nests those blocks within independently trained seeds. This is more conservative than treating individual forecasts as independent, but five training seeds still provide limited information about the distribution over optimization outcomes. The final PeMSD4 decision therefore emphasizes the seed standard deviation, directional wins, conditional coverage, and practical effect size rather than an instance level significance result.
+Traffic errors remain dependent across overlapping windows, connected nodes, and horizons. The hierarchical bootstrap aggregates within each forecast origin, resamples daily temporal blocks, and nests those blocks within independently trained seeds. This is more conservative than treating individual forecasts as independent, but five training seeds still provide limited information about the distribution over optimization outcomes. The final PeMSD4 decision therefore emphasizes the seed standard deviation, directional wins, conditional coverage, and practical effect size rather than an instance level significance result.
 
 STAEformer is a strong comparator on the selected datasets, but it is not the only modern forecasting architecture. Results could change with another frozen backbone or a different latent interface. Hyperparameter budgets were intentionally bounded and shared across treatments. A broader search might improve any head, yet it would also increase selection bias unless nested inside a new protected protocol.
 
@@ -518,7 +518,7 @@ The reproducibility package contains the complete source code, environment recor
 
 Raw benchmark data are not redistributed when their original terms or standard download routes apply. Instead, the package provides acquisition instructions, expected file layout, dimensions, and cryptographic hashes for the files used in the experiments. Each run stores its dataset, split, seed, model treatment, metrics, timing, and completion state. Smoke tests and the preprotocol batch size 128 run are marked and excluded from publication aggregation.
 
-The main analysis package expects 50 reference runs, 10 official STAEformer runs, and nine circuit ablations. Its completion audit reports no missing run. The reviewer revision package adds five PeMSD4 backbone evaluations, 15 expert count runs, dependence aware bootstrap outputs, conditional calibration tables, circuit diagnostics, and the scripts that regenerate Figures~\ref{fig:experimentflow}, \ref{fig:circuits}, and \ref{fig:revisiondiagnostics}. Validation only results are labelled separately from canonical test results. PeMSD8 test targets are absent by design because the validation gate failed. This absence can be verified from both the experiment ledger and the publication manifest.
+The main analysis package expects 50 reference runs, 10 official STAEformer runs, and nine circuit ablations. Its completion audit reports no missing run. The reproducibility package includes five PeMSD4 backbone evaluations, 15 expert count runs, dependence aware bootstrap outputs, conditional calibration tables, circuit diagnostics, and the scripts that regenerate Figures~\ref{fig:experimentflow}, \ref{fig:circuits}, and \ref{fig:robustnessdiagnostics}. Validation only results are labelled separately from canonical test results. PeMSD8 test targets are absent by design because the validation gate failed. This absence can be verified from both the experiment ledger and the publication manifest.
 
 \section{Conclusion}\label{sec:conclusion}
 
@@ -566,7 +566,7 @@ The complete code, configurations, tables, and figures are available from the re
 
 \bmhead{Author contributions}
 
-The author conceived the study, designed the methodology, developed the software, conducted the experiments, curated and analysed the data, validated the results, prepared the figures and tables, wrote the original manuscript, revised the manuscript, and approved the final version for submission.
+The author conceived the study, designed the methodology, developed the software, conducted the experiments, curated and analysed the data, validated the results, prepared the figures and tables, wrote and edited the manuscript, and approved the final version for submission.
 
 \begin{appendices}
 
@@ -647,7 +647,7 @@ The supplementary figures report horizon specific point errors, missing input ro
 \begin{figure*}[t]
 \centering
 \includegraphics[width=.9\textwidth]{figures/supplement/figureS11_pemsd4_head_seeds.png}
-\caption{Original additional PeMSD4 head seed comparison on the seed 42 frozen backbone. Head initialization variation is distinct from the revised five backbone replication, which retrains the complete point model.}
+\caption{Additional PeMSD4 head seed comparison on the seed 42 frozen backbone. Head initialization variation is distinct from the five backbone replication, which retrains the complete point model.}
 \label{fig:s11}
 \end{figure*}
 

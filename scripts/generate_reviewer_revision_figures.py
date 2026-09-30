@@ -109,7 +109,7 @@ def experiment_flow() -> None:
         arrow(ax, (stage_x + stage_w, y + height / 2), (decision_x, y + height / 2))
         if index < len(ys) - 1:
             arrow(ax, (stage_x + stage_w / 2, y), (stage_x + stage_w / 2, ys[index + 1] + height))
-    box(ax, (0.38, 0.025), 0.57, 0.085, "Post hoc reviewer diagnostics only\nExpert count, conditional coverage, circuit expressivity, and simulator cost", PURPLE, fontsize=7.8)
+    box(ax, (0.38, 0.025), 0.57, 0.085, "Supplementary post hoc diagnostics\nExpert count, conditional coverage, circuit expressivity, and simulator cost", PURPLE, fontsize=7.8)
     arrow(ax, (0.75, ys[-1]), (0.75, 0.11), color="#674188", style="--")
     save(fig, FIGURES / "figure07_experimental_flow")
 
@@ -225,7 +225,7 @@ def circuit_comparison() -> None:
     save(fig, FIGURES / "figure08_circuit_comparison")
 
 
-def quantitative_revision_figure() -> None:
+def quantitative_robustness_figure() -> None:
     seed_path = ANALYSIS / "pemsd4_five_backbone_metrics.csv"
     condition_path = ANALYSIS / "pemsd4_conditional_calibration.csv"
     k_path = ANALYSIS / "expert_count_ablation/summary.json"
@@ -294,14 +294,14 @@ def quantitative_revision_figure() -> None:
     ax.set_title("(d) Validation only expert ablation")
 
     fig.tight_layout()
-    save(fig, FIGURES / "figure09_revision_diagnostics")
+    save(fig, FIGURES / "figure09_robustness_diagnostics")
 
 
 def main() -> None:
     system_architecture()
     experiment_flow()
     circuit_comparison()
-    quantitative_revision_figure()
+    quantitative_robustness_figure()
 
 
 if __name__ == "__main__":

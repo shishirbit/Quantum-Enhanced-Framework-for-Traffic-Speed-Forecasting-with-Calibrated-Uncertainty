@@ -118,7 +118,7 @@ def highlighted_source(old_text: str, new_text: str) -> str:
                 [
                     "",
                     r"\begin{center}",
-                    r"\textcolor{blue}{\small Blue text identifies additions or replacements made during peer review.}",
+                    r"\textcolor{blue}{\small Blue text marks highlighted additions and replacements.}",
                     r"\end{center}",
                 ]
             )
