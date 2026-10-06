@@ -1,0 +1,59 @@
+{
+  "config": {
+    "study": "QUARTS v2 exploratory pilot",
+    "dataset": "METRLA",
+    "seed": 42,
+    "calibrator": "separable",
+    "frozen_backbone": "official STAEformer",
+    "cache_limits": {
+      "train_windows": 8,
+      "valid_windows": 8,
+      "test_windows": 8,
+      "train_instances": 1000
+    },
+    "arguments": {
+      "dataset": "METRLA",
+      "seed": 42,
+      "calibrators": [
+        "separable",
+        "quantum"
+      ],
+      "epochs": 1,
+      "patience": 1,
+      "batch_size": 256,
+      "learning_rate": 0.001,
+      "point_weight": 0.2,
+      "max_train_windows": 8,
+      "max_valid_windows": 8,
+      "max_test_windows": 8,
+      "max_train_instances": 1000,
+      "cache": "artifacts/cache/quarts_v2_smoke",
+      "output": "artifacts/runs/exploratory_v2_smoke",
+      "device": "cpu",
+      "cache_only": false
+    }
+  },
+  "environment": {
+    "python": "3.12.13 (main, Mar  3 2026, 15:01:35) [MSC v.1944 64 bit (AMD64)]",
+    "platform": "Windows-11-10.0.26200-SP0",
+    "processor": "Intel64 Family 6 Model 183 Stepping 1, GenuineIntel",
+    "packages": {
+      "numpy": "2.0.2",
+      "pandas": "2.2.3",
+      "scipy": "1.14.1",
+      "torch": "2.5.1",
+      "pennylane": "0.39.0",
+      "scikit-learn": "1.5.2"
+    },
+    "git_commit": null,
+    "cuda": {
+      "available": false,
+      "torch_cuda": null,
+      "device": null,
+      "device_memory": null
+    }
+  },
+  "file_hashes": {
+    "D:\\Research\\July Research\\New Paper\\artifacts\\runs\\confirmatory\\metr_la\\staeformer\\seed_42\\best.pt": "a21ec650606cc46eb70724339172c521931320a516e210c542e9b276d9729e0e"
+  }
+}

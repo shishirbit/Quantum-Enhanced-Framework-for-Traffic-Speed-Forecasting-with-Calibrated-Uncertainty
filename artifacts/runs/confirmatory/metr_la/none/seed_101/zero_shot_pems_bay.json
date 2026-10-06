@@ -1,0 +1,13 @@
+{
+  "source_dataset": "metr_la",
+  "target_dataset": "pems_bay",
+  "adaptation": "none",
+  "normalization": "target-training-split statistics",
+  "MAE": 2.1266560554504395,
+  "RMSE": 4.9578657150268555,
+  "MAPE": 5.008366107940674,
+  "WAPE": 3.404541492462158,
+  "Laplace_NLL": 2.441051483154297,
+  "inference_seconds": 2.416588700012653,
+  "target_test_windows": 10401
+}

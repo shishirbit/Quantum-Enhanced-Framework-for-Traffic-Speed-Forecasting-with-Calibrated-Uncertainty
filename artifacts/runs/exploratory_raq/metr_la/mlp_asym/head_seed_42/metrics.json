@@ -1,0 +1,178 @@
+{
+  "MAE": 2.539689779281616,
+  "conformal_WIS": 1.731276512145996,
+  "interval90_coverage": 0.9248219838843394,
+  "interval90_mean_width": 11.437469482421875,
+  "interval90_interval_score": 20.404935836791992,
+  "interval90_calibration_error": 0.024821983884339427,
+  "intervals": {
+    "0.1": {
+      "coverage": 0.9248219838843394,
+      "mean_width": 11.437469482421875,
+      "interval_score": 20.404935836791992
+    },
+    "0.2": {
+      "coverage": 0.8450252155363094,
+      "mean_width": 7.506059169769287,
+      "interval_score": 14.663140296936035
+    },
+    "0.5": {
+      "coverage": 0.5813614751170663,
+      "mean_width": 2.9354565143585205,
+      "interval_score": 9.21224594116211
+    }
+  },
+  "study": "RAQ-STAEformer validation-only exploratory pilot",
+  "dataset": "metr_la",
+  "head_seed": 42,
+  "model": "mlp_asym",
+  "canonical_test_split_used": false,
+  "point_forecast_modified": false,
+  "calibrator_parameters": 459,
+  "conformal_factors": [
+    [
+      1.0438481569290161,
+      1.0600579977035522,
+      2.6010055541992188
+    ],
+    [
+      1.0458648204803467,
+      1.0694197416305542,
+      2.689143419265747
+    ],
+    [
+      1.0357974767684937,
+      1.0698736906051636,
+      2.7151379585266113
+    ],
+    [
+      1.0409430265426636,
+      1.0821301937103271,
+      2.7526700496673584
+    ],
+    [
+      1.0618679523468018,
+      1.1031790971755981,
+      2.8247575759887695
+    ],
+    [
+      1.0963046550750732,
+      1.1388705968856812,
+      2.8907549381256104
+    ],
+    [
+      1.0748425722122192,
+      1.1106600761413574,
+      2.504948377609253
+    ],
+    [
+      1.1007920503616333,
+      1.1380321979522705,
+      2.59902286529541
+    ],
+    [
+      1.1301380395889282,
+      1.1624081134796143,
+      2.978332757949829
+    ],
+    [
+      1.1089855432510376,
+      1.1487950086593628,
+      2.612314224243164
+    ],
+    [
+      1.1298340559005737,
+      1.1637336015701294,
+      2.2234110832214355
+    ],
+    [
+      1.1628912687301636,
+      1.1928726434707642,
+      2.70331072807312
+    ]
+  ],
+  "mean_expert_weights": [
+    0.6628473401069641,
+    0.08535630255937576,
+    0.2518000900745392
+  ],
+  "effective_experts": 2.293060541152954,
+  "history": [
+    {
+      "epoch": 1,
+      "train_WIS_normalized": 0.10302974222804726,
+      "selection_WIS_normalized": 0.11089819664990078
+    },
+    {
+      "epoch": 2,
+      "train_WIS_normalized": 0.10057098486780229,
+      "selection_WIS_normalized": 0.10885382039974707
+    },
+    {
+      "epoch": 3,
+      "train_WIS_normalized": 0.09911347961922454,
+      "selection_WIS_normalized": 0.10751397771530741
+    },
+    {
+      "epoch": 4,
+      "train_WIS_normalized": 0.09818714165236678,
+      "selection_WIS_normalized": 0.10653890248321467
+    },
+    {
+      "epoch": 5,
+      "train_WIS_normalized": 0.09749730962479089,
+      "selection_WIS_normalized": 0.10574744702849084
+    },
+    {
+      "epoch": 6,
+      "train_WIS_normalized": 0.096901458528662,
+      "selection_WIS_normalized": 0.1050540145793858
+    },
+    {
+      "epoch": 7,
+      "train_WIS_normalized": 0.09637479612579662,
+      "selection_WIS_normalized": 0.1043986659912429
+    },
+    {
+      "epoch": 8,
+      "train_WIS_normalized": 0.0958793675678462,
+      "selection_WIS_normalized": 0.10376955620708202
+    },
+    {
+      "epoch": 9,
+      "train_WIS_normalized": 0.09538674761015492,
+      "selection_WIS_normalized": 0.10314637308316148
+    },
+    {
+      "epoch": 10,
+      "train_WIS_normalized": 0.09487496153971214,
+      "selection_WIS_normalized": 0.10252949301690739
+    },
+    {
+      "epoch": 11,
+      "train_WIS_normalized": 0.09436252590617596,
+      "selection_WIS_normalized": 0.10188388005589308
+    },
+    {
+      "epoch": 12,
+      "train_WIS_normalized": 0.09384500681468645,
+      "selection_WIS_normalized": 0.10124343412990634
+    },
+    {
+      "epoch": 13,
+      "train_WIS_normalized": 0.09329735215258816,
+      "selection_WIS_normalized": 0.10058372501254412
+    },
+    {
+      "epoch": 14,
+      "train_WIS_normalized": 0.0927088382253161,
+      "selection_WIS_normalized": 0.09996409169064986
+    },
+    {
+      "epoch": 15,
+      "train_WIS_normalized": 0.09209239636319498,
+      "selection_WIS_normalized": 0.099253223895633
+    }
+  ],
+  "elapsed_seconds": 64.13691299999994
+}

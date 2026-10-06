@@ -1,0 +1,30 @@
+{
+  "config": {
+    "dataset": "pems_bay",
+    "model": "persistence",
+    "deterministic": true
+  },
+  "environment": {
+    "python": "3.12.13 (main, Mar  3 2026, 15:01:35) [MSC v.1944 64 bit (AMD64)]",
+    "platform": "Windows-11-10.0.26200-SP0",
+    "processor": "Intel64 Family 6 Model 183 Stepping 1, GenuineIntel",
+    "packages": {
+      "numpy": "2.0.2",
+      "pandas": "2.2.3",
+      "scipy": "1.14.1",
+      "torch": "2.5.1",
+      "pennylane": "0.39.0",
+      "scikit-learn": "1.5.2"
+    },
+    "git_commit": null,
+    "cuda": {
+      "available": false,
+      "torch_cuda": null,
+      "device": null,
+      "device_memory": null
+    }
+  },
+  "file_hashes": {
+    "D:\\Research\\July Research\\New Paper\\data\\raw\\dcrnn\\pems-bay.h5": "65d69fb0a2323dba9867179eb7af47c8b814186bc459ff0a4937d21614153c8f"
+  }
+}

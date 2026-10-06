@@ -1,0 +1,55 @@
+{
+  "model": "staeformer+mlp",
+  "exploratory": true,
+  "seed": 42,
+  "calibrator_parameters": 216,
+  "MAE": 2.6014788150787354,
+  "RMSE": 5.195455074310303,
+  "MAPE": 6.06447696685791,
+  "WAPE": 4.3911895751953125,
+  "Laplace_NLL": 3.549487352371216,
+  "normalized_NLL": 0.5793927827275785,
+  "base_MAE": 2.6016035079956055,
+  "interval90_coverage": 0.9927161654135338,
+  "interval90_mean_width": 67.91492343657656,
+  "interval90_interval_score": 69.11734639131022,
+  "interval90_calibration_error": 0.09271616541353378,
+  "gate": [
+    0.0,
+    0.0024655612651258707,
+    0.0,
+    0.0,
+    0.0024723573587834835,
+    0.0,
+    0.0024637498427182436,
+    0.0024720667861402035,
+    0.0024766840506345034,
+    0.0024651787243783474,
+    0.0,
+    0.0
+  ],
+  "residual_horizons_enabled": [
+    false,
+    true,
+    false,
+    false,
+    true,
+    false,
+    true,
+    true,
+    true,
+    true,
+    false,
+    false
+  ],
+  "history": [
+    {
+      "epoch": 1,
+      "train_objective": 0.625997468829155,
+      "valid_MAE_normalized": 0.17002520437130575,
+      "valid_NLL_normalized": 0.6299334430393612,
+      "gate_mean": 0.002467900747433305
+    }
+  ],
+  "elapsed_seconds": 0.8395047000376508
+}

@@ -1,0 +1,46 @@
+{
+  "config": {
+    "study": "SA-CQR-RAC PeMSD8 validation-only development",
+    "canonical_test_split_used": false,
+    "arguments": {
+      "seed": 42,
+      "backbone_epochs": 1,
+      "backbone_patience": 1,
+      "head_epochs": 1,
+      "head_patience": 1,
+      "backbone_batch_size": 8,
+      "head_batch_size": 128,
+      "max_train_windows": 16,
+      "max_valid_windows": 60,
+      "max_train_instances": 1000,
+      "device": "cpu",
+      "output": "artifacts/runs/sacqr_pemsd8_smoke",
+      "cache": "artifacts/cache/sacqr_pemsd8_smoke"
+    }
+  },
+  "environment": {
+    "python": "3.12.13 | packaged by Anaconda, Inc. | (main, Jul  9 2026, 14:26:47) [MSC v.1942 64 bit (AMD64)]",
+    "platform": "Windows-11-10.0.26200-SP0",
+    "processor": "Intel64 Family 6 Model 183 Stepping 1, GenuineIntel",
+    "packages": {
+      "numpy": "2.0.2",
+      "pandas": "2.2.3",
+      "scipy": "1.18.0",
+      "torch": "2.13.0+cu130",
+      "pennylane": "0.39.0",
+      "scikit-learn": "1.9.0"
+    },
+    "git_commit": null,
+    "cuda": {
+      "available": true,
+      "torch_cuda": "13.0",
+      "device": "NVIDIA GeForce RTX 5060 Laptop GPU",
+      "device_memory": 8546484224
+    }
+  },
+  "file_hashes": {
+    "D:\\Research\\July Research\\New Paper\\data\\raw\\pemsd8\\PEMS08.npz": "e1d03ce74e9fb79149e6e7c37c680214822c4a285baa2f42278cacabcd25c075",
+    "D:\\Research\\July Research\\New Paper\\data\\raw\\pemsd8\\PEMS08.csv": "859d68e7583ed4e6016588eaaca494d3ece286dae361614c5c1833017f87eaa7",
+    "D:\\Research\\July Research\\New Paper\\configs\\sacqr_pemsd8_validation.yaml": "ca7baf4d05bd39881d37f1d07dbb13e18c60d0b5338a7b734aaadaa62291cdff"
+  }
+}

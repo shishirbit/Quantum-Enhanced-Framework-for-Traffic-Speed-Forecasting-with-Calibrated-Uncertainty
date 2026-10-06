@@ -1,0 +1,99 @@
+{
+  "MAE": 2.539689779281616,
+  "conformal_WIS": 1.690900444984436,
+  "uncalibrated_WIS": 1.6917228698730469,
+  "interval90_coverage": 0.9090848021915725,
+  "interval90_mean_width": 10.169068336486816,
+  "interval90_interval_score": 20.535951614379883,
+  "interval90_calibration_error": 0.009084802191572483,
+  "intervals": {
+    "0.1": {
+      "coverage": 0.9090848021915725,
+      "mean_width": 10.169068336486816,
+      "interval_score": 20.535951614379883
+    },
+    "0.2": {
+      "coverage": 0.8291782586042488,
+      "mean_width": 7.205185413360596,
+      "interval_score": 14.491960525512695
+    },
+    "0.5": {
+      "coverage": 0.5523021669959924,
+      "mean_width": 3.4034109115600586,
+      "interval_score": 8.689251899719238
+    }
+  },
+  "experts": 2,
+  "head_seed": 202,
+  "parameters": 263,
+  "mean_expert_weights": [
+    0.8085212707519531,
+    0.1914817839860916
+  ],
+  "effective_experts": 1.629644751548767,
+  "mean_max_gate_probability": 0.8586220145225525,
+  "elapsed_seconds": 57.99152470001718,
+  "history": [
+    {
+      "epoch": 1,
+      "selection_WIS_normalized": 0.10444433746159229
+    },
+    {
+      "epoch": 2,
+      "selection_WIS_normalized": 0.10131374688760653
+    },
+    {
+      "epoch": 3,
+      "selection_WIS_normalized": 0.09960899214794158
+    },
+    {
+      "epoch": 4,
+      "selection_WIS_normalized": 0.09860380337095548
+    },
+    {
+      "epoch": 5,
+      "selection_WIS_normalized": 0.09782809440968832
+    },
+    {
+      "epoch": 6,
+      "selection_WIS_normalized": 0.09734642486539889
+    },
+    {
+      "epoch": 7,
+      "selection_WIS_normalized": 0.09700410231042005
+    },
+    {
+      "epoch": 8,
+      "selection_WIS_normalized": 0.09685026595027507
+    },
+    {
+      "epoch": 9,
+      "selection_WIS_normalized": 0.09660450637497885
+    },
+    {
+      "epoch": 10,
+      "selection_WIS_normalized": 0.09647056665213545
+    },
+    {
+      "epoch": 11,
+      "selection_WIS_normalized": 0.09644497133844926
+    },
+    {
+      "epoch": 12,
+      "selection_WIS_normalized": 0.09626537168644365
+    },
+    {
+      "epoch": 13,
+      "selection_WIS_normalized": 0.09618230390760431
+    },
+    {
+      "epoch": 14,
+      "selection_WIS_normalized": 0.09614455624076572
+    },
+    {
+      "epoch": 15,
+      "selection_WIS_normalized": 0.09607035764792571
+    }
+  ],
+  "canonical_test_split_used": false
+}

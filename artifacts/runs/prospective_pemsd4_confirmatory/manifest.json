@@ -1,0 +1,45 @@
+{
+  "config": {
+    "study": "Prospective PeMSD4 confirmatory uncertainty evaluation",
+    "dataset": "PeMSD4",
+    "frozen_backbone_cache": "D:\\Research\\July Research\\New Paper\\artifacts\\cache\\prospective_pemsd4\\pemsd4_seed_42",
+    "arguments": {
+      "seeds": [
+        73,
+        202
+      ],
+      "head_epochs": 15,
+      "head_patience": 4,
+      "head_batch_size": 4096,
+      "max_train_instances": 200000,
+      "device": "cuda",
+      "cache": "artifacts/cache/prospective_pemsd4",
+      "output": "artifacts/runs/prospective_pemsd4_confirmatory"
+    }
+  },
+  "environment": {
+    "python": "3.12.13 | packaged by Anaconda, Inc. | (main, Jul  9 2026, 14:26:47) [MSC v.1942 64 bit (AMD64)]",
+    "platform": "Windows-11-10.0.26200-SP0",
+    "processor": "Intel64 Family 6 Model 183 Stepping 1, GenuineIntel",
+    "packages": {
+      "numpy": "2.0.2",
+      "pandas": "2.2.3",
+      "scipy": "1.18.0",
+      "torch": "2.13.0+cu130",
+      "pennylane": "0.39.0",
+      "scikit-learn": "1.9.0"
+    },
+    "git_commit": null,
+    "cuda": {
+      "available": true,
+      "torch_cuda": "13.0",
+      "device": "NVIDIA GeForce RTX 5060 Laptop GPU",
+      "device_memory": 8546484224
+    }
+  },
+  "file_hashes": {
+    "D:\\Research\\July Research\\New Paper\\artifacts\\cache\\prospective_pemsd4\\pemsd4_seed_42\\train.npz": "9b2ca5a5aac2c9d5d380ce66b81dac2638375b8d50f505d201eb8fccdbe54490",
+    "D:\\Research\\July Research\\New Paper\\artifacts\\cache\\prospective_pemsd4\\pemsd4_seed_42\\valid.npz": "8723dda41b16624389c5c157380bafb3c7ed5b5fff68c70b73eed624ad9e820c",
+    "D:\\Research\\July Research\\New Paper\\artifacts\\cache\\prospective_pemsd4\\pemsd4_seed_42\\test.npz": "1c389bf9644ec6c6399a47eadf30975741ec0d2730b167e169fbc1d83ca19076"
+  }
+}

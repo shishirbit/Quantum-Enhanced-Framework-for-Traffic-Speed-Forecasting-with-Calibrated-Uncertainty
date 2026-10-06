@@ -1,0 +1,77 @@
+{
+  "model": "staeformer+mlp",
+  "exploratory": true,
+  "seed": 42,
+  "calibrator_parameters": 216,
+  "quantum_backend": null,
+  "MAE": 2.9276466369628906,
+  "RMSE": 5.963712215423584,
+  "MAPE": 8.045509338378906,
+  "WAPE": 5.068474769592285,
+  "Laplace_NLL": 3.5484864711761475,
+  "normalized_NLL": 0.5783950309750187,
+  "base_MAE": 2.9277851581573486,
+  "interval90_coverage": 0.9929558200475679,
+  "interval90_mean_width": 67.05961933763786,
+  "interval90_interval_score": 68.31332396713181,
+  "interval90_calibration_error": 0.09295582004756786,
+  "gate": [
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0024337926879525185,
+    0.0,
+    0.0,
+    0.0024868634063750505,
+    0.0025432815309613943,
+    0.0
+  ],
+  "residual_horizons_enabled": [
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    true,
+    false,
+    false,
+    true,
+    true,
+    false
+  ],
+  "history": [
+    {
+      "epoch": 1,
+      "train_objective": 0.6152231340505638,
+      "valid_MAE_normalized": 0.14110230256963122,
+      "valid_NLL_normalized": 0.5596790162411662,
+      "gate_mean": 0.002438913332298398
+    },
+    {
+      "epoch": 2,
+      "train_objective": 0.537782044435034,
+      "valid_MAE_normalized": 0.14110611546504873,
+      "valid_NLL_normalized": 0.4557163233925068,
+      "gate_mean": 0.002385711995884776
+    },
+    {
+      "epoch": 3,
+      "train_objective": 0.39381251529771455,
+      "valid_MAE_normalized": 0.1411017766675878,
+      "valid_NLL_normalized": 0.27377121217127043,
+      "gate_mean": 0.002321082865819335
+    },
+    {
+      "epoch": 4,
+      "train_objective": 0.22043532741313077,
+      "valid_MAE_normalized": 0.14109576491025308,
+      "valid_NLL_normalized": 0.11182566423802033,
+      "gate_mean": 0.0022883510682731867
+    }
+  ],
+  "elapsed_seconds": 40.23611409997102
+}

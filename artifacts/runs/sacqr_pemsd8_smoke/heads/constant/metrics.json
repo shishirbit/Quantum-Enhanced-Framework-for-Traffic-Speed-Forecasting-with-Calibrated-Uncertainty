@@ -1,0 +1,88 @@
+{
+  "model": "constant",
+  "asymmetric": false,
+  "parameters": 36,
+  "history": [
+    {
+      "epoch": 1,
+      "selection_WIS": 0.47962209255087607
+    }
+  ],
+  "folds": [
+    {
+      "MAE": 133.76075744628906,
+      "conformal_WIS": 79.36161804199219,
+      "interval90_coverage": 0.7723856209150327,
+      "interval90_mean_width": 408.1363830566406,
+      "intervals": {
+        "0.1": {
+          "coverage": 0.7723856209150327,
+          "mean_width": 408.1363830566406,
+          "interval_score": 795.4904174804688
+        },
+        "0.2": {
+          "coverage": 0.6808823529411765,
+          "mean_width": 340.009033203125,
+          "interval_score": 630.2297973632812
+        },
+        "0.5": {
+          "coverage": 0.44607843137254904,
+          "mean_width": 204.8802032470703,
+          "interval_score": 432.35113525390625
+        }
+      },
+      "fold": 1
+    },
+    {
+      "MAE": 113.75135803222656,
+      "conformal_WIS": 63.11117172241211,
+      "interval90_coverage": 0.9216503267973856,
+      "interval90_mean_width": 494.5636901855469,
+      "intervals": {
+        "0.1": {
+          "coverage": 0.9216503267973856,
+          "mean_width": 494.5636901855469,
+          "interval_score": 559.1011962890625
+        },
+        "0.2": {
+          "coverage": 0.8365196078431373,
+          "mean_width": 396.3902893066406,
+          "interval_score": 478.2129821777344
+        },
+        "0.5": {
+          "coverage": 0.5270424836601307,
+          "mean_width": 213.74732971191406,
+          "interval_score": 352.9482116699219
+        }
+      },
+      "fold": 2
+    },
+    {
+      "MAE": 126.1055679321289,
+      "conformal_WIS": 72.55912017822266,
+      "interval90_coverage": 0.8824754901960784,
+      "interval90_mean_width": 502.22650146484375,
+      "intervals": {
+        "0.1": {
+          "coverage": 0.8824754901960784,
+          "mean_width": 502.22650146484375,
+          "interval_score": 665.3097534179688
+        },
+        "0.2": {
+          "coverage": 0.7900326797385621,
+          "mean_width": 397.3043212890625,
+          "interval_score": 562.6592407226562
+        },
+        "0.5": {
+          "coverage": 0.5052287581699346,
+          "mean_width": 217.28660583496094,
+          "interval_score": 405.4909362792969
+        }
+      },
+      "fold": 3
+    }
+  ],
+  "mean_WIS": 71.67730331420898,
+  "mean_coverage90": 0.8588371459694989,
+  "coverage_gate_passed": false
+}

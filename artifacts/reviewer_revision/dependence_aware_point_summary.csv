@@ -1,0 +1,7 @@
+dataset,comparison,independent_seeds,mean_MAE_difference,seed_SD,hierarchical_block_ci_low,hierarchical_block_ci_high,directional_wins_left,directional_wins_right
+metr_la,quantum_minus_separable,5,0.0048335595,0.007340647,-0.0017238685837285403,0.010419729020440034,1,4
+metr_la,quantum_minus_fourier,5,-0.0067524137,0.0073840036,-0.01287692157073052,-0.001110560683253612,4,1
+metr_la,quantum_minus_staeformer,5,0.9857234,0.01242542,0.9292158205451294,1.0425848148233683,0,5
+pems_bay,quantum_minus_separable,5,0.0047172857,0.0066122497,0.00016660737193051404,0.010581133410158356,2,3
+pems_bay,quantum_minus_fourier,5,-0.008077966,0.007883103,-0.014019367494023587,-0.0016753539208059153,4,1
+pems_bay,quantum_minus_staeformer,5,0.49055162,0.005035549,0.4510393767346099,0.5293934336041339,0,5

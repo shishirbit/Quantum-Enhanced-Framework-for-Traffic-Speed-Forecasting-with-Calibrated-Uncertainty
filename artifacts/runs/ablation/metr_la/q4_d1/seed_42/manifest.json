@@ -1,0 +1,106 @@
+{
+  "config": {
+    "dataset": {
+      "input_steps": 12,
+      "horizons": 12,
+      "features": 1
+    },
+    "model": {
+      "hidden_dim": 32,
+      "qubits": 4,
+      "circuit_depth": 1
+    },
+    "training": {
+      "epochs": 30,
+      "patience": 7,
+      "min_delta": 0.0005,
+      "batch_size": 256,
+      "learning_rate": 0.001,
+      "weight_decay": 0.0001
+    },
+    "evaluation": {
+      "horizons_minutes": [
+        15,
+        30,
+        60
+      ],
+      "seeds": [
+        17,
+        42,
+        73,
+        101,
+        202
+      ],
+      "missing_rates": [
+        0.1,
+        0.3,
+        0.5
+      ],
+      "noise_std_rates": [
+        0.01,
+        0.05,
+        0.1
+      ],
+      "calibrators": [
+        "none",
+        "mlp",
+        "fourier",
+        "separable",
+        "quantum"
+      ]
+    },
+    "quantum": {
+      "qubits": [
+        2,
+        4,
+        6
+      ],
+      "depths": [
+        1,
+        2,
+        3
+      ],
+      "depolarizing": [
+        0.001,
+        0.005,
+        0.01
+      ],
+      "amplitude_damping": [
+        0.001,
+        0.005,
+        0.01
+      ],
+      "shots": [
+        128,
+        512,
+        2048
+      ]
+    },
+    "seed": 42,
+    "selected_calibrator": "quantum"
+  },
+  "environment": {
+    "python": "3.12.13 | packaged by Anaconda, Inc. | (main, Jul  9 2026, 14:26:47) [MSC v.1942 64 bit (AMD64)]",
+    "platform": "Windows-11-10.0.26200-SP0",
+    "processor": "Intel64 Family 6 Model 183 Stepping 1, GenuineIntel",
+    "packages": {
+      "numpy": "2.0.2",
+      "pandas": "2.2.3",
+      "scipy": "1.18.0",
+      "torch": "2.13.0+cu130",
+      "pennylane": "0.39.0",
+      "scikit-learn": "1.9.0"
+    },
+    "git_commit": null,
+    "cuda": {
+      "available": true,
+      "torch_cuda": "13.0",
+      "device": "NVIDIA GeForce RTX 5060 Laptop GPU",
+      "device_memory": 8546484224
+    }
+  },
+  "file_hashes": {
+    "D:\\Research\\July Research\\New Paper\\data\\raw\\dcrnn\\metr-la.h5": "64784b76d6fb8ec9bff4b6decafb354da2bb37840468fdccee5044e511277c05",
+    "D:\\Research\\July Research\\New Paper\\data\\raw\\dcrnn\\adj_mx.pkl": "a35687c6e15aa228dc45027b0ed2a0ea0f4ec78f573deb992c595092d12f61b3"
+  }
+}

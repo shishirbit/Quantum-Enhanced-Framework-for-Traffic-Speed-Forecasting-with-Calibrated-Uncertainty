@@ -1,0 +1,101 @@
+{
+  "MAE": 2.539689779281616,
+  "conformal_WIS": 1.691182017326355,
+  "uncalibrated_WIS": 1.6909732818603516,
+  "interval90_coverage": 0.9114834730919589,
+  "interval90_mean_width": 10.398768424987793,
+  "interval90_interval_score": 20.476484298706055,
+  "interval90_calibration_error": 0.011483473091958851,
+  "intervals": {
+    "0.1": {
+      "coverage": 0.9114834730919589,
+      "mean_width": 10.398768424987793,
+      "interval_score": 20.476484298706055
+    },
+    "0.2": {
+      "coverage": 0.8331531053285229,
+      "mean_width": 7.35916805267334,
+      "interval_score": 14.508481979370117
+    },
+    "0.5": {
+      "coverage": 0.5538586815829917,
+      "mean_width": 3.444070339202881,
+      "interval_score": 8.698479652404785
+    }
+  },
+  "experts": 4,
+  "head_seed": 202,
+  "parameters": 343,
+  "mean_expert_weights": [
+    0.10376490652561188,
+    0.6612546443939209,
+    0.07825042307376862,
+    0.15672676265239716
+  ],
+  "effective_experts": 2.713996171951294,
+  "mean_max_gate_probability": 0.7273314595222473,
+  "elapsed_seconds": 56.29170139998314,
+  "history": [
+    {
+      "epoch": 1,
+      "selection_WIS_normalized": 0.10504107056806136
+    },
+    {
+      "epoch": 2,
+      "selection_WIS_normalized": 0.1017606597366355
+    },
+    {
+      "epoch": 3,
+      "selection_WIS_normalized": 0.09972486611721784
+    },
+    {
+      "epoch": 4,
+      "selection_WIS_normalized": 0.09848785548969351
+    },
+    {
+      "epoch": 5,
+      "selection_WIS_normalized": 0.09774356777560729
+    },
+    {
+      "epoch": 6,
+      "selection_WIS_normalized": 0.09727430743509118
+    },
+    {
+      "epoch": 7,
+      "selection_WIS_normalized": 0.09691649931246003
+    },
+    {
+      "epoch": 8,
+      "selection_WIS_normalized": 0.09673175767724057
+    },
+    {
+      "epoch": 9,
+      "selection_WIS_normalized": 0.09655506826707726
+    },
+    {
+      "epoch": 10,
+      "selection_WIS_normalized": 0.09647884965899771
+    },
+    {
+      "epoch": 11,
+      "selection_WIS_normalized": 0.09640490179361261
+    },
+    {
+      "epoch": 12,
+      "selection_WIS_normalized": 0.09627466084436295
+    },
+    {
+      "epoch": 13,
+      "selection_WIS_normalized": 0.09629972872790164
+    },
+    {
+      "epoch": 14,
+      "selection_WIS_normalized": 0.09619867158292658
+    },
+    {
+      "epoch": 15,
+      "selection_WIS_normalized": 0.09605804431649957
+    }
+  ],
+  "canonical_test_split_used": false
+}

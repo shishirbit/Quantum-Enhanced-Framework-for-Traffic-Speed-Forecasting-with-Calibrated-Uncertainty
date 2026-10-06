@@ -1,0 +1,27 @@
+{
+  "title": "QUARTS for Probabilistic Traffic Forecasting: Code and Reproducibility Materials",
+  "upload_type": "software",
+  "description": "Permanent software and reproducibility archive for the manuscript QUARTS for Probabilistic Traffic Forecasting: A Controlled Evaluation of Quantum and Classical Residual Calibration. The release contains source code, immutable experiment configurations, analysis and figure-generation scripts, run-level manifests and metrics, completion audits, publication tables and figures, and Springer Nature manuscript sources. Raw benchmark datasets, trained checkpoints, cached tensors, and per-forecast prediction arrays are excluded; acquisition instructions, integrity hashes, and regeneration commands are provided.",
+  "creators": [
+    {
+      "name": "Chauhan, Shishir Singh",
+      "affiliation": "Department of Computer Science and Engineering, Manipal University Jaipur, India"
+    }
+  ],
+  "keywords": [
+    "traffic forecasting",
+    "quantum machine learning",
+    "probabilistic forecasting",
+    "uncertainty calibration",
+    "reproducibility"
+  ],
+  "version": "1.0.0",
+  "access_right": "open",
+  "related_identifiers": [
+    {
+      "identifier": "https://github.com/shishirbit/Quantum-Enhanced-Framework-for-Traffic-Speed-Forecasting-with-Calibrated-Uncertainty",
+      "relation": "isSupplementTo",
+      "scheme": "url"
+    }
+  ]
+}

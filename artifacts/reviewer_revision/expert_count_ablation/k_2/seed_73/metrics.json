@@ -1,0 +1,99 @@
+{
+  "MAE": 2.539689779281616,
+  "conformal_WIS": 1.6877038478851318,
+  "uncalibrated_WIS": 1.6889804601669312,
+  "interval90_coverage": 0.9039810727826221,
+  "interval90_mean_width": 10.0114107131958,
+  "interval90_interval_score": 20.450361251831055,
+  "interval90_calibration_error": 0.003981072782622053,
+  "intervals": {
+    "0.1": {
+      "coverage": 0.9039810727826221,
+      "mean_width": 10.0114107131958,
+      "interval_score": 20.450361251831055
+    },
+    "0.2": {
+      "coverage": 0.8208156791810439,
+      "mean_width": 7.150096416473389,
+      "interval_score": 14.451967239379883
+    },
+    "0.5": {
+      "coverage": 0.5385982848847688,
+      "mean_width": 3.351451873779297,
+      "interval_score": 8.67761516571045
+    }
+  },
+  "experts": 2,
+  "head_seed": 73,
+  "parameters": 263,
+  "mean_expert_weights": [
+    0.800918459892273,
+    0.19907933473587036
+  ],
+  "effective_experts": 1.6472795009613037,
+  "mean_max_gate_probability": 0.8586839437484741,
+  "elapsed_seconds": 57.99664050000138,
+  "history": [
+    {
+      "epoch": 1,
+      "selection_WIS_normalized": 0.10289750592973297
+    },
+    {
+      "epoch": 2,
+      "selection_WIS_normalized": 0.10098871543937062
+    },
+    {
+      "epoch": 3,
+      "selection_WIS_normalized": 0.09992208647468745
+    },
+    {
+      "epoch": 4,
+      "selection_WIS_normalized": 0.09919222425092313
+    },
+    {
+      "epoch": 5,
+      "selection_WIS_normalized": 0.09863492398691394
+    },
+    {
+      "epoch": 6,
+      "selection_WIS_normalized": 0.0979512729561183
+    },
+    {
+      "epoch": 7,
+      "selection_WIS_normalized": 0.09742302856647878
+    },
+    {
+      "epoch": 8,
+      "selection_WIS_normalized": 0.09690662418268312
+    },
+    {
+      "epoch": 9,
+      "selection_WIS_normalized": 0.0964643558323435
+    },
+    {
+      "epoch": 10,
+      "selection_WIS_normalized": 0.0962604159109565
+    },
+    {
+      "epoch": 11,
+      "selection_WIS_normalized": 0.09610316829113676
+    },
+    {
+      "epoch": 12,
+      "selection_WIS_normalized": 0.09590551602612254
+    },
+    {
+      "epoch": 13,
+      "selection_WIS_normalized": 0.09586667615917656
+    },
+    {
+      "epoch": 14,
+      "selection_WIS_normalized": 0.0957683293079576
+    },
+    {
+      "epoch": 15,
+      "selection_WIS_normalized": 0.09578955758556491
+    }
+  ],
+  "canonical_test_split_used": false
+}

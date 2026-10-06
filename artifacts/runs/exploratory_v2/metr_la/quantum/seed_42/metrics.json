@@ -1,0 +1,91 @@
+{
+  "model": "staeformer+quantum",
+  "exploratory": true,
+  "seed": 42,
+  "calibrator_parameters": 240,
+  "quantum_backend": "TorchStatevectorQuantumLayer",
+  "MAE": 2.9276509284973145,
+  "RMSE": 5.963888168334961,
+  "MAPE": 8.04567813873291,
+  "WAPE": 5.068482398986816,
+  "Laplace_NLL": 3.064906597137451,
+  "normalized_NLL": 0.09481237402410733,
+  "base_MAE": 2.9277851581573486,
+  "interval90_coverage": 0.9766479409852504,
+  "interval90_mean_width": 35.15341045511817,
+  "interval90_interval_score": 40.14954031141633,
+  "interval90_calibration_error": 0.0766479409852504,
+  "gate": [
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.002284160116687417,
+    0.0023359525948762894,
+    0.0024695941247045994,
+    0.0023730825632810593,
+    0.0021949659567326307,
+    0.0024710192810744047
+  ],
+  "residual_horizons_enabled": [
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true
+  ],
+  "history": [
+    {
+      "epoch": 1,
+      "train_objective": 0.48277861427287666,
+      "valid_MAE_normalized": 0.14110675415090385,
+      "valid_NLL_normalized": 0.43724906235509603,
+      "gate_mean": 0.002411080291494727
+    },
+    {
+      "epoch": 2,
+      "train_objective": 0.4203533572810037,
+      "valid_MAE_normalized": 0.14110444746850745,
+      "valid_NLL_normalized": 0.36052126158515313,
+      "gate_mean": 0.0023573373910039663
+    },
+    {
+      "epoch": 3,
+      "train_objective": 0.321032171954914,
+      "valid_MAE_normalized": 0.141100147110473,
+      "valid_NLL_normalized": 0.23790622545114606,
+      "gate_mean": 0.002326129237189889
+    },
+    {
+      "epoch": 4,
+      "train_objective": 0.17033795981991048,
+      "valid_MAE_normalized": 0.14109563945410297,
+      "valid_NLL_normalized": 0.0632323202586865,
+      "gate_mean": 0.002321643056347966
+    },
+    {
+      "epoch": 5,
+      "train_objective": 0.008973685046598524,
+      "valid_MAE_normalized": 0.14109276420612388,
+      "valid_NLL_normalized": -0.071807055552208,
+      "gate_mean": 0.0023310703691095114
+    },
+    {
+      "epoch": 6,
+      "train_objective": -0.1117473269755743,
+      "valid_MAE_normalized": 0.1410912744671427,
+      "valid_NLL_normalized": -0.1753084814874438,
+      "gate_mean": 0.0023412080481648445
+    }
+  ],
+  "elapsed_seconds": 76.15841199993156
+}

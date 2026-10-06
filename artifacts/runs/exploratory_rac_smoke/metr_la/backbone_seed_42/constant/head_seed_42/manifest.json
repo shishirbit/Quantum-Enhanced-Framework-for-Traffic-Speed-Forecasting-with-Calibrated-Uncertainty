@@ -1,0 +1,116 @@
+{
+  "config": {
+    "study": "QUARTS-RAC validation-only exploratory pilot",
+    "arguments": {
+      "dataset": "METRLA",
+      "backbone_seed": 42,
+      "head_seeds": [
+        42
+      ],
+      "calibrators": [
+        "constant",
+        "mlp",
+        "fourier",
+        "separable",
+        "quantum"
+      ],
+      "epochs": 2,
+      "patience": 2,
+      "batch_size": 1024,
+      "learning_rate": 0.003,
+      "max_train_windows": 32,
+      "max_valid_windows": 60,
+      "max_train_instances": 5000,
+      "latent_dim": 8,
+      "cache": "artifacts/cache/quarts_rac_smoke",
+      "output": "artifacts/runs/exploratory_rac_smoke",
+      "device": "cpu",
+      "cache_only": false
+    },
+    "canonical_test_split_used": false,
+    "feature_names": [
+      "base_h1",
+      "base_h2",
+      "base_h3",
+      "base_h4",
+      "base_h5",
+      "base_h6",
+      "base_h7",
+      "base_h8",
+      "base_h9",
+      "base_h10",
+      "base_h11",
+      "base_h12",
+      "local_last",
+      "local_mean",
+      "local_std",
+      "local_trend",
+      "neighbor_last",
+      "neighbor_mean",
+      "neighbor_std",
+      "neighbor_trend",
+      "disagreement_last",
+      "disagreement_mean",
+      "disagreement_std",
+      "disagreement_trend",
+      "network_mean_last",
+      "network_mean_mean",
+      "network_mean_std",
+      "network_mean_trend",
+      "network_std_last",
+      "network_std_mean",
+      "network_std_std",
+      "network_std_trend",
+      "tod_sin",
+      "tod_cos",
+      "dow_sin",
+      "dow_cos",
+      "latent_projection_1",
+      "latent_projection_2",
+      "latent_projection_3",
+      "latent_projection_4",
+      "latent_projection_5",
+      "latent_projection_6",
+      "latent_projection_7",
+      "latent_projection_8"
+    ],
+    "validation_windows": {
+      "early_stopping": [
+        0,
+        24
+      ],
+      "conformal_calibration": [
+        24,
+        42
+      ],
+      "held_out_evaluation": [
+        42,
+        60
+      ]
+    }
+  },
+  "environment": {
+    "python": "3.12.13 (main, Mar  3 2026, 15:01:35) [MSC v.1944 64 bit (AMD64)]",
+    "platform": "Windows-11-10.0.26200-SP0",
+    "processor": "Intel64 Family 6 Model 183 Stepping 1, GenuineIntel",
+    "packages": {
+      "numpy": "2.0.2",
+      "pandas": "2.2.3",
+      "scipy": "1.14.1",
+      "torch": "2.5.1",
+      "pennylane": "0.39.0",
+      "scikit-learn": "1.5.2"
+    },
+    "git_commit": null,
+    "cuda": {
+      "available": false,
+      "torch_cuda": null,
+      "device": null,
+      "device_memory": null
+    }
+  },
+  "file_hashes": {
+    "D:\\Research\\July Research\\New Paper\\artifacts\\runs\\confirmatory\\metr_la\\staeformer\\seed_42\\best.pt": "a21ec650606cc46eb70724339172c521931320a516e210c542e9b276d9729e0e",
+    "D:\\Research\\July Research\\New Paper\\configs\\quarts_rac_exploratory.yaml": "cd220e9c39008b6ff7e84e4a925962b9013149d14a57630a7843629a013381c0"
+  }
+}

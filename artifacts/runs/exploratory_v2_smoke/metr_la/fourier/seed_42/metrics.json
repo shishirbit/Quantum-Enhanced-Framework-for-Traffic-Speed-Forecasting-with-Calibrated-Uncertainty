@@ -1,0 +1,55 @@
+{
+  "model": "staeformer+fourier",
+  "exploratory": true,
+  "seed": 42,
+  "calibrator_parameters": 219,
+  "MAE": 2.6015825271606445,
+  "RMSE": 5.1959099769592285,
+  "MAPE": 6.065436840057373,
+  "WAPE": 4.391364574432373,
+  "Laplace_NLL": 3.52516770362854,
+  "normalized_NLL": 0.5550728364098341,
+  "base_MAE": 2.6016035079956055,
+  "interval90_coverage": 0.9934797932330827,
+  "interval90_mean_width": 66.57136114736994,
+  "interval90_interval_score": 67.70575008713226,
+  "interval90_calibration_error": 0.09347979323308264,
+  "gate": [
+    0.002474698703736067,
+    0.0,
+    0.00247964053414762,
+    0.0024638306349515915,
+    0.0024664350785315037,
+    0.0,
+    0.0024663095828145742,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0
+  ],
+  "residual_horizons_enabled": [
+    true,
+    false,
+    true,
+    true,
+    true,
+    false,
+    true,
+    false,
+    false,
+    false,
+    false,
+    false
+  ],
+  "history": [
+    {
+      "epoch": 1,
+      "train_objective": 0.6225601136684418,
+      "valid_MAE_normalized": 0.17005074778471024,
+      "valid_NLL_normalized": 0.6140935427034022,
+      "gate_mean": 0.0024708982091397047
+    }
+  ],
+  "elapsed_seconds": 0.09989770001266152
+}

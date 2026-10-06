@@ -1,0 +1,67 @@
+{
+  "config": {
+    "study": "QUARTS-UQ exploratory",
+    "dataset": "metr_la",
+    "backbone_seed": 42,
+    "head_seed": 73,
+    "calibrator": "fourier",
+    "point_forecast_modified": false,
+    "cache": "D:\\Research\\July Research\\New Paper\\artifacts\\cache\\quarts_v2\\metr_la_seed_42\\tw_2000_vw_1000_xw_0",
+    "arguments": {
+      "dataset": "metr_la",
+      "backbone_seed": 42,
+      "head_seeds": [
+        42,
+        73,
+        202
+      ],
+      "calibrators": [
+        "constant",
+        "mlp",
+        "fourier",
+        "separable",
+        "quantum"
+      ],
+      "epochs": 12,
+      "patience": 4,
+      "batch_size": 4096,
+      "learning_rate": 0.001,
+      "max_train_windows": 2000,
+      "max_valid_windows": 1000,
+      "max_test_windows": 0,
+      "max_train_instances": 200000,
+      "data_seed": 42,
+      "alphas": [
+        0.1,
+        0.2,
+        0.5
+      ],
+      "cache": "artifacts/cache/quarts_v2",
+      "output": "artifacts/runs/exploratory_uq",
+      "device": "cpu"
+    }
+  },
+  "environment": {
+    "python": "3.12.13 (main, Mar  3 2026, 15:01:35) [MSC v.1944 64 bit (AMD64)]",
+    "platform": "Windows-11-10.0.26200-SP0",
+    "processor": "Intel64 Family 6 Model 183 Stepping 1, GenuineIntel",
+    "packages": {
+      "numpy": "2.0.2",
+      "pandas": "2.2.3",
+      "scipy": "1.14.1",
+      "torch": "2.5.1",
+      "pennylane": "0.39.0",
+      "scikit-learn": "1.5.2"
+    },
+    "git_commit": null,
+    "cuda": {
+      "available": false,
+      "torch_cuda": null,
+      "device": null,
+      "device_memory": null
+    }
+  },
+  "file_hashes": {
+    "D:\\Research\\July Research\\New Paper\\artifacts\\runs\\confirmatory\\metr_la\\staeformer\\seed_42\\best.pt": "a21ec650606cc46eb70724339172c521931320a516e210c542e9b276d9729e0e"
+  }
+}

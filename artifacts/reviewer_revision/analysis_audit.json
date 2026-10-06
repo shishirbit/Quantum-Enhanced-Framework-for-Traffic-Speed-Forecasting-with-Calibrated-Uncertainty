@@ -1,0 +1,11 @@
+{
+  "complete": true,
+  "sections": [
+    "pemsd4"
+  ],
+  "bootstrap_replicates": 5000,
+  "block_length_origins": 288,
+  "block_interpretation": "one day at five-minute resolution",
+  "independent_replication_unit": "training seed",
+  "test_subgroup_analysis": "post hoc descriptive diagnostic requested during peer review"
+}

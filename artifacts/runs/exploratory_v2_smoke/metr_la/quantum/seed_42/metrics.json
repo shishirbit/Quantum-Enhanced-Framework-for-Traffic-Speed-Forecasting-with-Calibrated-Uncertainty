@@ -1,0 +1,56 @@
+{
+  "model": "staeformer+quantum",
+  "exploratory": true,
+  "seed": 42,
+  "calibrator_parameters": 240,
+  "quantum_backend": "TorchStatevectorQuantumLayer",
+  "MAE": 2.6013128757476807,
+  "RMSE": 5.195685863494873,
+  "MAPE": 6.06455135345459,
+  "WAPE": 4.390909194946289,
+  "Laplace_NLL": 3.410849094390869,
+  "normalized_NLL": 0.4407542146238169,
+  "base_MAE": 2.6016035079956055,
+  "interval90_coverage": 0.9927161654135338,
+  "interval90_mean_width": 57.40610675671383,
+  "interval90_interval_score": 58.68081531892786,
+  "interval90_calibration_error": 0.09271616541353378,
+  "gate": [
+    0.002472538501024246,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.002464843448251486,
+    0.0,
+    0.0,
+    0.0024752060417085886,
+    0.0,
+    0.002464066492393613,
+    0.0
+  ],
+  "residual_horizons_enabled": [
+    true,
+    false,
+    false,
+    false,
+    false,
+    true,
+    false,
+    false,
+    true,
+    false,
+    true,
+    false
+  ],
+  "history": [
+    {
+      "epoch": 1,
+      "train_objective": 0.4882069081068039,
+      "valid_MAE_normalized": 0.17002398234194732,
+      "valid_NLL_normalized": 0.5011218892626931,
+      "gate_mean": 0.0024703547824174166
+    }
+  ],
+  "elapsed_seconds": 0.16445280006155372
+}

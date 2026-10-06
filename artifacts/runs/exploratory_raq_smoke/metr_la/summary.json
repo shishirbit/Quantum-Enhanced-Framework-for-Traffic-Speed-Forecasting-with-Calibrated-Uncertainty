@@ -1,0 +1,76 @@
+{
+  "study": "RAQ-STAEformer validation-only exploratory pilot",
+  "complete": true,
+  "canonical_test_split_used": false,
+  "validation_split": {
+    "early_stopping": 0.4,
+    "conformal_calibration": 0.3,
+    "held_out_evaluation": 0.3
+  },
+  "models": [
+    {
+      "model": "constant_asym",
+      "runs": 1,
+      "conformal_WIS_mean": 1.887556552886963,
+      "conformal_WIS_std": 0.0,
+      "interval90_coverage_mean": 0.9164020591868768,
+      "interval90_coverage_std": 0.0,
+      "interval90_mean_width_mean": 12.669888496398926,
+      "interval90_mean_width_std": 0.0,
+      "interval90_interval_score_mean": 25.700969696044922,
+      "interval90_interval_score_std": 0.0,
+      "interval90_calibration_error_mean": 0.01640205918687676,
+      "interval90_calibration_error_std": 0.0,
+      "effective_experts_mean": 1.0,
+      "effective_experts_std": 0.0
+    },
+    {
+      "model": "fourier_sym",
+      "runs": 1,
+      "conformal_WIS_mean": 1.887553095817566,
+      "conformal_WIS_std": 0.0,
+      "interval90_coverage_mean": 0.9098466751209985,
+      "interval90_coverage_std": 0.0,
+      "interval90_mean_width_mean": 12.46850299835205,
+      "interval90_mean_width_std": 0.0,
+      "interval90_interval_score_mean": 26.153959274291992,
+      "interval90_interval_score_std": 0.0,
+      "interval90_calibration_error_mean": 0.00984667512099846,
+      "interval90_calibration_error_std": 0.0,
+      "effective_experts_mean": 2.8878464698791504,
+      "effective_experts_std": 0.0
+    },
+    {
+      "model": "mlp_asym",
+      "runs": 1,
+      "conformal_WIS_mean": 1.882576584815979,
+      "conformal_WIS_std": 0.0,
+      "interval90_coverage_mean": 0.9148815902008396,
+      "interval90_coverage_std": 0.0,
+      "interval90_mean_width_mean": 12.439209938049316,
+      "interval90_mean_width_std": 0.0,
+      "interval90_interval_score_mean": 25.5887451171875,
+      "interval90_interval_score_std": 0.0,
+      "interval90_calibration_error_mean": 0.014881590200839567,
+      "interval90_calibration_error_std": 0.0,
+      "effective_experts_mean": 2.939899206161499,
+      "effective_experts_std": 0.0
+    },
+    {
+      "model": "fourier_asym",
+      "runs": 1,
+      "conformal_WIS_mean": 1.8877670764923096,
+      "conformal_WIS_std": 0.0,
+      "interval90_coverage_mean": 0.9167133621042767,
+      "interval90_coverage_std": 0.0,
+      "interval90_mean_width_mean": 12.692201614379883,
+      "interval90_mean_width_std": 0.0,
+      "interval90_interval_score_mean": 25.700563430786133,
+      "interval90_interval_score_std": 0.0,
+      "interval90_calibration_error_mean": 0.016713362104276652,
+      "interval90_calibration_error_std": 0.0,
+      "effective_experts_mean": 2.9523074626922607,
+      "effective_experts_std": 0.0
+    }
+  ]
+}

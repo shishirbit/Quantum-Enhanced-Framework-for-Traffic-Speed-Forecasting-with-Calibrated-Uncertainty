@@ -1,0 +1,22 @@
+cff-version: 1.2.0
+message: "If you use this software or its reproducibility materials, please cite the archived release."
+title: "QUARTS for Probabilistic Traffic Forecasting: A Controlled Evaluation of Quantum and Classical Residual Calibration"
+type: software
+authors:
+  - family-names: Chauhan
+    given-names: Shishir Singh
+    affiliation: Manipal University Jaipur
+version: 1.0.0
+date-released: 2026-10-06
+repository-code: "https://github.com/shishirbit/Quantum-Enhanced-Framework-for-Traffic-Speed-Forecasting-with-Calibrated-Uncertainty"
+abstract: >-
+  Code, experiment configurations, analysis scripts, run-level metrics,
+  publication tables, figures, and manuscript sources for a controlled
+  evaluation of quantum and classical residual calibration in probabilistic
+  traffic forecasting.
+keywords:
+  - traffic forecasting
+  - quantum machine learning
+  - probabilistic forecasting
+  - uncertainty calibration
+  - reproducibility

@@ -1,0 +1,52 @@
+{
+  "config": {
+    "study": "Reviewer-requested validation-only Fourier-RAC expert-count ablation",
+    "arguments": {
+      "experts": [
+        1,
+        2,
+        3,
+        4,
+        5
+      ],
+      "head_seeds": [
+        42,
+        73,
+        202
+      ],
+      "epochs": 15,
+      "patience": 4,
+      "batch_size": 4096,
+      "learning_rate": 0.003,
+      "max_train_instances": 200000,
+      "device": "cuda",
+      "cache": "artifacts/cache/quarts_rac/metr_la_seed_42/tw_2000_vw_1000_ld_8",
+      "output": "artifacts/reviewer_revision/expert_count_ablation"
+    },
+    "canonical_test_split_used": false
+  },
+  "environment": {
+    "python": "3.12.13 | packaged by Anaconda, Inc. | (main, Jul  9 2026, 14:26:47) [MSC v.1942 64 bit (AMD64)]",
+    "platform": "Windows-11-10.0.26200-SP0",
+    "processor": "Intel64 Family 6 Model 183 Stepping 1, GenuineIntel",
+    "packages": {
+      "numpy": "2.0.2",
+      "pandas": "2.2.3",
+      "scipy": "1.18.0",
+      "torch": "2.13.0+cu130",
+      "pennylane": "0.39.0",
+      "scikit-learn": "1.9.0"
+    },
+    "git_commit": "a2b89a1193b962334578fb7bc49a1f65063cb046",
+    "cuda": {
+      "available": true,
+      "torch_cuda": "13.0",
+      "device": "NVIDIA GeForce RTX 5060 Laptop GPU",
+      "device_memory": 8546484224
+    }
+  },
+  "file_hashes": {
+    "D:\\Research\\July Research\\New Paper\\artifacts\\cache\\quarts_rac\\metr_la_seed_42\\tw_2000_vw_1000_ld_8\\train.npz": "4696b13af5e26e96ea509a4a346140ae29be783743ad4a83738475890f539270",
+    "D:\\Research\\July Research\\New Paper\\artifacts\\cache\\quarts_rac\\metr_la_seed_42\\tw_2000_vw_1000_ld_8\\valid.npz": "3decfd5a20187d45100393781460208f374c7954309af098f7762fee2a4e2f7a"
+  }
+}

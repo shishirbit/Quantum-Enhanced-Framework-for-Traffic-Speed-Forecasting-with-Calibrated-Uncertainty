@@ -1,0 +1,33 @@
+[
+  {
+    "MAE": 50.057247161865234,
+    "conformal_WIS": 31.467191696166992,
+    "uncalibrated_WIS": 31.385488510131836,
+    "interval90_coverage": 0.8855079252666842,
+    "interval90_mean_width": 215.7195281982422,
+    "interval90_interval_score": 330.6568603515625,
+    "interval90_calibration_error": 0.014492074733315818,
+    "intervals": {
+      "0.1": {
+        "coverage": 0.8855079252666842,
+        "mean_width": 215.7195281982422,
+        "interval_score": 330.6568603515625
+      },
+      "0.2": {
+        "coverage": 0.7465000115781836,
+        "mean_width": 135.39938354492188,
+        "interval_score": 261.68939208984375
+      },
+      "0.5": {
+        "coverage": 0.39259940192249304,
+        "mean_width": 52.492977142333984,
+        "interval_score": 169.6192169189453
+      }
+    },
+    "model": "gaussian_scale_conformal",
+    "dataset": "PeMSD4",
+    "canonical_test_split_used": true,
+    "test_used_for_selection": false,
+    "point_forecast_modified": false
+  }
+]

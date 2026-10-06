@@ -1,0 +1,59 @@
+{
+  "config": {
+    "seed": 42,
+    "dataset": {
+      "name": "synthetic",
+      "input_steps": 12,
+      "horizons": 12,
+      "nodes": 8,
+      "features": 1
+    },
+    "model": {
+      "hidden_dim": 16,
+      "qubits": 4,
+      "circuit_depth": 2,
+      "calibrator": "quantum"
+    },
+    "training": {
+      "epochs": 2,
+      "batch_size": 8,
+      "learning_rate": 0.001
+    },
+    "evaluation": {
+      "horizons_minutes": [
+        15,
+        30,
+        60
+      ],
+      "seeds": [
+        17,
+        42,
+        73,
+        101,
+        202
+      ]
+    },
+    "selected_calibrator": "quantum"
+  },
+  "environment": {
+    "python": "3.12.13 | packaged by Anaconda, Inc. | (main, Jul  9 2026, 14:26:47) [MSC v.1942 64 bit (AMD64)]",
+    "platform": "Windows-11-10.0.26200-SP0",
+    "processor": "Intel64 Family 6 Model 183 Stepping 1, GenuineIntel",
+    "packages": {
+      "numpy": "2.0.2",
+      "pandas": "2.2.3",
+      "scipy": "1.18.0",
+      "torch": "2.13.0+cu130",
+      "pennylane": "0.39.0",
+      "scikit-learn": "1.9.0"
+    },
+    "git_commit": null,
+    "cuda": {
+      "available": true,
+      "torch_cuda": "13.0",
+      "device": "NVIDIA GeForce RTX 5060 Laptop GPU",
+      "device_memory": 8546484224
+    }
+  },
+  "file_hashes": {}
+}

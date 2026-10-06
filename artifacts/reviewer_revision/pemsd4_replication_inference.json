@@ -1,0 +1,21 @@
+{
+  "experimental_unit": "independently trained STAEformer backbone",
+  "independent_seeds": [
+    17,
+    42,
+    73,
+    101,
+    202
+  ],
+  "comparison": "Fourier-RAC minus MLP-RAC WIS",
+  "mean_difference": -0.030794689431786537,
+  "seed_SD": 0.12845748662948608,
+  "hierarchical_block_ci95": [
+    -0.1336446780206468,
+    0.07673824761998596
+  ],
+  "Fourier_wins": 3,
+  "MLP_wins": 2,
+  "bootstrap_unit": "five-minute forecast origin in circular 288-origin daily blocks, nested within backbone seed",
+  "post_hoc_reviewer_requested": true
+}

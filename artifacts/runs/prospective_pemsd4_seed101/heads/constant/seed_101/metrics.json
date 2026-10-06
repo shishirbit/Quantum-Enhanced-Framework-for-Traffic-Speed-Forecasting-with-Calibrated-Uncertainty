@@ -1,0 +1,161 @@
+{
+  "MAE": 34.181697845458984,
+  "conformal_WIS": 21.089069366455078,
+  "uncalibrated_WIS": 20.916166305541992,
+  "interval90_coverage": 0.9265730892137641,
+  "interval90_mean_width": 169.21995544433594,
+  "interval90_interval_score": 223.54823303222656,
+  "interval90_calibration_error": 0.02657308921376411,
+  "intervals": {
+    "0.1": {
+      "coverage": 0.9265730892137641,
+      "mean_width": 169.21995544433594,
+      "interval_score": 223.54823303222656
+    },
+    "0.2": {
+      "coverage": 0.8523017750641946,
+      "mean_width": 121.82776641845703,
+      "interval_score": 173.93675231933594
+    },
+    "0.5": {
+      "coverage": 0.6096958121709866,
+      "mean_width": 62.9520263671875,
+      "interval_score": 112.59906768798828
+    }
+  },
+  "study": "Prospective PeMSD4 Fourier-RAC evaluation",
+  "dataset": "PeMSD4",
+  "model": "constant",
+  "head_seed": 101,
+  "canonical_test_split_used": true,
+  "test_used_for_selection": false,
+  "point_forecast_modified": false,
+  "calibrator_parameters": 36,
+  "coverage_calibration_factors": [
+    [
+      0.9628815054893494,
+      1.05239999294281,
+      1.081998586654663
+    ],
+    [
+      0.9796174168586731,
+      1.0586589574813843,
+      1.079906940460205
+    ],
+    [
+      0.9997756481170654,
+      1.0764178037643433,
+      1.0853462219238281
+    ],
+    [
+      1.018204927444458,
+      1.0871585607528687,
+      1.0921446084976196
+    ],
+    [
+      1.0288053750991821,
+      1.0954296588897705,
+      1.1122565269470215
+    ],
+    [
+      1.0458295345306396,
+      1.1088576316833496,
+      1.1158841848373413
+    ],
+    [
+      1.0637891292572021,
+      1.1185134649276733,
+      1.1306072473526
+    ],
+    [
+      1.0787131786346436,
+      1.1260732412338257,
+      1.1457993984222412
+    ],
+    [
+      1.094667673110962,
+      1.1392500400543213,
+      1.1557010412216187
+    ],
+    [
+      1.1029220819473267,
+      1.1461691856384277,
+      1.1610476970672607
+    ],
+    [
+      1.1227279901504517,
+      1.1634832620620728,
+      1.1631910800933838
+    ],
+    [
+      1.1366676092147827,
+      1.1760308742523193,
+      1.1579618453979492
+    ]
+  ],
+  "mean_expert_weights": [
+    1.0
+  ],
+  "history": [
+    {
+      "epoch": 1,
+      "selection_WIS_normalized": 0.19099022982096636
+    },
+    {
+      "epoch": 2,
+      "selection_WIS_normalized": 0.17883786145706182
+    },
+    {
+      "epoch": 3,
+      "selection_WIS_normalized": 0.1693089963680538
+    },
+    {
+      "epoch": 4,
+      "selection_WIS_normalized": 0.1619972837755715
+    },
+    {
+      "epoch": 5,
+      "selection_WIS_normalized": 0.1565001751039632
+    },
+    {
+      "epoch": 6,
+      "selection_WIS_normalized": 0.15244203356389283
+    },
+    {
+      "epoch": 7,
+      "selection_WIS_normalized": 0.14951088139804974
+    },
+    {
+      "epoch": 8,
+      "selection_WIS_normalized": 0.14744904567413056
+    },
+    {
+      "epoch": 9,
+      "selection_WIS_normalized": 0.1460403108595063
+    },
+    {
+      "epoch": 10,
+      "selection_WIS_normalized": 0.14510663931116166
+    },
+    {
+      "epoch": 11,
+      "selection_WIS_normalized": 0.14451319376782154
+    },
+    {
+      "epoch": 12,
+      "selection_WIS_normalized": 0.14415463652151886
+    },
+    {
+      "epoch": 13,
+      "selection_WIS_normalized": 0.14395456556501546
+    },
+    {
+      "epoch": 14,
+      "selection_WIS_normalized": 0.1438585263772342
+    },
+    {
+      "epoch": 15,
+      "selection_WIS_normalized": 0.14382643562725414
+    }
+  ]
+}
