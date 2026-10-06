@@ -91,7 +91,11 @@ def highlighted_source(old_text: str, new_text: str) -> str:
     old = old_text.splitlines()
     new = new_text.splitlines()
     changed = changed_lines(old, new)
-    first_body = next(index for index, line in enumerate(new) if r"\begin{document}" in line) + 1
+    # Springer Nature stores title, author, affiliation, and abstract metadata
+    # before \maketitle. Surrounding those commands with standalone colour
+    # switches can suppress the generated title block, so highlighting begins
+    # only after \maketitle.
+    first_body = next(index for index, line in enumerate(new) if r"\maketitle" in line) + 1
     last_body = next(index for index, line in enumerate(new) if r"\end{document}" in line) - 1
     spans = environment_spans(new)
     selected: list[tuple[int, int]] = []
@@ -165,6 +169,9 @@ def main() -> None:
         "sn-mathphys-num.bst",
     ):
         shutil.copy2(SOURCE / name, package / name)
+    cover_letter = SOURCE / "submission" / "Cover_Letter_EPJ_Quantum_Technology.docx"
+    if cover_letter.exists():
+        shutil.copy2(cover_letter, package / cover_letter.name)
     shutil.copytree(SOURCE / "bst", package / "bst")
     copy_referenced_figures(current, package)
 
@@ -174,6 +181,7 @@ Primary clean manuscript: main.tex
 Highlighted revision: main_highlighted.tex
 Point-by-point response: response_to_reviewers.tex
 Bibliography: references.bib
+Cover letter: Cover_Letter_EPJ_Quantum_Technology.docx
 
 Upload the contents of this folder to a new Overleaf project. Select the desired
 main document in Overleaf's project settings. The clean manuscript should be the

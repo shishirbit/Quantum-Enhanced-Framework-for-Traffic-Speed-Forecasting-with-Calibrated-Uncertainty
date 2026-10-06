@@ -1,6 +1,6 @@
 cff-version: 1.2.0
 message: "If you use this software or its reproducibility materials, please cite the archived release."
-title: "QUARTS for Probabilistic Traffic Forecasting: A Controlled Evaluation of Quantum and Classical Residual Calibration"
+title: "Controlled Evaluation of Quantum and Classical Residual Calibration for Probabilistic Traffic Forecasting"
 type: software
 authors:
   - family-names: Chauhan

@@ -1,10 +1,10 @@
-# QUARTS for probabilistic traffic forecasting
+# Controlled Evaluation of Quantum and Classical Residual Calibration for Probabilistic Traffic Forecasting
 
 This repository contains the complete implementation and publication artifacts
 for:
 
-> QUARTS for Probabilistic Traffic Forecasting: A Controlled Evaluation of
-> Quantum and Classical Residual Calibration
+> Controlled Evaluation of Quantum and Classical Residual Calibration for
+> Probabilistic Traffic Forecasting
 
 QUARTS is a Quantum Uncertainty Aware Residual Traffic System. The study tests
 whether an entangled variational quantum circuit improves point forecasts or

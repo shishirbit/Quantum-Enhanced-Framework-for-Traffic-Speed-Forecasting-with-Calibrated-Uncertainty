@@ -1,8 +1,8 @@
 # Reproducibility record
 
 This release is the permanent computational record for the manuscript
-"QUARTS for Probabilistic Traffic Forecasting: A Controlled Evaluation of
-Quantum and Classical Residual Calibration."
+"Controlled Evaluation of Quantum and Classical Residual Calibration for
+Probabilistic Traffic Forecasting."
 
 ## Archived scope
 

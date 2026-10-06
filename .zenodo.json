@@ -1,7 +1,7 @@
 {
-  "title": "QUARTS for Probabilistic Traffic Forecasting: Code and Reproducibility Materials",
+  "title": "QUARTS Code and Reproducibility Materials for Probabilistic Traffic Forecasting",
   "upload_type": "software",
-  "description": "Permanent software and reproducibility archive for the manuscript QUARTS for Probabilistic Traffic Forecasting: A Controlled Evaluation of Quantum and Classical Residual Calibration. The release contains source code, immutable experiment configurations, analysis and figure-generation scripts, run-level manifests and metrics, completion audits, publication tables and figures, and Springer Nature manuscript sources. Raw benchmark datasets, trained checkpoints, cached tensors, and per-forecast prediction arrays are excluded; acquisition instructions, integrity hashes, and regeneration commands are provided.",
+  "description": "Permanent software and reproducibility archive for the manuscript Controlled Evaluation of Quantum and Classical Residual Calibration for Probabilistic Traffic Forecasting. The release contains source code, immutable experiment configurations, analysis and figure-generation scripts, run-level manifests and metrics, completion audits, publication tables and figures, and Springer Nature manuscript sources. Raw benchmark datasets, trained checkpoints, cached tensors, and per-forecast prediction arrays are excluded; acquisition instructions, integrity hashes, and regeneration commands are provided.",
   "creators": [
     {
       "name": "Chauhan, Shishir Singh",
