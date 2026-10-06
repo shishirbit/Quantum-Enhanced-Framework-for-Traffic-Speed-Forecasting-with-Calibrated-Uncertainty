@@ -82,6 +82,10 @@ failed. This is a protocol decision rather than missing output.
 
 ## Version identity
 
-The permanent archive identifies version 1.0.0. Its DOI, GitHub tag, release
-URL, and exact commit identifier are recorded in `CITATION.cff`, the repository
-README, and the manuscript after the DOI is reserved.
+The permanent archive identifies version 1.0.0 and is registered at
+[https://doi.org/10.5281/zenodo.23191444](https://doi.org/10.5281/zenodo.23191444).
+It corresponds to GitHub release and tag
+[`v1.0.0`](https://github.com/shishirbit/Quantum-Enhanced-Framework-for-Traffic-Speed-Forecasting-with-Calibrated-Uncertainty/releases/tag/v1.0.0).
+The release page records the exact commit identifier. The DOI, tag, and release
+URL are also recorded in `CITATION.cff`, the repository README, and the
+manuscript.

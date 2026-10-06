@@ -92,5 +92,8 @@ evaluated because the SA-CQR validation gate failed.
 
 ## Citation
 
-Citation metadata will be added after the author list and journal record are
-confirmed. Until then, cite the manuscript title and this repository commit.
+The permanent version 1.0.0 archive is available from Zenodo at
+[https://doi.org/10.5281/zenodo.23191444](https://doi.org/10.5281/zenodo.23191444).
+It corresponds to the GitHub release and tag
+[`v1.0.0`](https://github.com/shishirbit/Quantum-Enhanced-Framework-for-Traffic-Speed-Forecasting-with-Calibrated-Uncertainty/releases/tag/v1.0.0).
+Machine-readable citation metadata are provided in `CITATION.cff`.
