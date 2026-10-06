@@ -92,8 +92,8 @@ evaluated because the SA-CQR validation gate failed.
 
 ## Citation
 
-The permanent version 1.0.0 archive is available from Zenodo at
+The permanent version 1.0.1 archive is available from Zenodo at
 [https://doi.org/10.5281/zenodo.23191444](https://doi.org/10.5281/zenodo.23191444).
 It corresponds to the GitHub release and tag
-[`v1.0.0`](https://github.com/shishirbit/Quantum-Enhanced-Framework-for-Traffic-Speed-Forecasting-with-Calibrated-Uncertainty/releases/tag/v1.0.0).
+[`v1.0.1`](https://github.com/shishirbit/Quantum-Enhanced-Framework-for-Traffic-Speed-Forecasting-with-Calibrated-Uncertainty/releases/tag/v1.0.1).
 Machine-readable citation metadata are provided in `CITATION.cff`.

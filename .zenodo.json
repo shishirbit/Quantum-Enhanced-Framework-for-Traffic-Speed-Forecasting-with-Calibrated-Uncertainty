@@ -15,7 +15,7 @@
     "uncertainty calibration",
     "reproducibility"
   ],
-  "version": "1.0.0",
+  "version": "1.0.1",
   "access_right": "open",
   "related_identifiers": [
     {
@@ -24,7 +24,7 @@
       "scheme": "url"
     },
     {
-      "identifier": "https://github.com/shishirbit/Quantum-Enhanced-Framework-for-Traffic-Speed-Forecasting-with-Calibrated-Uncertainty/releases/tag/v1.0.0",
+      "identifier": "https://github.com/shishirbit/Quantum-Enhanced-Framework-for-Traffic-Speed-Forecasting-with-Calibrated-Uncertainty/releases/tag/v1.0.1",
       "relation": "isIdenticalTo",
       "scheme": "url"
     }
